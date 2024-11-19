@@ -11,11 +11,11 @@
             $obj= new UsuariosModel();
 
 
-            $sql= "SELECT * FROM roll";
+            $sql= "SELECT * FROM roles";
             $rol= $obj->consult($sql);
 
 
-            $sql= "SELECT * FROM tipo_documentoo";
+            $sql= "SELECT * FROM tipo_documentos";
             $tipo_documento= $obj->consult($sql);
 
             include_once '../view/usuarios/create.php';
@@ -23,16 +23,16 @@
         public function postCreate(){
 
             $obj=new UsuariosModel();
-            $usu_nombre_1=$_POST['usu_nombre_1'];
-            $usu_nombre_2=$_POST['usu_nombre_2'];
-            $usu_apellido_1=$_POST['usu_apellido_1'];
-            $usu_apellido_2=$_POST['usu_apellido_2'];
-            $usu_correo=$_POST['usu_correo'];
-            $usu_contrasena=$_POST['usu_contrasena'];
+            $usu_nombre_1=$_POST['usuario_nombre_1'];
+            $usu_nombre_2=$_POST['usuario_nombre_2'];
+            $usu_apellido_1=$_POST['usuario_apellido_1'];
+            $usu_apellido_2=$_POST['usuario_apellido_2'];
+            $usu_correo=$_POST['usuario_correo'];
+            $usu_contrasena=$_POST['usuario_contrasena'];
             // $rol=$_POST['rol'];
-            $usu_telefono=$_POST['usu_telefono'];
+            $usu_telefono=$_POST['usuario_telefono'];
             $tipo_documento=$_POST['tipo_documento'];
-            $numero_documento=$_POST['numero_documento'];
+            $numero_documento=$_POST['usuario_num_identificacion'];
 
 
 
@@ -101,7 +101,7 @@
             // }
             // // $id= $obj->autoIncrement("usu_id","usuarios");
             // $usu_clave=password_hash($usu_clave,PASSWORD_DEFAULT);
-            $sql="INSERT INTO usuarios VALUES ($usu_nombre_1,$usu_nombre_2,$usu_apellido_1,$usu_apellido_2,$usu_correo,$usu_contrasena,2,$usu_telefono,$tipo_documento,$numero_documento)";
+            $sql="INSERT INTO usuarios VALUES ($tipo_documento,$numero_documento,$usu_nombre_1,$usu_nombre_2,$usu_apellido_1,$usu_apellido_2,$usu_contrasena,$usu_correo,$usu_telefono,$usu_direccion,1,1)";
             
             if($validaciones == true){
                 $ejecutar=$obj->insert($sql);
@@ -121,7 +121,7 @@
             $obj= new UsuariosModel();
 
            
-            $sql= "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u JOIN roll r ON u.rol_id =r.rol_id  JOIN tipo_documentoo t ON u.tipo_documento_id=t.tipo_documento_id"; 
+            $sql= "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id  JOIN tipo_documentos t ON u.tipo_documento_id=t.tipo_documento_id"; 
             $usuarios= $obj->consult($sql);
             include_once '../view/usuarios/consult.php';
         }
