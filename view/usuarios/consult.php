@@ -22,7 +22,7 @@
                 <th>Rol</th>
                 <th>Telefono</th>
                 <th>Tipo de documento</th>
-                <th>Numero de documento</th>
+                <th>Numero de documento</th>    
                 
 
             </tr>
@@ -33,6 +33,7 @@
                     // $clase="";
                     // $texto="";
                     echo "<tr>";
+                    echo"<td>".$usu['usuario_id']."</td>";
                         echo"<td>".$usu['usuario_nombre_1']."</td>";
                         echo"<td>".$usu['usuario_nombre_2']."</td>";
                         echo"<td>".$usu['usuario_apellido_1']."</td>";

@@ -31,10 +31,10 @@
             $usu_contrasena=$_POST['usuario_contrasena'];
             // $rol=$_POST['rol'];
             $usu_telefono=$_POST['usuario_telefono'];
-            $tipo_documento=$_POST['tipo_documento'];
+            $tipo_documento=$_POST['tipo_documento_id'];
             $numero_documento=$_POST['usuario_num_identificacion'];
 
-
+            $usu_direccion="Cra pondaje";
 
 
             $validaciones=true;

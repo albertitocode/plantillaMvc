@@ -37,7 +37,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Registro usuarios</a>
+                    <a href="#">Registro Accidente</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +46,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tittle">
-                            Registro Usuarios
+                            Registre el accidente
                         </div>
                     </div>
                     <div class="card-body">
@@ -56,33 +56,54 @@
             
         </div> -->
                         <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                                <label for="">Tipo de solicitud</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <?php
+                                    foreach ($tipo_documento as $tipo_d) {
+                                        echo "<option  value='" . $tipo_d['tipo_documento_id'] . "'>" . $tipo_d['tipo_documento_nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group">
-                                <label for="usuario_nombre_1">Primer nombre</label>
-                                <input type="text" name="usuario_nombre_1" id="usu_nombre_1" class="form-control" placeholder="Nombre 1">
+                                <label for="">Fecha</label>
+                                <input type="date" name="" id="" class="form-control" placeholder="Nombre 1">
 
                             </div>
                             <div class="form-group">
-                                <label for="usuario_nombre_2">Segundo nombre</label>
-                                <input type="text" name="usuario_nombre_2" id="usuario_nombre_2" class="form-control" placeholder="Nombre 2">
+                                <label for="">Hora</label>
+                                <input type="time" name="" id="" class="form-control" placeholder="Nombre 2">
 
                             </div>
                             <div class="form-group">
-                                <label for="usuario_apellido_1">Primer apellido</label>
-                                <input type="text" name="usuario_apellido_1" id="usuario_apellido_1" class="form-control" placeholder="Apellido 1">
+                                <label for="">Direccion</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="Apellido 1">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
-                                <label for="usuario_apellido_2">Segundo apellido</label>
-                                <input type="text" name="usuario_apellido_2" id="usuario_apellido_2" class="form-control" placeholder="Apellido 2">
+                                <label for="">Tipo de choque</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <?php
+                                    foreach ($tipo_documento as $tipo_d) {
+                                        echo "<option  value='" . $tipo_d['tipo_documento_id'] . "'>" . $tipo_d['tipo_documento_nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <label for="image" class="d-block">Imagen del accidente</label>
+                                    <input type="file" name="acc_img">
+                                </div>
+
                             </div>
                             <div class="form-group">
-                                <label for="usuario_correo">correo</label>
-                                <input type="text" name="usuario_correo" id="usuario_correo" class="form-control" placeholder="Correo">
-                            </div>
-                            <div class="form-group">
-                                <label for="usuario_contrasena">Contraseña</label>
-                                <input type="password" name="usuario_contrasena" id="usuario_contrasena" class="form-control" placeholder="Clave">
+                                <label for="">Observacion</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="Observacion">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
