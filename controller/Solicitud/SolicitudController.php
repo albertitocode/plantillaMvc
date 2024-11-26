@@ -22,12 +22,12 @@
 
             include_once '../view/solicitudSenal/create.php';
         }
-        public function postCreateSenal(){
+        public function postCreateSenialMalEstado(){
 
             $obj=new SolicitudModel();
 
-            $senal_id=$_POST['senal_id'];
-            $senal_nombre=$_POST['senal_nombre'];
+            // $senal_id=$_POST['senal_id'];
+            $categoria=$_POST['categoria_senal_id'];
             $categoria_senal_id=$_POST['categoria_senal_id'];
             $tipo_senal_id=$_POST['tipo_senal_id'];
 
