@@ -77,11 +77,33 @@
            
         
         }
+
         public function GetCreateVia(){
+
+            $obj = new SolicitudModel();
+
+            $sql = "SELECT * FROM ";
+            $categoria_senal=$obj->consult($sql);
+
+            $sql = "SELECT * FROM ";
+            $tipo_senal=$obj->consult($sql);
+
+            include_once '../view/solicitudVial/create.php';
 
         
         }
         public function PostCreateVia(){
+
+            $obj=new SolicitudModel();
+
+           
+
+            $sql="INSERT INTO  VALUES()";
+            $ejecutar=$obj->insert($sql);
+                if($ejecutar){
+                    redirect(getUrl("Solicitud","Solicitud","getVias"));
+                }else{
+                    echo "Se ha presentado un error al insertar";
 
         }
     
