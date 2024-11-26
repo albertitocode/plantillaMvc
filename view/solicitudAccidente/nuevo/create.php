@@ -3,7 +3,7 @@
 </div> -->
 
 
-<div class="mt-5">
+   abbr<div class="mt-5">
     <div class="alert alert-danger d-none" role="alert" id="error">
 
     </div>
@@ -18,7 +18,7 @@
     }
 
     ?>
-    <form action="<?php echo getUrl("Usuarios", "Usuarios", "postCreate"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreate"); ?>" method="post" id="form">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
