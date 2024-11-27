@@ -55,6 +55,7 @@
             <input type="text" name="usu_id" class="form-control" placeholder="Id">
             
         </div> -->
+                    <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label for="usuario_nombre_1">Primer nombre</label>
@@ -109,6 +110,7 @@
                         <div class="mt-5">
                             <input type="submit" value="Enviar" class="btn btn-success">
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
