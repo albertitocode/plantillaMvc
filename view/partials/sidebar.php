@@ -108,14 +108,14 @@
           <!-- empieza reductor -->
           <li>
               <a data-bs-toggle="collapse" href="#reductor">
-            <i class="fas fa-layer-group"></i>
+            <i class="fas fa-layer-group"></i><?php getUrl("Solicitud","Solicitud", "getCreateReductor")?>
             <p>Solicitud Reductores </p>
             <span class="caret"></span>
             </a>
             <div class="collapse" id="reductor">
             <ul class="nav nav-collapse">
               <li>
-                <a href="components/buttons.html">
+                <a href="">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li> 
@@ -125,6 +125,37 @@
           </li>
 
           <!-- termina reductor -->
+
+
+           <!-- empieza vias -->
+           <li>
+              <a data-bs-toggle="collapse" href="#via">
+            <i class="fas fa-layer-group"></i>
+            <p>Solicitud Vias </p>
+            <span class="caret"></span>
+            </a>
+            <div class="collapse" id="via">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateVia");?>">
+                  <span class="sub-item">Registrar</span>
+                </a>
+              </li> 
+              <li>
+                <a href="<?php echo getUrl("Solicitud","Solicitud","getVias");?>">
+                  <span class="sub-item">Consultar</span>
+                </a>
+              </li> 
+
+            </ul>
+          </div>
+          </li>
+
+
+
+          
+
+          <!-- termina vias -->
 
         
             </ul>
