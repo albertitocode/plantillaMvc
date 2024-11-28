@@ -1,7 +1,6 @@
 <?php
 include_once '../model/Solicitud/SolicitudModel.php';
 
-<<<<<<< HEAD
     class SolicitudController {
         public function test1() {
             echo "Funciona1";
@@ -14,25 +13,6 @@ include_once '../model/Solicitud/SolicitudModel.php';
         }
         public function getCreateSenialMalEstado(){
             $obj = new SolicitudModel();
-=======
-class SolicitudController
-{
-    public function test1()
-    {
-        echo "Funciona1";
-    }
-    public function test2()
-    {
-        echo "Funciona2";
-    }
-    public function test3()
-    {
-        echo "Funciona3";
-    }
-    public function GetCreateSenal()
-    {
-        $obj = new SolicitudModel();
->>>>>>> 4994650fd0910093a0d519c631de594bce255574
 
         $sql = "SELECT * FROM categoria_senal";
         $categoria_senal = $obj->consult($sql);
@@ -40,20 +20,12 @@ class SolicitudController
         $sql = "SELECT * FROM tipo_senal";
         $tipo_senal = $obj->consult($sql);
 
-<<<<<<< HEAD
             include_once '../view/solicitudSenal/malEstado/create.php';
         }
         public function postCreateSenialMalEstado(){
-=======
-        include_once '../view/solicitudSenal/create.php';
-    }
-    public function postCreateSenialMalEstado()
-    {
->>>>>>> 4994650fd0910093a0d519c631de594bce255574
 
         $obj = new SolicitudModel();
 
-<<<<<<< HEAD
             // $senal_id=$_POST['senal_id'];
             $categoria=$_POST['categoria_senal_id'];
             $categoria_senal_id=$_POST['categoria_senal_id'];
@@ -111,32 +83,10 @@ class SolicitudController
            
         
         }
-        public function GetCreateVia(){
-
-        
-        }
-        public function PostCreateVia(){
-
-        }
+       
     
-=======
-        // $senal_id=$_POST['senal_id'];
-        $categoria = $_POST['categoria_senal_id'];
-        $categoria_senal_id = $_POST['categoria_senal_id'];
-        $tipo_senal_id = $_POST['tipo_senal_id'];
 
-        // $sql = "INSERT INTO usuarios VALUES($senal_id,'$senal_nombre',$categoria_senal_id,$tipo_senal_id)";
-        // $ejecutar = $obj->insert($sql);
-        // if ($ejecutar) {
-        //     redirect(getUrl("Solicitud", "Solicitud", "getSenal"));
-        // } else {
-        //     echo "Se ha presentado un error al insertar";
-        // }
-
-
->>>>>>> 4994650fd0910093a0d519c631de594bce255574
-
-    }
+    
     public function getSenal()
     {
         $obj = new SolicitudModel();
