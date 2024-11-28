@@ -95,7 +95,7 @@
             <div class="collapse" id="senal">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateSenal");?>">
+                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateSenialMalEstado");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li> 
@@ -159,7 +159,17 @@
           <div class="collapse" id="usuarios">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","getCreate");?>">
+                <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>">
+                  <span class="sub-item">Actualizar usuarios</span>
+                </a>
+              </li> 
+
+            </ul>
+          </div>
+          <div class="collapse" id="usuarios">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="<?php echo getUrl("Usuarios","Usuarios","updateStatus");?>">
                   <span class="sub-item">Inhabilitar/Habilitar</span>
                 </a>
               </li> 

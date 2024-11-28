@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    /* background-color: #0adb29; */
+    background: url('../img/laquinta.jpg') no-repeat;
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    
+}
+body {
+    
+}
+
+.container {
+    width: 300px;
+    padding: 16px;
+    background-color: white;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.logo {
+    position: relative; /* Necesario para posicionar elementos hijos */
+    /* padding: 10px; Espacio interno */
+    /* background-color: white; Color de fondo del contenedor */
+    height: 50px; /* Altura del contenedor */
+}
+.log{
+    width: 50px; /* Cambia el ancho según tus necesidades */
+    height: 50px; /* Mantiene la proporción de la imagen */
+    position: absolute; /* Permite posicionar la imagen */
+    /* top: 20px; Distancia desde la parte superior del contenedor */
+    right: 20px; /* Distancia desde la parte derecha del contenedor */
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #01100b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}

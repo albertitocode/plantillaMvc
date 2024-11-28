@@ -6,17 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <title>Login</title>
 </head>
 <body>
-    <form action="<?php echo getUrl("Acceso","Acceso","login");?>" method="post" id="form" >
+    
+    <form action="<?php echo getUrl("Acceso","Acceso","login","","ajax");?>" method="post" id="form1" >
    <div class="logo"> 
-        <img src="R.png" alt="log" class="log">
+        <img src="assets/img/calvo.jpg" alt="log" class="log">
     </div> 
      <div class="container">
+     <!-- <img src="assets/img/prueba.png" alt=""> -->
         <div class="logo"> 
-            <img src="R.png" alt="log" class="log">
+            <img src="assets/img/calvo.jpg" alt="log" class="log">
         </div> 
         
             <h1>Iniciar Sesión</h1>
@@ -26,7 +28,7 @@
             <label for="psw"><b>Contraseña</b></label>
             <input type="password" placeholder="Ingrese su contraseña" name="pass" id="pass" required>
 
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-success">Iniciar Sesión</button>
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Recordarme
             </label>

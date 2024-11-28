@@ -11,7 +11,7 @@
         public function test3() {
             echo "Funciona3";
         }
-        public function GetCreateSenal(){
+        public function getCreateSenialMalEstado(){
             $obj = new SolicitudModel();
 
             $sql = "SELECT * FROM categoria_senal";
@@ -20,7 +20,7 @@
             $sql = "SELECT * FROM tipo_senal";
             $tipo_senal=$obj->consult($sql);
 
-            include_once '../view/solicitudSenal/create.php';
+            include_once '../view/solicitudSenal/malEstado/create.php';
         }
         public function postCreateSenialMalEstado(){
 
@@ -30,11 +30,17 @@
             $categoria=$_POST['categoria_senal_id'];
             $categoria_senal_id=$_POST['categoria_senal_id'];
             $tipo_senal_id=$_POST['tipo_senal_id'];
+            $senial_id=$_POST['senial_id'];
+            $solicitud_senial_mal_estado_descripcion=$_POST['solicitud_senial_mal_estado_descripcion'];
+            $solicitud_senial_mal_estado_direccion=$_POST['solicitud_senial_mal_estado_direccion'];
+            $solicitud_senial_mal_estado_imagen=$_POST['solicitud_senial_mal_estado_imagen'];
+            $danio_id=$_POST['danio_id'];
+            $usuario_id=1;
 
-            $sql="INSERT INTO usuarios VALUES($senal_id,'$senal_nombre',$categoria_senal_id,$tipo_senal_id)";
+            $sql="INSERT INTO usuarios VALUES(null,$senial_id,$solicitud_senial_mal_estado_descripcion,$danio_id,$usuario_id,$solicitud_senial_mal_estado_direccion,$solicitud_senial_mal_estado_imagen,1,1)";
             $ejecutar=$obj->insert($sql);
                 if($ejecutar){
-                    redirect(getUrl("Solicitud","Solicitud","getSenal"));
+                    redirect(getUrl("Solicitud","Solicitud","getSenialMalEstado"));
                 }else{
                     echo "Se ha presentado un error al insertar";
                 }
@@ -42,7 +48,7 @@
 
 
         }
-        public function getSenal(){
+        public function getSenialMalEstado(){
             $obj=new SolicitudModel();
 
             $sql= "SELECT s.*,c.categoria_senal_nombre, t.tipo_senal_nombre FROM senal s, categoria_senal c, tipo_senal t WHERE s.categoria_senal_id =c.categoria_senal_id AND s.tipo_senal_id=t.tipo_senal_id";

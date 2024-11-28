@@ -13,9 +13,7 @@ class MasterModel extends Connection {
             echo "Error en la consulta: " . pg_last_error($this->getConnect()); 
             return false; 
         } 
-        $result = pg_fetch_all($result); 
-        
-        return $result;
+        return $result; 
     }
 
     public function update($sql) {

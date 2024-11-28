@@ -1,3 +1,4 @@
+
 <div class="main-header">
           <div class="main-header-logo">
             <!-- Logo Header -->
@@ -336,7 +337,7 @@
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold"> Goat Turinho</span>
+                      <span class="fw-bold"><?=$_SESSION['nombre']?></span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -351,10 +352,10 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
+                            <h4><?=$_SESSION['nombre']." ".$_SESSION['apellido']?></h4>
+                            <p class="text-muted"><?=$_SESSION['correo']?></p>
                             <a
-                              href="profile.html"
+                              href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>"
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
@@ -363,13 +364,13 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">My Perfil</a>
                         <a class="dropdown-item" href="#">My Balance</a>
                         <a class="dropdown-item" href="#">Inbox</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="<?php echo getUrl("Acceso","Acceso","logout");?>">Cerrar sesion</a>
                       </li>
                     </div>
                   </ul>

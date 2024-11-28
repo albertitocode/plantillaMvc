@@ -2,9 +2,9 @@
 include_once '../lib/helphers.php';
 include_once '../view/partials/header.php';
  
-// if(!isset($_SESSION['auth'])){
-//     redirect('login.php');
-// }
+if(!isset($_SESSION['auth'])){
+    redirect('login.php');
+}
  echo "<body>";
  
     echo "<div class ='wrapper'>";
@@ -23,6 +23,7 @@ include_once '../view/partials/header.php';
         include_once '../view/partials/footer.php';
       echo "</div>";    
     echo "</div>";
+    include_once '../view/partials/colors.php';
     include_once '../view/partials/scripts.php';
  echo "</body>";
 echo "</html>";
