@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/login.css">
     <title>Login</title>
+    
 </head>
 <body>
     
@@ -29,11 +30,16 @@
             <input type="password" placeholder="Ingrese su contraseña" name="pass" id="pass" required>
 
             <button type="submit" class="btn btn-success">Iniciar Sesión</button>
-            <label>
+            <!-- <label>
                 <input type="checkbox" checked="checked" name="remember"> Recordarme
-            </label>
+            </label> -->
+         
+    </form>
+    <form action="<?php echo getUrl("Usuarios","Usuarios","getCreate","","ajax");?>" method="post" id="form2" >
+    <button type="submit" class="btn btn-success" name="registro">Registrarme</button>
         
-    </div>
+        </div>
+
     </form>
 </body>
 </html> 

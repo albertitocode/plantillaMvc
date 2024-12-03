@@ -101,9 +101,10 @@
                                     <select name="danio_id" id="danio_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <?php
-                                        foreach ($tipo_danio as $tipo_d) {
-                                            echo "<option  value='" . $tipo_d['tipo_danio_id'] . "'>" . $tipo_d['tipo_danio_nombre'] . "</option>";
+                                        foreach ($tipo_solicitudes as $tipo_s) {
+                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
                                         }
+                                        
                                         ?>
                                     </select>
                                 </div>

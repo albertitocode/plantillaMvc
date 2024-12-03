@@ -58,6 +58,19 @@ $(document).ready(function() {
       }
     });
   });
+  $(document).on('keyup',"#id_data",function(){
+    let id_data= $(this).val();
+    let url= $(this).attr('data-url');
+    console.log("Keyup event triggered");
+    $.ajax({
+      url:url,
+      type: 'POST',
+      data: {'id_data':id_data},
+      success: function(data){
+        $('#datos').html(data);
+      }
+    });
+  });
   $(document).on('click','#cambiar_estado',function(){
       let id = $(this).attr('data-id');
       let url = $(this).attr('data-url');

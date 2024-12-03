@@ -138,12 +138,12 @@ include_once '../model/Solicitud/SolicitudModel.php';
 
         $obj = new SolicitudModel();
 
-        $sql = "SELECT * FROM tipo_danios";
-        $tipo_danio = $obj->consult($sql);
+        $sql = "SELECT * FROM tipo_solicitudes";
+        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
+        
 
 
-
-        include_once '../view/solicitudReductor/create.php';
+        include_once '../view/solicitudVial/create.php';
 
 
     }

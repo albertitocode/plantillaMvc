@@ -3,12 +3,14 @@
   <div class="sidebar-logo">
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
-      <a href="index.html" class="logo">
-        <img
-          src="assets/img/kaiadmin/logo_light.svg"
+      <a href="../web/index.php" class="logo align-items-center">
+        <img 
+          src="assets/img/calva.jpg"
           alt="navbar brand"
           class="navbar-brand"
-          height="20"
+          height="60"
+          width="70"
+          
         />
       </a>
       <div class="nav-toggle">
@@ -28,26 +30,17 @@
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
+  
         <li class="nav-item active">
-          <a
-            data-bs-toggle="collapse"
-            href="#dashboard"
-            class="collapsed"
-            aria-expanded="false"
-          >
-            <i class="fas fa-home"></i>
-            <p>Dashboard</p>
-            <span class="caret"></span>
+
+          <a href="../web/index.php">
+          <i class="fas fa-home"></i>
+           <p>Inicio</p>
+           
           </a>
-          <div class="collapse" id="dashboard">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="../demo1/index.html">
-                  <span class="sub-item">Dashboard 1</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+
+
+
         </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
@@ -63,7 +56,7 @@
           </a>
           <div class="collapse" id="base">
             <ul class="nav nav-collapse">
-              
+
             <!-- accidente -->
           <li>
               <a data-bs-toggle="collapse" href="#bas">
@@ -77,12 +70,12 @@
                 <a href="components/buttons.html">
                   <span class="sub-item">Buttons</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
           </li>
-          
+
           <!-- termina accidente -->
 
           <!-- empieza sñal -->
@@ -98,7 +91,7 @@
                 <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateSenialMalEstado");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -118,7 +111,7 @@
                 <a href="">
                   <span class="sub-item">Registrar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -140,12 +133,12 @@
                 <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateVia");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
-              </li> 
+              </li>
               <li>
                 <a href="<?php echo getUrl("Solicitud","Solicitud","getVias");?>">
                   <span class="sub-item">Consultar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -153,11 +146,11 @@
 
 
 
-          
+
 
           <!-- termina vias -->
 
-        
+
             </ul>
           </div>
         </li>
@@ -173,7 +166,7 @@
                 <a href="<?php echo getUrl("Usuarios","Usuarios","getUsuarios");?>">
                   <span class="sub-item">Consultar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -183,7 +176,7 @@
                 <a href="<?php echo getUrl("Usuarios","Usuarios","getCreate");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -193,7 +186,7 @@
                 <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>">
                   <span class="sub-item">Actualizar usuarios</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
@@ -203,17 +196,17 @@
                 <a href="<?php echo getUrl("Usuarios","Usuarios","updateStatus");?>">
                   <span class="sub-item">Inhabilitar/Habilitar</span>
                 </a>
-              </li> 
+              </li>
 
             </ul>
           </div>
-          
+
           </li>
-          
+
           <!-- termina accidente -->
 
           <!-- empieza sñal -->
-          
+
         </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#sidebarLayouts">
@@ -252,7 +245,7 @@
             </ul>
           </div>
         </li>
-        
+
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#maps">
             <i class="fas fa-map-marker-alt"></i>

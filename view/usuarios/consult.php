@@ -1,4 +1,12 @@
-<div class="mt-5">
+
+<style>
+        .card-scroll {
+            
+            overflow-x: auto;  /* Habilita el scroll vertical */
+        }
+    </style>
+<div 
+class="mt-5">
     <h3 class="display-4">Consultar Usuarios</h3>
 </div>
 <div class="page-header">
@@ -25,7 +33,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card overflow-x-scroll">
             <div class="card-header">
                 <div class="card-tittle">
                     Actualizacion Usuarios

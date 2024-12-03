@@ -14,7 +14,7 @@ class UsuariosController
 
 
         $sql = "SELECT * FROM roles";
-        $rol = pg_fetch_all($obj->consult($sql));
+        $roles = pg_fetch_all($obj->consult($sql));
 
 
         $sql = "SELECT * FROM tipo_documentos";
@@ -22,8 +22,13 @@ class UsuariosController
 
         $sql = "SELECT * FROM estados";
         $estado = pg_fetch_all($obj->consult($sql));
-
-        include_once '../view/usuarios/create.php';
+        
+        
+        if(isset($_POST['registro'])){
+           include_once '../view/usuarios/newUser.php';
+        }else{
+            include_once '../view/usuarios/create.php';
+        }
     }
     public function postCreate()
     {
@@ -107,14 +112,19 @@ class UsuariosController
         // }
         // // $id= $obj->autoIncrement("usu_id","usuarios");
         // $usu_clave=password_hash($usu_clave,PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1, usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasena, usuario_correo, usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasena', '$usu_correo', $usu_telefono, '$usu_direccion', 1, 1)";
+        $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1, usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasena, usuario_correo, usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasena', '$usu_correo', $usu_telefono, '$usu_direccion', 2, 1)";
 
         echo $sql;
 
         if ($validaciones == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
+                if(isset($_POST['registro'])){
+                    $_SESSION['auth']='ok';
+                    redirect('../web/index.php');
+                }else{
                 redirect(getUrl("Usuarios", "Usuarios", "getUsuarios"));
+                }
             } else {
                 echo "Se ha presentado un error al insertar";
             }
@@ -139,9 +149,21 @@ class UsuariosController
 
         $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u, rol r, tipo_documento t WHERE u.rol_id =r.rol_id AND u.tipo_documento=t.tipo_documento_id AND (u.usu_nombre_1 LIKE '%$buscar%' OR u.usu_nombre_2 LIKE '%$buscar%' OR u.usu_apellido_1 LIKE '%$buscar%' OR u.usu_apellido_2 LIKE '%$buscar%' OR u.usu_correo LIKE '%$buscar%' OR t.tipo_documento_nombre LIKE '%$buscar%' OR r.rol_nombre LIKE '%$buscar%') ORDER BY u.usu_id ASC";
 
-        $usuarios = $rol = pg_fetch_all($obj->consult($sql));
+        $usuarios =  pg_fetch_all($obj->consult($sql));
 
         include_once '../view/usuarios/buscar.php';
+    }
+    public function buscarUsuario()
+    {
+        $obj = new UsuariosModel();
+
+        $id_datos = $_POST['id_data'];
+
+        $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u, rol r, tipo_documento t WHERE u.rol_id =r.rol_id AND u.tipo_documento=t.tipo_documento_id AND u.usuario_id=$id_datos";
+
+        $usuario =  pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/usuarios/buscarUsuarios.php';
     }
 
     public function posUpdateStatus()
@@ -180,17 +202,23 @@ class UsuariosController
 
 
         $sql = "SELECT * FROM roles";
-        $rol = $rol = pg_fetch_all($obj->consult($sql));
+        $roles = pg_fetch_all($obj->consult($sql));
 
 
         $sql = "SELECT * FROM tipo_documentos";
-        $tipo_documento = $rol = pg_fetch_all($obj->consult($sql));
+        $tipo_documento = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM estados";
-        $estado = $rol = pg_fetch_all($obj->consult($sql));
+        $estado = pg_fetch_all($obj->consult($sql));
 
-    
+        $sql = "SELECT * FROM usuarios";
+        $usuario = pg_fetch_all($obj->consult($sql));
+
+        if($_SESSION['rol']==1){
         include_once '../view/usuarios/update.php';
+    }else{
+        include_once '../view/usuarios/perfil.php';
+    }
     }
     public function postUpdateUsuarios()
     {
@@ -199,6 +227,7 @@ class UsuariosController
         // dd($_POST);
         if(isset($_POST['enviar'])){
 
+        
         $id = $_POST['usuario_id'];
         $usu_nombre_1 = $_POST['usuario_nombre_1'];
         $usu_nombre_2 = $_POST['usuario_nombre_2'];
@@ -271,8 +300,8 @@ class UsuariosController
         } else {
             echo "No se seleccionarion campos para actualizar";
         }
-
-        echo $sql;
+        echo $cont;
+        
 
         if ($validaciones == true) {
             $ejecutar = $obj->update($sql);

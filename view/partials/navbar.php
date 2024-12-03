@@ -330,14 +330,14 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="assets/img/calvo.jpg"
+                        src="<?=$_SESSION['foto']?>"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold"><?=$_SESSION['nombre']?></span>
+                      <span class="fw-bold"><?=$_SESSION['primer nombre']?></span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -346,13 +346,13 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="assets/img/calvo.jpg"
+                              src="<?=$_SESSION['foto']?>"
                               alt="image profile"
                               class="avatar-img rounded"
                             />
                           </div>
                           <div class="u-text">
-                            <h4><?=$_SESSION['nombre']." ".$_SESSION['apellido']?></h4>
+                            <h4><?=$_SESSION['primer nombre']." ".$_SESSION['primer apellido']?></h4>
                             <p class="text-muted"><?=$_SESSION['correo']?></p>
                             <a
                               href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>"

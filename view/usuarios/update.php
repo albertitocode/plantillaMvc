@@ -55,85 +55,16 @@
             <input type="text" name="usu_id" class="form-control" placeholder="Id">
             
         </div> -->
-                        <div class="form-group col-lg-4">
-                            <label for="usuario_id">Digite el id del usuario a actualizar</label>
-                            <input type="text" name="usuario_id" id="" class="form-control" placeholder="Id">
-
+                        <div class="col-md-3 mt-4">
+                            <label for="">Id</label>
+                            <input type="text" name="id_data" id="id_data" class="form-control"
+                                placeholder="Buscar por id" data-url='<?php echo getUrl("Usuarios", "Usuarios", "buscarUsuario", false, "ajax");?>'>
                         </div>
-                        <div class="row">
-
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    <label for="usuario_nombre_1">Primer nombre</label>
-                                    <input type="text" name="usuario_nombre_1" id="" class="form-control" placeholder="Nombre 1">
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="usuario_apellido_1">Primer apellido</label>
-                                    <input type="text" name="usuario_apellido_1" id="" class="form-control" placeholder="Apellido 1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_correo">correo</label>
-                                    <input type="text" name="usuario_correo" id="" class="form-control" placeholder="Correo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_direccion">Direccion </label>
-                                    <input type="text" name="usuario_direccion" id="" class="form-control" placeholder="Direccion">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    <label for="usuario_nombre_2">Segundo nombre</label>
-                                    <input type="text" name="usuario_nombre_2" id="" class="form-control" placeholder="Nombre 2">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_apellido_2">Segundo apellido</label>
-                                    <input type="text" name="usuario_apellido_2" id="" class="form-control" placeholder="Apellido 2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="usuario_contrasena">Contraseña</label>
-                                    <input type="password" name="usuario_contrasena" id="" class="form-control" placeholder="Clave">
-                                </div>
-                                <div class="form-group">
-                                    <label for="rol_id">Rol</label>
-                                    <select name="rol_id" id="" class="form-control">
-                                        <option value="">Seleccione...</option>
-                                        <?php
-                                        foreach ($rol as $ro) {
-                                            echo "<option  value='" . $ro['rol_id'] . "'>" . $ro['rol_nombre'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    <label for="usuario_telefono">Telefono</label>
-                                    <input type="text" name="usuario_telefono" id="" class="form-control" placeholder="Telefono celular">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo_documento_id">Tipo de documento</label>
-                                    <select name="tipo_documento_id" id="" class="form-control">
-                                        <option value="">Seleccione...</option>
-                                        <?php
-                                        foreach ($tipo_documento as $tipo_d) {
-                                            echo "<option  value='" . $tipo_d['tipo_documento_id'] . "'>" . $tipo_d['tipo_documento_nombre'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_num_identificacion">Numero documento</label>
-                                    <input type="number" name="usuario_num_identificacion" id="" class="form-control" placeholder="Documento">
-                                </div>
-
-                            </div>
+                        <div class="row" id="datos">
+                                
                             <div class="mt-5">
                                 <input type="submit" value="Enviar" class="btn btn-success" name="enviar">
-                                
+
                             </div>
                         </div>
                     </div>
