@@ -1,97 +1,106 @@
 <?php
 include_once '../model/Solicitud/SolicitudModel.php';
 
-    class SolicitudController {
-        public function test1() {
-            echo "Funciona1";
-        }
-        public function test2() {
-            echo "Funciona2";
-        }
-        public function test3() {
-            echo "Funciona3";
-        }
-        public function getCreateSenialMalEstado(){
-            $obj = new SolicitudModel();
+class SolicitudController
+{
+    public function test1()
+    {
+        echo "Funciona1";
+    }
+    public function test2()
+    {
+        echo "Funciona2";
+    }
+    public function test3()
+    {
+        echo "Funciona3";
+    }
+    public function getCreateSenialMalEstado()
+    {
+        $obj = new SolicitudModel();
 
-        $sql = "SELECT * FROM categoria_senal";
+        $sql = "SELECT * FROM categoria_seniales";
         $categoria_senal = $obj->consult($sql);
 
-        $sql = "SELECT * FROM tipo_senal";
+        $sql = "SELECT * FROM tipo_seniales";
         $tipo_senal = $obj->consult($sql);
 
-            include_once '../view/solicitudSenal/malEstado/create.php';
-        }
-        public function postCreateSenialMalEstado(){
+        include_once '../view/solicitudSenal/malEstado/create.php';
+    }
+    public function postCreateSenialMalEstado()
+    {
 
         $obj = new SolicitudModel();
 
-            // $senal_id=$_POST['senal_id'];
-            $categoria=$_POST['categoria_senal_id'];
-            $categoria_senal_id=$_POST['categoria_senal_id'];
-            $tipo_senal_id=$_POST['tipo_senal_id'];
-            $senial_id=$_POST['senial_id'];
-            $solicitud_senial_mal_estado_descripcion=$_POST['solicitud_senial_mal_estado_descripcion'];
-            $solicitud_senial_mal_estado_direccion=$_POST['solicitud_senial_mal_estado_direccion'];
-            $solicitud_senial_mal_estado_imagen=$_POST['solicitud_senial_mal_estado_imagen'];
-            $danio_id=$_POST['danio_id'];
-            $usuario_id=1;
+        // $senal_id=$_POST['senal_id'];
+        $categoria = $_POST['categoria_senal_id'];
+        $categoria_senal_id = $_POST['categoria_senal_id'];
+        $tipo_senal_id = $_POST['tipo_senal_id'];
+        $senial_id = $_POST['senial_id'];
+        $solicitud_senial_mal_estado_descripcion = $_POST['solicitud_senial_mal_estado_descripcion'];
+        $solicitud_senial_mal_estado_direccion = $_POST['solicitud_senial_mal_estado_direccion'];
+        $solicitud_senial_mal_estado_imagen = $_POST['solicitud_senial_mal_estado_imagen'];
+        $danio_id = $_POST['danio_id'];
+        $usuario_id = 1;
 
-            $sql="INSERT INTO usuarios VALUES(null,$senial_id,$solicitud_senial_mal_estado_descripcion,$danio_id,$usuario_id,$solicitud_senial_mal_estado_direccion,$solicitud_senial_mal_estado_imagen,1,1)";
-            $ejecutar=$obj->insert($sql);
-                if($ejecutar){
-                    redirect(getUrl("Solicitud","Solicitud","getSenialMalEstado"));
-                }else{
-                    echo "Se ha presentado un error al insertar";
-                }
-            
-
-
+        $sql = "INSERT INTO usuarios VALUES(null,$senial_id,$solicitud_senial_mal_estado_descripcion,$danio_id,$usuario_id,$solicitud_senial_mal_estado_direccion,$solicitud_senial_mal_estado_imagen,1,1)";
+        $ejecutar = $obj->insert($sql);
+        if ($ejecutar) {
+            redirect(getUrl("Solicitud", "Solicitud", "getSenialMalEstado"));
+        } else {
+            echo "Se ha presentado un error al insertar";
         }
-        public function getSenialMalEstado(){
-            $obj=new SolicitudModel();
-
-            $sql= "SELECT s.*,c.categoria_senal_nombre, t.tipo_senal_nombre FROM senal s, categoria_senal c, tipo_senal t WHERE s.categoria_senal_id =c.categoria_senal_id AND s.tipo_senal_id=t.tipo_senal_id";
-            $senal=$obj->consult($sql);
-            include_once '../view/solicitudSenal/consult.php';
-        }
-        public function GetCreateReduc(){
-            $obj= new SolicitudModel();
-
-            $sql="SELECT r.*, t_r.tipo_reductor_nombre FROM reductor r, tipo_señal t_r WHERE r.tipo_reductor_id=t_r.tipo_reductor_id ";
-
-            $reductor=$obj->consult($sql);
-
-            include_once '../view/solicitudReductor/consult.php';
 
 
-        }
-        public function PostCreateReduc(){
-            $obj=new SolicitudModel();
 
-            $categoria_reduc_id=$_POST[''];
-            $categoria_reduc_nombre=$_POST[''];
-            $tipo_reduc_id=$_POST[''];
-
-            $sql="INSERT INTO  VALUES()";
-            $ejecutar=$obj->insert($sql);
-                if($ejecutar){
-                    redirect(getUrl("Solicitud","Solicitud",""));
-                }else{
-                    echo "Se ha presentado un error al insertar";
-                }
-           
-        
-        }
-       
-    
-
-    
-    public function getSenal()
+    }
+    public function getSenialMalEstado()
     {
         $obj = new SolicitudModel();
 
         $sql = "SELECT s.*,c.categoria_senal_nombre, t.tipo_senal_nombre FROM senal s, categoria_senal c, tipo_senal t WHERE s.categoria_senal_id =c.categoria_senal_id AND s.tipo_senal_id=t.tipo_senal_id";
+        $senal = $obj->consult($sql);
+        include_once '../view/solicitudSenal/consult.php';
+    }
+    public function GetCreateReduc()
+    {
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT r.*, t_r.tipo_reductor_nombre FROM reductor r, tipo_señal t_r WHERE r.tipo_reductor_id=t_r.tipo_reductor_id ";
+
+        $reductor = $obj->consult($sql);
+
+        include_once '../view/solicitudReductor/consult.php';
+
+
+    }
+    public function PostCreateReduc()
+    {
+        $obj = new SolicitudModel();
+
+        $categoria_reduc_id = $_POST[''];
+        $categoria_reduc_nombre = $_POST[''];
+        $tipo_reduc_id = $_POST[''];
+
+        $sql = "INSERT INTO  VALUES()";
+        $ejecutar = $obj->insert($sql);
+        if ($ejecutar) {
+            redirect(getUrl("Solicitud", "Solicitud", ""));
+        } else {
+            echo "Se ha presentado un error al insertar";
+        }
+
+
+    }
+
+
+
+
+    public function getSenal()
+    {
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT s.*,c.categoria_senial_nombre, t.tipo_senial_nombre FROM senal s, categoria_senial c, tipo_senial t WHERE s.categoria_senial_id =c.categoria_senial_id AND s.tipo_senial_id=t.tipo_senial_id";
         $senal = $obj->consult($sql);
         include_once '../view/solicitudSenal/consult.php';
     }
@@ -140,7 +149,7 @@ include_once '../model/Solicitud/SolicitudModel.php';
 
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
-        
+
 
 
         include_once '../view/solicitudVial/create.php';
@@ -266,5 +275,115 @@ include_once '../model/Solicitud/SolicitudModel.php';
 
     }
     //termina vias
+
+
+    //Empieza Accidentes
+    public function GetCreateAccidente()
+    {
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM tipo_solicitudes";
+        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
+
+
+
+        include_once '../view/solicitudAccidente/create.php';
+
+
+    }
+
+
+    public function PostCreateAccidente()
+    {
+
+        $obj = new SolicitudModel();
+
+        $tipo_via = $_POST['tipo_via'];
+        $num_via = $_POST['num_via'];
+        $letra1 = $_POST['letra1'];
+        $bis = $_POST['bis'];
+        $orientacion = $_POST['orientacion'];
+        $numero2 = $_POST['numero2'];
+        $letra2 = $_POST['letra2'];
+        $numero3 = $_POST['numero3'];
+        $barrio = $_POST['barrio'];
+        $direccion = "$tipo_via $num_via $letra1$bis $orientacion $numero2 $letra2 $numero3, barrio $barrio";
+        $descripcion = $_POST['observacion'];
+        $imagen = $_POST['imagen'];
+        $tipo_choque = $_POST['tipo_choque'];
+        $lesionados= $_POST['lesionados'];
+
+
+        //VALIDACIONES
+        $validacion = true;
+        $campos = [
+            'tipo_via' => 'El campo tipo de vía es requerido',
+            'num_via' => 'El campo número de vía es requerido',
+            'barrio' => 'El campo barrio es requerido',
+            'tipo_choque' => 'El campo tipo de choque es requerido'
+        ];
+
+        // Bucle para validar los campos
+        foreach ($campos as $campo => $mensaje) {
+            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
+
+        }
+
+        // function validarNumeros($input){
+        //     $patron = "/^[0-9]+$/";
+        //     return preg_match($patron,$input)===1;
+
+        // }
+
+        $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
+        solicitud_accidente_imagen,solicitud_accidente_descripcion,estado_id,usuario_id,tipo_solicitud_id) VALUES (
+    $direccion, $tipo_choque, $imagen,$descripcion, 3, 1, 4 );";
+
+        if ($validacion == true) {
+            $ejecutar = $obj->insert($sql);
+
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateVia") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        } else {
+            redirect(getUrl("Usuarios", "Usuarios", "getCreate"));
+        }
+
+
+
+
+
+
+        if ($ejecutar) {
+
+
+        } else {
+            echo "Se ha presentado un error al insertar";
+
+
+        }
+
+
+    }
+    //Termina accidentes
 }
 ?>

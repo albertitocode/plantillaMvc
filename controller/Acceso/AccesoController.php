@@ -10,7 +10,7 @@ class AccesoController {
             $user=$_POST['user'];
             $pass=$_POST['pass'];
 
-            $sql = "SELECT * FROM usuarios WHERE usuario_correo='$user' and usuario_contrasena='$pass'";
+            $sql = "SELECT * FROM usuarios WHERE usuario_correo='$user' AND usuario_contrasenia='$pass'";
             $usuarios= $obj->consult($sql);
             if($usuarios){
             if(pg_num_rows($usuarios)>0){

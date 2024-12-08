@@ -67,8 +67,8 @@
             <div class="collapse" id="bas">
             <ul class="nav nav-collapse">
               <li>
-                <a href="components/buttons.html">
-                  <span class="sub-item">Buttons</span>
+                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateAccidente");?>">
+                  <span class="sub-item">Registrar</span>
                 </a>
               </li>
 

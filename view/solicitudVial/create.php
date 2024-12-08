@@ -7,7 +7,7 @@
     <div class="alert alert-danger d-none" role="alert" id="error">
 
     </div>
-   
+
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateVia"); ?>" method="post" id="form">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
@@ -32,7 +32,7 @@
             </ul>
         </div>
         <div class="row">
-            
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        
+
                         <!-- <div class="col-md-4">
             <label for="usu_id">Id</label>
             <input type="text" name="usu_id" class="form-control" placeholder="Id">
@@ -51,17 +51,17 @@
 
 
                             <div class="col-md-6 col-lg-6">
-                            <?php
-    if (isset($_SESSION['errores'])) {
-        echo "<div class='alert alert-danger' role='alert'>";
-        foreach ($_SESSION['errores'] as $error) {
-            echo $error . "<br>";
-        }
-        echo "</div>";
-        unset($_SESSION['errores']);
-    }
+                                <?php
+                                if (isset($_SESSION['errores'])) {
+                                    echo "<div class='alert alert-danger' role='alert'>";
+                                    foreach ($_SESSION['errores'] as $error) {
+                                        echo $error . "<br>";
+                                    }
+                                    echo "</div>";
+                                    unset($_SESSION['errores']);
+                                }
 
-    ?>
+                                ?>
                                 <div class="form-group">
                                     <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
                                         via</label>
@@ -104,7 +104,7 @@
                                         foreach ($tipo_solicitudes as $tipo_s) {
                                             echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
                                         }
-                                        
+
                                         ?>
                                     </select>
                                 </div>
