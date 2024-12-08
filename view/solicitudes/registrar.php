@@ -18,9 +18,9 @@
     }
 
     ?>
-    <form action="<?php echo getUrl("Usuarios", "Usuarios", "postUpdateUsuarios"); ?>" method="post" id="form">
+    <form action="" method="post" id="form">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Actualizacion</h3>
+            <h3 class="fw-bold mb-3">Solicitudes</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -31,13 +31,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Usuarios</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Actualizar usuarios</a>
+                    <a href="#">Realizar solicitud</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +40,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tittle">
-                            Actualizacion Usuarios
+                            Registro
                         </div>
                     </div>
                     <div class="card-body">
@@ -56,11 +50,21 @@
             
         </div> -->
                         <div class="col-md-3 mt-4">
-                            <label for="">Id</label>
-                            <input type="text" name="id_data" id="id_data" class="form-control"
-                                placeholder="Buscar por id" data-url='<?php echo getUrl("Usuarios", "Usuarios", "buscarUsuario", false, "ajax");?>'>
-                        </div>
-                        <div class="row" id="datos">
+                            <!-- <label for="">Id</label>
+                            <input type="text" name="id_solicitud" id="id_solicitud" class="form-control"
+                                placeholder="Buscar por tipo de solcitud" data-url='
+                         -->
+                        <label for="">Tipo de solicitud</label>
+                                <select name="tipo_solicitud_id" id="id_solicitud" class="form-control" data-url='<?php echo getUrl("Solicitud", "Solicitud", "buscarSolicitud", false, "ajax");?>'>
+                                    <option value="">Seleccione...</option>
+                                    <?php
+                                    foreach ($tipo_solicitud as $tipo_s) {
+                                        echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                        <div id="formularios">
                                 
                            
                         </div>

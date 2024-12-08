@@ -2,23 +2,39 @@
 include_once '../model/Solicitud/SolicitudModel.php';
 
     class SolicitudController {
-        public function test1() {
-            echo "Funciona1";
+        public function getSolicitud() {
+            $obj = new SolicitudModel();
+
+            $sql = "SELECT * FROM tipo_solicitudes";
+            $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+            include_once '../view/solicitudes/registrar.php';            
         }
-        public function test2() {
-            echo "Funciona2";
+        public function buscarSolicitud(){
+            $obj = new SolicitudModel();
+
+            $id_solicitud = $_POST['id_solicitud'];
+            // $sql = "SELECT * FROM tipo_solicitudes WHERE tipo_solicitud";
+            // $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+            if($id_solicitud==1){
+                include_once '../view/solicitudSenal/malEstado/create.php'; 
+            }else if($id_solicitud==2){
+            include_once '../view/solicitudVial/create.php'; 
+            }
         }
-        public function test3() {
-            echo "Funciona3";
-        }
+    
         public function getCreateSenialMalEstado(){
             $obj = new SolicitudModel();
 
-        $sql = "SELECT * FROM categoria_senal";
-        $categoria_senal = $obj->consult($sql);
+        $sql = "SELECT * FROM categoria_seniales";
+        $categoria_senal = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM tipo_senal";
-        $tipo_senal = $obj->consult($sql);
+        $sql = "SELECT * FROM tipo_seniales";
+        $tipo_senal = pg_fetch_all($obj->consult($sql));
+
+        $sql =  "SELECT  * FROM seniales";
+        $seniales = pg_fetch_all($obj->consult($sql));
 
             include_once '../view/solicitudSenal/malEstado/create.php';
         }
@@ -87,15 +103,7 @@ include_once '../model/Solicitud/SolicitudModel.php';
     
 
     
-    public function getSenal()
-    {
-        $obj = new SolicitudModel();
-
-        $sql = "SELECT s.*,c.categoria_senal_nombre, t.tipo_senal_nombre FROM senal s, categoria_senal c, tipo_senal t WHERE s.categoria_senal_id =c.categoria_senal_id AND s.tipo_senal_id=t.tipo_senal_id";
-        $senal = $obj->consult($sql);
-        include_once '../view/solicitudSenal/consult.php';
-    }
-
+ 
 
     //Empieza reductor
     public function GetCreateReductor()
