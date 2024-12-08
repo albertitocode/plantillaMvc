@@ -137,7 +137,7 @@ class UsuariosController
         $obj = new UsuariosModel();
 
 
-        $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id  JOIN tipo_documentos t ON u.tipo_documento_id=t.tipo_documento_id JOIN estados e ON u.estado_id=e.estado_id";
+        $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id  JOIN tipo_documentos t ON u.tipo_documento_id=t.tipo_documento_id JOIN estados e ON u.estado_id=e.estado_id order by u.usuario_id asc";
         $usuarios = pg_fetch_all($obj->consult($sql));
         include_once '../view/usuarios/consult.php';
     }
@@ -159,10 +159,10 @@ class UsuariosController
 
         $id_datos = $_POST['id_data'];
 
-        $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u, rol r, tipo_documento t WHERE u.rol_id =r.rol_id AND u.tipo_documento=t.tipo_documento_id AND u.usuario_id=$id_datos";
-
+        $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre FROM usuarios u, roles r, tipo_documentos t WHERE u.rol_id =r.rol_id AND u.tipo_documento_id=t.tipo_documento_id AND u.usuario_id=$id_datos";
+        $_SESSION['id_datos']=$id_datos;
         $usuario =  pg_fetch_all($obj->consult($sql));
-
+        
         include_once '../view/usuarios/buscarUsuarios.php';
     }
 
@@ -188,10 +188,10 @@ class UsuariosController
         $ejecutar = $obj->update($sql);
         if ($ejecutar) {
 
-        $sql = "SELECT u.estado_id,u.usuario_id,u.usuario_nombre_1,u.usuario_num_identificacion,u.usuario_apellido_1,u.usuario_correo,r.rol_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id  JOIN estados e ON u.estado_id=e.estado_id";
+            $sql = "SELECT u.*,r.rol_nombre, t.tipo_documento_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id  JOIN tipo_documentos t ON u.tipo_documento_id=t.tipo_documento_id JOIN estados e ON u.estado_id=e.estado_id order by u.usuario_id asc";
         $usuarios = pg_fetch_all($obj->consult($sql));
 
-            include_once '../view/usuarios/buscar2.php';
+            include_once '../view/usuarios/buscar.php';
         } else {
             echo "No se pudo actualizar";
         }
@@ -228,7 +228,7 @@ class UsuariosController
         if(isset($_POST['enviar'])){
 
         
-        $id = $_POST['usuario_id'];
+        $id = $_SESSION['id_datos'];
         $usu_nombre_1 = $_POST['usuario_nombre_1'];
         $usu_nombre_2 = $_POST['usuario_nombre_2'];
         $usu_apellido_1 = $_POST['usuario_apellido_1'];
@@ -324,22 +324,8 @@ class UsuariosController
         $sql = "SELECT u.estado_id,u.usuario_id,u.usuario_nombre_1,u.usuario_num_identificacion,u.usuario_apellido_1,u.usuario_correo,r.rol_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id   JOIN estados e ON u.estado_id=e.estado_id";
         $usuarios = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/usuarios/habilitar_inhabilitar.php';
+        include_once '../view/usuarios/buscar.php';
     }
-    public function status(){
-        $obj = new UsuariosModel();
-        include_once '../view/usuarios/status.php';
-    }
-    public function buscar2()
-    {
-        $obj = new UsuariosModel();
-
-        $buscar = $_POST['buscar'];
-
-        $sql = "SELECT u.estado_id,u.usuario_id,u.usuario_nombre_1,u.usuario_num_identificacion,u.usuario_apellido_1,u.usuario_correo,r.rol_nombre, e.estado_nombre FROM usuarios u JOIN roles r ON u.rol_id =r.rol_id   JOIN estados e ON u.estado_id=e.estado_id AND (u.usu_nombre_1 LIKE '%$buscar%' OR u.usu_nombre_2 LIKE '%$buscar%' OR u.usu_apellido_1 LIKE '%$buscar%' OR u.usu_apellido_2 LIKE '%$buscar%' OR u.usu_correo LIKE '%$buscar%' OR t.tipo_documento_nombre LIKE '%$buscar%' OR r.rol_nombre LIKE '%$buscar%') ORDER BY u.usu_id ASC";
-
-        $usuarios = $obj->consult($sql);
-
-        include_once '../view/usuarios/buscar2.php';
-    }
+  
+    
 }

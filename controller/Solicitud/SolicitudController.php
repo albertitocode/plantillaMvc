@@ -1,29 +1,40 @@
 <?php
 include_once '../model/Solicitud/SolicitudModel.php';
 
-class SolicitudController
-{
-    public function test1()
-    {
-        echo "Funciona1";
-    }
-    public function test2()
-    {
-        echo "Funciona2";
-    }
-    public function test3()
-    {
-        echo "Funciona3";
-    }
-    public function getCreateSenialMalEstado()
-    {
-        $obj = new SolicitudModel();
+    class SolicitudController {
+        public function getSolicitud() {
+            $obj = new SolicitudModel();
+
+            $sql = "SELECT * FROM tipo_solicitudes";
+            $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+            include_once '../view/solicitudes/registrar.php';            
+        }
+        public function buscarSolicitud(){
+            $obj = new SolicitudModel();
+
+            $id_solicitud = $_POST['id_solicitud'];
+            // $sql = "SELECT * FROM tipo_solicitudes WHERE tipo_solicitud";
+            // $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+            if($id_solicitud==1){
+                include_once '../view/solicitudSenal/malEstado/create.php'; 
+            }else if($id_solicitud==2){
+            include_once '../view/solicitudVial/create.php'; 
+            }
+        }
+    
+        public function getCreateSenialMalEstado(){
+            $obj = new SolicitudModel();
 
         $sql = "SELECT * FROM categoria_seniales";
-        $categoria_senal = $obj->consult($sql);
+        $categoria_senal = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM tipo_seniales";
-        $tipo_senal = $obj->consult($sql);
+        $tipo_senal = pg_fetch_all($obj->consult($sql));
+
+        $sql =  "SELECT  * FROM seniales";
+        $seniales = pg_fetch_all($obj->consult($sql));
 
         include_once '../view/solicitudSenal/malEstado/create.php';
     }
@@ -53,58 +64,25 @@ class SolicitudController
 
 
 
-    }
-    public function getSenialMalEstado()
-    {
-        $obj = new SolicitudModel();
+            $categoria_reduc_id=$_POST[''];
+            $categoria_reduc_nombre=$_POST[''];
+            $tipo_reduc_id=$_POST[''];
 
-        $sql = "SELECT s.*,c.categoria_senal_nombre, t.tipo_senal_nombre FROM senal s, categoria_senal c, tipo_senal t WHERE s.categoria_senal_id =c.categoria_senal_id AND s.tipo_senal_id=t.tipo_senal_id";
-        $senal = $obj->consult($sql);
-        include_once '../view/solicitudSenal/consult.php';
-    }
-    public function GetCreateReduc()
-    {
-        $obj = new SolicitudModel();
-
-        $sql = "SELECT r.*, t_r.tipo_reductor_nombre FROM reductor r, tipo_señal t_r WHERE r.tipo_reductor_id=t_r.tipo_reductor_id ";
-
-        $reductor = $obj->consult($sql);
-
-        include_once '../view/solicitudReductor/consult.php';
-
-
-    }
-    public function PostCreateReduc()
-    {
-        $obj = new SolicitudModel();
-
-        $categoria_reduc_id = $_POST[''];
-        $categoria_reduc_nombre = $_POST[''];
-        $tipo_reduc_id = $_POST[''];
-
-        $sql = "INSERT INTO  VALUES()";
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", ""));
-        } else {
-            echo "Se ha presentado un error al insertar";
+            $sql="INSERT INTO  VALUES()";
+            $ejecutar=$obj->insert($sql);
+                if($ejecutar){
+                    redirect(getUrl("Solicitud","Solicitud",""));
+                }else{
+                    echo "Se ha presentado un error al insertar";
+                }
+           
+        
         }
+       
+    
 
-
-    }
-
-
-
-
-    public function getSenal()
-    {
-        $obj = new SolicitudModel();
-
-        $sql = "SELECT s.*,c.categoria_senial_nombre, t.tipo_senial_nombre FROM senal s, categoria_senial c, tipo_senial t WHERE s.categoria_senial_id =c.categoria_senial_id AND s.tipo_senial_id=t.tipo_senial_id";
-        $senal = $obj->consult($sql);
-        include_once '../view/solicitudSenal/consult.php';
-    }
-
+    
+ 
 
     //Empieza reductor
     public function GetCreateReductor()

@@ -19,37 +19,7 @@
 
     //  -->
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenal"); ?>" method="post" id="form">
-        <div class="page-header">
-            <h3 class="fw-bold mb-3">Registro</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Usuarios</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Registro señales en mal estado</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-tittle">
-                            Señal en mal estado
-                        </div>
-                    </div>
-                    <div class="card-body">
+    
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
@@ -75,15 +45,24 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="solicitud_senial_mal_estado_direccion"> Direccion</label>
-                                    <select name="dir1" id="" class="form-control">
-                                        <option value="">Seleccione carrera...</option>
-                                        <option value=""> Cra</option>
-                                    </select>
-                                    <select name="dir2" id="" class="form-control">
-                                        <option value="">Seleccione calle...</option>
-                                        <option value=""> Cra</option>
-                                    </select>
+                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
+                                        via</label>
+                                    <div class="d-flex">
+
+                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
+                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
+                                            placeholder="carrera">
+
+                                        <label for="calle" class="mt-2 mx-2">calle</label>
+                                        <input type="text" name="calle" id="calle" class="form-control px-4"
+                                            placeholder="calle">
+
+                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
+                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
+                                            placeholder="brario">
+
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -122,10 +101,7 @@
                             </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          
       
 
         <!--Usuarios id se va coger desde sesion_start -->

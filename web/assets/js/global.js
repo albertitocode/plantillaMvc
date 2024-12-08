@@ -61,13 +61,27 @@ $(document).ready(function() {
   $(document).on('keyup',"#id_data",function(){
     let id_data= $(this).val();
     let url= $(this).attr('data-url');
-    console.log("Keyup event triggered");
+    console.log("gola");
     $.ajax({
       url:url,
       type: 'POST',
       data: {'id_data':id_data},
       success: function(data){
         $('#datos').html(data);
+      }
+    });
+  });
+  $(document).on('change',"#id_solicitud",function(){
+    let id_solicitud= $(this).val();
+    let url= $(this).attr('data-url');
+    console.log("gola");
+    console.log("Valor seleccionado: " + id_solicitud);
+    $.ajax({
+      url:url,
+      type: 'POST',
+      data: {'id_solicitud':id_solicitud},
+      success: function(data){
+        $('#formularios').html(data);
       }
     });
   });

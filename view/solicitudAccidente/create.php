@@ -178,8 +178,8 @@
                                      
 
                                         <div class="form-group mb-3">
-                                            <label for="solicitud_via_mal_estado_imagen" class="fw-bold">Imagen</label>
-                                            <input type="file" name="solicitud_via_mal_estado_imagen"
+                                            <label for="imagen" class="fw-bold">Imagen</label>
+                                            <input type="file" name="imagen"
                                                 class="form-control">
                                         </div>
                                     </div>

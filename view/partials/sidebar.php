@@ -49,110 +49,26 @@
           <h4 class="text-section">Components</h4>
         </li>
         <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#base">
+          <a data-bs-toggle="collapse" href="#solicitudes">
             <i class="fas fa-layer-group"></i>
             <p>Solicitudes</p>
             <span class="caret"></span>
           </a>
-          <div class="collapse" id="base">
-            <ul class="nav nav-collapse">
-
-            <!-- accidente -->
-          <li>
-              <a data-bs-toggle="collapse" href="#bas">
-            <i class="fas fa-layer-group"></i>
-            <p>Solicitud Accidente  </p>
-            <span class="caret"></span>
-            </a>
-            <div class="collapse" id="bas">
+          <div class="collapse" id="solicitudes">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateAccidente");?>">
+                <a href="<?php echo getUrl("Solicitud","Solicitud","getSolicitud");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li>
-
-            </ul>
-          </div>
-          </li>
-
-          <!-- termina accidente -->
-
-          <!-- empieza sñal -->
-          <li>
-              <a data-bs-toggle="collapse" href="#senal">
-            <i class="fas fa-layer-group"></i>
-            <p>Solicitud Señales  </p>
-            <span class="caret"></span>
-            </a>
-            <div class="collapse" id="senal">
-            <ul class="nav nav-collapse">
               <li>
                 <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateSenialMalEstado");?>">
-                  <span class="sub-item">Registrar</span>
-                </a>
-              </li>
-
-            </ul>
-          </div>
-          </li>
-          <!-- termina señal -->
-
-          <!-- empieza reductor -->
-          <li>
-              <a data-bs-toggle="collapse" href="#reductor">
-            <i class="fas fa-layer-group"></i><?php getUrl("Solicitud","Solicitud", "getCreateReductor")?>
-            <p>Solicitud Reductores </p>
-            <span class="caret"></span>
-            </a>
-            <div class="collapse" id="reductor">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="">
-                  <span class="sub-item">Registrar</span>
-                </a>
-              </li>
-
-            </ul>
-          </div>
-          </li>
-
-          <!-- termina reductor -->
-
-
-           <!-- empieza vias -->
-           <li>
-              <a data-bs-toggle="collapse" href="#via">
-            <i class="fas fa-layer-group"></i>
-            <p>Solicitud Vias </p>
-            <span class="caret"></span>
-            </a>
-            <div class="collapse" id="via">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateVia");?>">
-                  <span class="sub-item">Registrar</span>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getVias");?>">
                   <span class="sub-item">Consultar</span>
                 </a>
               </li>
-
             </ul>
           </div>
-          </li>
-
-
-
-
-
-          <!-- termina vias -->
-
-
-            </ul>
-          </div>
+          
         </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#usuarios">
