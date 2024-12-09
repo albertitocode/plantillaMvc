@@ -1,31 +1,37 @@
 <?php
 include_once '../model/Solicitud/SolicitudModel.php';
 
-    class SolicitudController {
-        public function getSolicitud() {
-            $obj = new SolicitudModel();
+class SolicitudController
+{
+    public function getSolicitud()
+    {
+        $obj = new SolicitudModel();
 
-            $sql = "SELECT * FROM tipo_solicitudes";
-            $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+        $sql = "SELECT * FROM tipo_solicitudes";
+        $tipo_solicitud = pg_fetch_all($obj->consult($sql));
 
-            include_once '../view/solicitudes/registrar.php';            
+        include_once '../view/solicitudes/registrar.php';
+    }
+    public function buscarSolicitud()
+    {
+        $obj = new SolicitudModel();
+
+        $id_solicitud = $_POST['id_solicitud'];
+        // $sql = "SELECT * FROM tipo_solicitudes WHERE tipo_solicitud";
+        // $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+        if ($id_solicitud == 1) {
+            include_once '../view/solicitudSenal/malEstado/create.php';
+        } else if ($id_solicitud == 2) {
+            include_once '../view/solicitudVial/create.php';
+        } else if ($id_solicitud == 4) {
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateAccidente"));
         }
-        public function buscarSolicitud(){
-            $obj = new SolicitudModel();
+    }
 
-            $id_solicitud = $_POST['id_solicitud'];
-            // $sql = "SELECT * FROM tipo_solicitudes WHERE tipo_solicitud";
-            // $tipo_solicitud = pg_fetch_all($obj->consult($sql));
-
-            if($id_solicitud==1){
-                include_once '../view/solicitudSenal/malEstado/create.php'; 
-            }else if($id_solicitud==2){
-            include_once '../view/solicitudVial/create.php'; 
-            }
-        }
-    
-        public function getCreateSenialMalEstado(){
-            $obj = new SolicitudModel();
+    public function getCreateSenialMalEstado()
+    {
+        $obj = new SolicitudModel();
 
         $sql = "SELECT * FROM categoria_seniales";
         $categoria_senal = pg_fetch_all($obj->consult($sql));
@@ -33,7 +39,7 @@ include_once '../model/Solicitud/SolicitudModel.php';
         $sql = "SELECT * FROM tipo_seniales";
         $tipo_senal = pg_fetch_all($obj->consult($sql));
 
-        $sql =  "SELECT  * FROM seniales";
+        $sql = "SELECT  * FROM seniales";
         $seniales = pg_fetch_all($obj->consult($sql));
 
         include_once '../view/solicitudSenal/malEstado/create.php';
@@ -64,25 +70,25 @@ include_once '../model/Solicitud/SolicitudModel.php';
 
 
 
-            $categoria_reduc_id=$_POST[''];
-            $categoria_reduc_nombre=$_POST[''];
-            $tipo_reduc_id=$_POST[''];
+        $categoria_reduc_id = $_POST[''];
+        $categoria_reduc_nombre = $_POST[''];
+        $tipo_reduc_id = $_POST[''];
 
-            $sql="INSERT INTO  VALUES()";
-            $ejecutar=$obj->insert($sql);
-                if($ejecutar){
-                    redirect(getUrl("Solicitud","Solicitud",""));
-                }else{
-                    echo "Se ha presentado un error al insertar";
-                }
-           
-        
+        $sql = "INSERT INTO  VALUES()";
+        $ejecutar = $obj->insert($sql);
+        if ($ejecutar) {
+            redirect(getUrl("Solicitud", "Solicitud", ""));
+        } else {
+            echo "Se ha presentado un error al insertar";
         }
-       
-    
 
-    
- 
+
+    }
+
+
+
+
+
 
     //Empieza reductor
     public function GetCreateReductor()
@@ -264,7 +270,18 @@ include_once '../model/Solicitud/SolicitudModel.php';
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
 
+        $sql = "SELECT * FROM barrios LIMIT 10";
+        $barrios = pg_fetch_all($obj->consult($sql));
 
+        $sql = "SELECT * FROM letras_via LIMIT 10";
+        $letras = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM tipo_via";
+        $vias = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM orientaciones";
+        $orientaciones = pg_fetch_all($obj->consult($sql));
+        
 
         include_once '../view/solicitudAccidente/create.php';
 
@@ -290,7 +307,7 @@ include_once '../model/Solicitud/SolicitudModel.php';
         $descripcion = $_POST['observacion'];
         $imagen = $_POST['imagen'];
         $tipo_choque = $_POST['tipo_choque'];
-        $lesionados= $_POST['lesionados'];
+        $lesionados = $_POST['lesionados'];
 
 
         //VALIDACIONES

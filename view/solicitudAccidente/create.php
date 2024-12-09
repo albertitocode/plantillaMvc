@@ -48,7 +48,7 @@
             
         </div> -->
                         <div class="row">
-
+                        <?php  var_dump($letras);  ?>
 
                             <div class="col-md-12">
                                 <?php
@@ -67,14 +67,16 @@
                                     <div class="col-md-6 col-lg-6">
 
                                         <div class="form-group mb-3">
+                                            
                                             <label for="direccion" class="fw-bold">Dirección Accidente</label>
                                             <div class="row gx-2">
                                                 <div class="col-6 col-md-4">
                                                     <select name="tipo_via" id="tipo_via" class="form-select mt-1">
                                                         <option value="">Tipo de vía...</option>
                                                         <?php
-                                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                                        
+                                                        foreach ($vias as $via) {
+                                                            echo "<option  value='" . $via['tipo_via_id'] . "'>" . $via['tipo_via_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -88,8 +90,8 @@
                                                     <select name="letra1" id="letra1" class="form-select mt-1">
                                                         <option value="">Letra...</option>
                                                         <?php
-                                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                                        foreach ($letras as $letra) {
+                                                            echo "<option  value='" . $letra['tipo_solicitud_id'] . "'>" . $letra['tipo_solicitud_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -104,8 +106,8 @@
                                                         class="form-select mt-1">
                                                         <option value="">Orientación...</option>
                                                         <?php
-                                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                                        foreach ($orientaciones as $orientacion) {
+                                                            echo "<option  value='" . $orientacion['orientacion_id'] . "'>" . $orientacion['orientacion_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -121,8 +123,8 @@
                                                     <select name="letra2" id="letra2" class="form-select mt-1">
                                                         <option value="">Letra...</option>
                                                         <?php
-                                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                                        foreach ($letras as $letra) {
+                                                            echo "<option  value='" . $letra['tipo_solicitud_id'] . "'>" . $letra['tipo_solicitud_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -136,8 +138,8 @@
                                                     <select name="barrio" id="barrio" class="form-select mt-1">
                                                         <option value="">Barrio...</option>
                                                         <?php
-                                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                                        foreach ($barrios as $barrio) {
+                                                            echo "<option  value='" . $barrio['tipo_solicitud_id'] . "'>" . $barrio['tipo_solicitud_nombre'] . "</option>";
                                                         }
 
                                                         ?>
