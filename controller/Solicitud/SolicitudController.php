@@ -66,7 +66,7 @@ class SolicitudController
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 3) {
-            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+            redirect(getUrl("Solicitud", "Solicitud", "getReductorMalEstado"));
         } else if ($id_solicitud == 6) {
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         }
@@ -196,6 +196,16 @@ class SolicitudController
 
 
     //Empieza reductor
+
+    public function getReductorMalEstado(){
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT r.*, re.reductor_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, da.danio_nombre, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_reductores_mal_estado r JOIN reductores re ON r.reductor_id=re.reductor_id JOIN usuarios usu  ON r.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON r.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON r.estado_id = e.estado_id JOIN danios da ON r.danio_id=da.danio_id";
+        $solicitud_reductores_mal_estado = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudReductor/malEstado/consult.php';
+    }
     public function getCreateReductorMalEstado()
     {
         $obj = new SolicitudModel();
