@@ -284,25 +284,29 @@ class SolicitudController
 
         $sql = "SELECT * FROM tipo_choques";
         $choques = pg_fetch_all($obj->consult($sql));
-        
+
 
         include_once '../view/solicitudAccidente/create.php';
 
 
     }
 
-    public function getDetalleChoque(){
+    public function getDetalleChoque()
+    {
+        if (isset($_POST['tipo_choque_id'])) {
+            $tipo_choque = $_POST['tipo_choque'];
 
-        $obj = new SolicitudModel();
+            $sql = "SELECT cd.*, tc.tipo_choque_id 
+        FROM choque_detalles cd 
+        INNER JOIN tipo_choques tc ON cd.tipo_choque_id = tc.tipo_choque_id 
+        WHERE tc.tipo_choque_id = '$tipo_choque'";
+            $detalles = pg_fetch_all($this->consult($sql));
 
-        $sql = "SELECT * FROM choque detalle WHERE ";
-        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
-
-        include_once '../view/solicitudAccidente/create.php';
+          
 
 
     }
-
+    }
 
     public function PostCreateAccidente()
     {
@@ -323,13 +327,13 @@ class SolicitudController
         $tipo_choque = $_POST['tipo_choque'];
         $lesionados = $_POST['lesionados'];
 
-       
-        if(!$lesionados){  
-            $lesionados="Sin lesionados";
+
+        if (!$lesionados) {
+            $lesionados = "Sin lesionados";
         }
-                        
-        if(!$bis){
-            $bis="Sin bis";
+
+        if (!$bis) {
+            $bis = "Sin bis";
         }
 
         //VALIDACIONES

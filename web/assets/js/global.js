@@ -1,204 +1,240 @@
-$(document).ready(function() {
-  $('#formu').submit(function(event){
+$(document).ready(function () {
+  $('#formu').submit(function (event) {
     event.preventDefault();
-  
-    let mensajes=[];
-  
+
+    let mensajes = [];
+
     $('#error').html('');
-  
-    let esValido= true;
-  
+
+    let esValido = true;
+
     const nombre = $('#nombre').val().trim();
-    if(nombre === ''){
+    if (nombre === '') {
       mensajes.push('El Nombre es obligatorio');
-      esValido= false;
+      esValido = false;
     }
     const apellido = $('#apellido').val().trim();
-    if (apellido ===''){
+    if (apellido === '') {
       mensajes.push('El campo Apellido es obligatorio');
       esValido = false;
     }
-    const email= $('#email').val().trim();
-    if(email === ''){
+    const email = $('#email').val().trim();
+    if (email === '') {
       mensajes.push('El campo email es obligatorio');
       esValido = false;
     }
-    const clave= $('#clave').val().trim();
-    if(clave===''){
+    const clave = $('#clave').val().trim();
+    if (clave === '') {
       mensajes.push('El campo clave es obligatorio');
       esValido = false;
     }
 
-    
+
     // const user = $('#user').val().trim();
     // if(user ===''){
     //   mensajes.push('El campo usuario es obligatorio');
     // }
-    if(esValido){
+    if (esValido) {
       // alert('Formulario valido. Enviando datos..')
       // $("#error").fadeout(500);
       this.submit();
-    }else{
-      
-      $('#error').html(mensajes.map(ms=> `${ms}<br>`).join(''));
-      $('#error').removeClass('d-none');
-      
-    }
-  }); 
+    } else {
 
-  $('#formAccidente').submit(function(event){
-          
+      $('#error').html(mensajes.map(ms => `${ms}<br>`).join(''));
+      $('#error').removeClass('d-none');
+
+    }
+  });
+
+  $('#formAccidente').submit(function (event) {
+
 
     event.preventDefault();
-    
-  
-    let mensajes=[];
-  
+
+
+    let mensajes = [];
+
     $('#errorAccidente').html('');
-  
-    let esValido= true;
-  
+
+    let esValido = true;
+
     const tipo_via = $('#tipo_via').val().trim();
-    if(tipo_via === ''){
+    if (tipo_via === '') {
       mensajes.push('El tipo de via es obligatorio');
-      esValido= false;
+      esValido = false;
     }
     const num_via = $('#num_via').val().trim();
-    if (num_via ===''){
+    if (num_via === '') {
       mensajes.push('El campo numero de via es obligatorio');
       esValido = false;
     }
-    const orientacion= $('#orientacion').val().trim();
-    if(orientacion === ''){
+    const orientacion = $('#orientacion').val().trim();
+    if (orientacion === '') {
       mensajes.push('El campo orientacion es obligatorio');
       esValido = false;
     }
-    const numero2= $('#numero2').val().trim();
-    if(numero2===''){
+    const numero2 = $('#numero2').val().trim();
+    if (numero2 === '') {
       mensajes.push('El campo numero complemento 2 es obligatorio');
       esValido = false;
     }
-    const numero3= $('#numero3').val().trim();
-    if(numero3===''){
+    const numero3 = $('#numero3').val().trim();
+    if (numero3 === '') {
       mensajes.push('El campo numero complemento 3 es obligatorio');
       esValido = false;
     }
 
-    const barrio= $('#barrio').val().trim();
-    if(barrio===''){
+    const barrio = $('#barrio').val().trim();
+    if (barrio === '') {
       mensajes.push('El campo barrio es obligatorio');
       esValido = false;
     }
-    const tipo_choque= $('#tipo_choque').val().trim();
-    if(tipo_choque===''){
+    const tipo_choque = $('#tipo_choque').val().trim();
+    if (tipo_choque === '') {
       mensajes.push('El campo tipo de choque es obligatorio');
       document.getElementById("tipoError").textContent = "El campo email es obligatorio";
       esValido = false;
-      
+
     }
-    
+
     // const user = $('#user').val().trim();
     // if(user ===''){
     //   mensajes.push('El campo usuario es obligatorio');
     // }
-    if(esValido){
-       alert('Formulario valido. Enviando datos..')
+    if (esValido) {
+      alert('Formulario valido. Enviando datos..')
       // $("#error").fadeout(500);
       this.submit();
-    }else{
+    } else {
 
-      $('#errorAccidente').html(mensajes.map(ms=> `${ms}<br>`).join(''));
+      $('#errorAccidente').html(mensajes.map(ms => `${ms}<br>`).join(''));
       $('#errorAccidente').removeClass('d-none');
-      
+
     }
-  }); 
-  $(document).on('keyup',"#buscar",function(){
-    let buscar= $(this).val();
-    let url= $(this).attr('data-url');
-                     
+  });
+  $(document).on('keyup', "#buscar", function () {
+    let buscar = $(this).val();
+    let url = $(this).attr('data-url');
+
     $.ajax({
-      url:url,
+      url: url,
       type: 'POST',
-      data: {'buscar':buscar},
-      success: function(data){
+      data: { 'buscar': buscar },
+      success: function (data) {
         $('tbody').html(data);
       }
     });
   });
-  $(document).on('keyup',"#id_data",function(){
-    let id_data= $(this).val();
-    let url= $(this).attr('data-url');
+  $(document).on('keyup', "#id_data", function () {
+    let id_data = $(this).val();
+    let url = $(this).attr('data-url');
     console.log("gola");
     $.ajax({
-      url:url,
+      url: url,
       type: 'POST',
-      data: {'id_data':id_data},
-      success: function(data){
+      data: { 'id_data': id_data },
+      success: function (data) {
         $('#datos').html(data);
       }
     });
   });
-  $(document).on('change',"#id_solicitud",function(){
-    let id_solicitud= $(this).val();
-    let url= $(this).attr('data-url');
+  $(document).on('change', "#id_solicitud", function () {
+    let id_solicitud = $(this).val();
+    let url = $(this).attr('data-url');
     console.log("gola");
     console.log("Valor seleccionado: " + id_solicitud);
     $.ajax({
-      url:url,
+      url: url,
       type: 'POST',
-      data: {'id_solicitud':id_solicitud},
-      success: function(data){
+      data: { 'id_solicitud': id_solicitud },
+      success: function (data) {
         $('#formularios').html(data);
       }
     });
   });
-  $(document).on('click','#cambiar_estado',function(){
-      let id = $(this).attr('data-id');
-      let url = $(this).attr('data-url');
-      let user = $(this).attr('data-user');
+  $(document).on('click', '#cambiar_estado', function () {
+    let id = $(this).attr('data-id');
+    let url = $(this).attr('data-url');
+    let user = $(this).attr('data-user');
 
-      // alert("Funciona data: "+id+" user "+user+" url "+url);
-      $.ajax({
-        url:url,
-        data:{id,user},
-        type:'POST',
-        success: function(data){
-          $('tbody').html(data);
-        }
-      })
+    // alert("Funciona data: "+id+" user "+user+" url "+url);
+    $.ajax({
+      url: url,
+      data: { id, user },
+      type: 'POST',
+      success: function (data) {
+        $('tbody').html(data);
+      }
+    })
   });
-  $(document).on('click','#cambiar_estado_tar',function(){
+  $(document).on('click', '#cambiar_estado_tar', function () {
     let id = $(this).attr('data-id');
     let url = $(this).attr('data-url');
     let tarea = $(this).attr('data-tarea');
 
     // alert("Funciona data: "+id+" user "+user+" url "+url);
     $.ajax({
-      url:url,
-      data:{id,tarea},
-      type:'POST',
-      success: function(data){
+      url: url,
+      data: { id, tarea },
+      type: 'POST',
+      success: function (data) {
         $('tbody').html(data);
       }
     })
   });
-  $(document).on('click','#copyList',function(){
+  $(document).on('click', '#copyList', function () {
     let listUser = $("#listUser").html();
 
     $("#responsables").append(
-      "<div class='col md-4 form-group'>"+
-      "<label>Responsable</label>"+
-      "<div class='row'>"+
-        "<div class='col-md-10'>"+listUser+"</div>"+
-        "<div class='col-md-2'>"+
-            "<button class='btn btn-danger' type='button' id='removeList'>x</button"+
-          "</div>"+
-        "</div>"+
+      "<div class='col md-4 form-group'>" +
+      "<label>Responsable</label>" +
+      "<div class='row'>" +
+      "<div class='col-md-10'>" + listUser + "</div>" +
+      "<div class='col-md-2'>" +
+      "<button class='btn btn-danger' type='button' id='removeList'>x</button" +
+      "</div>" +
+      "</div>" +
       "</div>"
     )
   });
-  $(document).on('click','#removeList',function(){
+  $(document).on('click', '#removeList', function () {
     $(this).parent().parent().parent().remove();
+  });
+
+  $('#tipo_choque').on('change', function () {
+ 
+
+
+
+    var url = $(this).data('data-url');  
+    var tipo_choque = $(this).val();  
+   
+    
+      alert("Funciona data: "+tipo_choque);
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: { 'tipo_choque': tipo_choque },
+        success: function (data) {
+          alert(data);
+          $('#detalle_choque').empty();
+
+          // Verificar si la respuesta contiene datos
+          if (data && Array.isArray(data) && data.length > 0) {
+              // Iterar sobre los detalles del choque y agregar opciones al select
+              data.forEach(function(detalle) {
+                  $('#detalle_choque').append(
+                      `<option value="${detalle.choque_detalle_id}">${detalle.choque_detalle_descripcion}</option>`
+                  );
+              });
+          } 
+      },
+      error: function() {
+          // Manejo de error en caso de que la solicitud falle
+          alert('Error al cargar los detalles del choque.');
+      }
+      });
+   
   });
 });
 
