@@ -90,7 +90,7 @@
                                                         <?php
 
                                                         foreach ($vias as $via) {
-                                                            echo "<option  value='" . $via['tipo_via_id'] . "'>" . $via['tipo_via_nombre'] . "</option>";
+                                                            echo "<option  value='" . $via['tipo_via_nombre']  . "'>" . $via['tipo_via_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -105,7 +105,7 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
-                                                            echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
+                                                            echo "<option  value='" .$letra['letra_via']  . "'>" . $letra['letra_via'] . "</option>";
                                                         }
 
                                                         ?>
@@ -121,7 +121,7 @@
                                                         <option value="">Orientación...</option>
                                                         <?php
                                                         foreach ($orientaciones as $orientacion) {
-                                                            echo "<option  value='" . $orientacion['orientacion_id'] . "'>" . $orientacion['orientacion_nombre'] . "</option>";
+                                                            echo "<option  value='" .$orientacion['orientacion_nombre'] . "'>" . $orientacion['orientacion_nombre'] . "</option>";
                                                         }
 
                                                         ?>
@@ -138,7 +138,7 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
-                                                            echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
+                                                            echo "<option  value='" .$letra['letra_via'] . "'>" . $letra['letra_via'] . "</option>";
                                                         }
 
                                                         ?>
@@ -153,7 +153,7 @@
                                                         <option value="">Barrio...</option>
                                                         <?php
                                                         foreach ($barrios as $barrio) {
-                                                            echo "<option  value='" . $barrio['barrio_id'] . "'>" . $barrio['barrio_nombre'] . "</option>";
+                                                            echo "<option  value='" .  $barrio['barrio_nombre'] . "'>" . $barrio['barrio_nombre'] . "</option>";
                                                         }
 
                                                         ?>

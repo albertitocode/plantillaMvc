@@ -442,26 +442,32 @@ class SolicitudController
         $tipo_via = $_POST['tipo_via'];
         $num_via = $_POST['num_via'];
         $letra1 = $_POST['letra1'];
-        $bis = $_POST['bis'];
+
         $orientacion = $_POST['orientacion'];
         $numero2 = $_POST['numero2'];
         $letra2 = $_POST['letra2'];
         $numero3 = $_POST['numero3'];
         $barrio = $_POST['barrio'];
-        $direccion = "$tipo_via $num_via $letra1$bis $orientacion $numero2 $letra2 $numero3, barrio $barrio";
+
         $descripcion = $_POST['observacion'];
         $imagen = $_POST['imagen'];
         $tipo_choque = $_POST['tipo_choque'];
-        $lesionados = $_POST['lesionados'];
+       
 
-
-        if (!$lesionados) {
+       
+        if (isset($_POST['lesionados'])) {
+            $lesionados = $_POST['lesionados'];
+        }else{
             $lesionados = "Sin lesionados";
         }
-
-        if (!$bis) {
-            $bis = "Sin bis";
+        echo "les".$lesionados;
+        if (isset($_POST['bis'])) {
+            $bis = $_POST['bis'];
+        } else {
+            $bis = "";
         }
+
+        $direccion = "$tipo_via $num_via$letra1 $bis $orientacion $numero2$letra2 $numero3, barrio $barrio";
 
         //VALIDACIONES
         $validacion = true;
@@ -490,7 +496,7 @@ class SolicitudController
 
         $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
         solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id) VALUES (
-    $direccion, $tipo_choque, $imagen,$descripcion, 3, 1, 4 );";
+    '$direccion', $tipo_choque, '$imagen','$descripcion','$lesionados', 3, 1, 4 );";
 
         if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
@@ -505,7 +511,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateVia") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateAccidente") . "';
                     }
                 });
             </script>";
@@ -521,14 +527,6 @@ class SolicitudController
 
 
 
-        if ($ejecutar) {
-
-
-        } else {
-            echo "Se ha presentado un error al insertar";
-
-
-        }
 
 
     }
