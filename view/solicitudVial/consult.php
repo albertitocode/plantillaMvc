@@ -25,7 +25,9 @@
                 </tr>
             </thead>
             <tbody>
+                
                 <?php
+                var_dump($vias);
                 foreach ($vias as $via) {
                     // $clase="";
                     // $texto="";

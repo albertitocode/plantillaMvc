@@ -41,6 +41,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- <?php var_dump($detallesChoques); ?> -->
 
 
                         <!-- <div class="col-md-4">
@@ -104,11 +105,7 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
-<<<<<<< HEAD
                                                             echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
-=======
-                                                            echo "<option  value='" . $letra['letra_id'] . "'>" . $letra['letra_via'] . "</option>";
->>>>>>> e5ecbe9b22bde87d55a4f30a4fe6bd5925ed65cb
                                                         }
 
                                                         ?>
@@ -177,7 +174,9 @@
                                     <div class="col-md-6 col-lg-6">
                                         <div class="form-group mb-3">
                                             <label for="danio_id" class="fw-bold">Tipo de choque</label>
-                                            <select name="tipo_choque" id="tipo_choque" class="form-select ">
+                                            <select name="tipo_choque" id="tipo_choque" class="form-select "
+                                                data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
+
                                                 <option value="">Seleccione...</option>
                                                 <?php
                                                 foreach ($choques as $choque) {
@@ -186,12 +185,17 @@
 
                                                 ?>
                                             </select>
-                                            <span class="error" id="tipoError"></span>
+                                            <span class=" error" id="tipoError"></span>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="detalle_choque" class="fw-bold">Detalle de choque</label>
                                             <select name="detalle_choque" id="detalle_choque" class="form-select">
-                                                <option value="">Seleccione...</option>
+                                                <?php
+
+                                                foreach ($detallesChoques as $detalle) {
+                                                    echo "<option value='" . $detalle['choque_detalle_id'] . "'>" . $detalle['choque_detalle_descripcion'] . "</option>";
+                                                }
+                                                ?>
 
                                             </select>
                                             <span class="error" id="tipoError"></span>

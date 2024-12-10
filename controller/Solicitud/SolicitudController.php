@@ -28,13 +28,50 @@ class SolicitudController
             redirect(getUrl("Solicitud", "Solicitud", "GetCreateVia"));
         } else if ($id_solicitud == 4) {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateAccidente"));
-        } else if ($id_solicitud == 5){
+        } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateNuevaSenial"));
-        } else if ($id_solicitud == 3){
+        } else if ($id_solicitud == 3) {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorMalEstado"));
-        }else if ($id_solicitud == 6){
+        } else if ($id_solicitud == 6) {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorNuevo"));
         }
+    }
+
+
+    public function postSolicitud()
+    {
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM tipo_solicitudes";
+        $tipo_solicitud = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudes/consultar.php';
+    }
+
+    public function obtenerSolicitudes()
+    {
+        $obj = new SolicitudModel();
+
+        $id_solicitud = $_POST['id_solicitud'];
+
+        if ($id_solicitud == 1) {
+            // include_once '../view/solicitudSenal/malEstado/create.php';
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        } else if ($id_solicitud == 2) {
+            // include_once '../view/solicitudVial/create.php';
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        } else if ($id_solicitud == 4) {
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        } else if ($id_solicitud == 5) {
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        } else if ($id_solicitud == 3) {
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        } else if ($id_solicitud == 6) {
+            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+        }
+
+
     }
     public function getCreateNuevaSenial()
     {
@@ -59,13 +96,13 @@ class SolicitudController
 
         //añadir campo fecha
         //agregar los cambios de estados
-        
+
         $categoria_senal_id = $_POST['categoria_senal_id'];
         $tipo_senal_id = $_POST['tipo_senal_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_nueva_descripcion = $_POST['solicitud_senial_nueva_descripcion'];
         $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
-        
+
         $usuario_id = $_SESSION['id'];
         //solucionar el problema de la rideccion
         $sql = "INSERT INTO solicitud_seniales_nuevas (solicitud_senial_nueva_descripcion,solicitud_senial_nueva_direccion,senial_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_senial_nueva_descripcion','$solicitud_senial_nueva_direccion',$senial_id,$usuario_id,5,1)";
@@ -92,7 +129,7 @@ class SolicitudController
 
 
     }
-    
+
     public function getCreateSenialMalEstado()
     {
         $obj = new SolicitudModel();
@@ -269,7 +306,7 @@ class SolicitudController
         $estado = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM tipo_solicitudes";
-        $tipo_solicitudes=pg_fetch_all($obj->consult($sql));
+        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
 
 
 
@@ -412,7 +449,7 @@ class SolicitudController
         $sql = "SELECT * FROM letras_via";
         $letras = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM tipos_via";
+        $sql = "SELECT * FROM tipo_via";
         $vias = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM orientaciones";
@@ -420,25 +457,28 @@ class SolicitudController
 
         $sql = "SELECT * FROM tipo_choques";
         $choques = pg_fetch_all($obj->consult($sql));
-        
+
 
         include_once '../view/solicitudAccidente/create.php';
 
 
     }
 
-    public function getDetalleChoque(){
+    public function getDetalleChoque()
+    {
+        echo "si";
+        if (isset($_POST['tipo_choque_id'])) {
+            $tipo_choque = $_POST['tipo_choque'];
 
-        $obj = new SolicitudModel();
-
-        $sql = "SELECT * FROM choque detalle WHERE ";
-        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
-
-        include_once '../view/solicitudAccidente/create.php';
+            $sql = "SELECT * from choque_detalles WHERE tipo_choque_id=$tipo_choque";
+            $detalleChoques = pg_fetch_all($this->consult($sql));
 
 
+            include_once '../view/solicitudAccidente/create.php';
+
+
+        }
     }
-
 
     public function PostCreateAccidente()
     {
@@ -459,13 +499,13 @@ class SolicitudController
         $tipo_choque = $_POST['tipo_choque'];
         $lesionados = $_POST['lesionados'];
 
-       
-        if(!$lesionados){  
-            $lesionados="Sin lesionados";
+
+        if (!$lesionados) {
+            $lesionados = "Sin lesionados";
         }
-                        
-        if(!$bis){
-            $bis="Sin bis";
+
+        if (!$bis) {
+            $bis = "Sin bis";
         }
 
         //VALIDACIONES
