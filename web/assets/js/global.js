@@ -45,6 +45,73 @@ $(document).ready(function() {
       
     }
   }); 
+
+  $('#formAccidente').submit(function(event){
+          
+
+    event.preventDefault();
+    
+  
+    let mensajes=[];
+  
+    $('#errorAccidente').html('');
+  
+    let esValido= true;
+  
+    const tipo_via = $('#tipo_via').val().trim();
+    if(tipo_via === ''){
+      mensajes.push('El tipo de via es obligatorio');
+      esValido= false;
+    }
+    const num_via = $('#num_via').val().trim();
+    if (num_via ===''){
+      mensajes.push('El campo numero de via es obligatorio');
+      esValido = false;
+    }
+    const orientacion= $('#orientacion').val().trim();
+    if(orientacion === ''){
+      mensajes.push('El campo orientacion es obligatorio');
+      esValido = false;
+    }
+    const numero2= $('#numero2').val().trim();
+    if(numero2===''){
+      mensajes.push('El campo numero complemento 2 es obligatorio');
+      esValido = false;
+    }
+    const numero3= $('#numero3').val().trim();
+    if(numero3===''){
+      mensajes.push('El campo numero complemento 3 es obligatorio');
+      esValido = false;
+    }
+
+    const barrio= $('#barrio').val().trim();
+    if(barrio===''){
+      mensajes.push('El campo barrio es obligatorio');
+      esValido = false;
+    }
+    const tipo_choque= $('#tipo_choque').val().trim();
+    if(tipo_choque===''){
+      mensajes.push('El campo tipo de choque es obligatorio');
+      document.getElementById("tipoError").textContent = "El campo email es obligatorio";
+      esValido = false;
+      
+    }
+    
+    // const user = $('#user').val().trim();
+    // if(user ===''){
+    //   mensajes.push('El campo usuario es obligatorio');
+    // }
+    if(esValido){
+       alert('Formulario valido. Enviando datos..')
+      // $("#error").fadeout(500);
+      this.submit();
+    }else{
+
+      $('#errorAccidente').html(mensajes.map(ms=> `${ms}<br>`).join(''));
+      $('#errorAccidente').removeClass('d-none');
+      
+    }
+  }); 
   $(document).on('keyup',"#buscar",function(){
     let buscar= $(this).val();
     let url= $(this).attr('data-url');

@@ -361,10 +361,10 @@ class SolicitudController
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM barrios LIMIT 10";
+        $sql = "SELECT * FROM barrios";
         $barrios = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM letras_via LIMIT 10";
+        $sql = "SELECT * FROM letras_via";
         $letras = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM tipos_via";
@@ -372,7 +372,22 @@ class SolicitudController
 
         $sql = "SELECT * FROM orientaciones";
         $orientaciones = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM tipo_choques";
+        $choques = pg_fetch_all($obj->consult($sql));
         
+
+        include_once '../view/solicitudAccidente/create.php';
+
+
+    }
+
+    public function getDetalleChoque(){
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM choque detalle WHERE ";
+        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
 
         include_once '../view/solicitudAccidente/create.php';
 
@@ -382,7 +397,6 @@ class SolicitudController
 
     public function PostCreateAccidente()
     {
-
         $obj = new SolicitudModel();
 
         $tipo_via = $_POST['tipo_via'];
@@ -400,6 +414,14 @@ class SolicitudController
         $tipo_choque = $_POST['tipo_choque'];
         $lesionados = $_POST['lesionados'];
 
+       
+        if(!$lesionados){  
+            $lesionados="Sin lesionados";
+        }
+                        
+        if(!$bis){
+            $bis="Sin bis";
+        }
 
         //VALIDACIONES
         $validacion = true;
@@ -427,7 +449,7 @@ class SolicitudController
         // }
 
         $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
-        solicitud_accidente_imagen,solicitud_accidente_descripcion,estado_id,usuario_id,tipo_solicitud_id) VALUES (
+        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id) VALUES (
     $direccion, $tipo_choque, $imagen,$descripcion, 3, 1, 4 );";
 
         if ($validacion == true) {
@@ -451,7 +473,7 @@ class SolicitudController
                 echo "Se ha presentado un error al insertar";
             }
         } else {
-            redirect(getUrl("Usuarios", "Usuarios", "getCreate"));
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateAccidente"));
         }
 
 
