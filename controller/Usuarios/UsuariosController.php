@@ -6,7 +6,7 @@ class UsuariosController
     // public function test(){
     //     echo"Funciona maifren";
     // }
-
+        
 
     public function getCreate()
     {

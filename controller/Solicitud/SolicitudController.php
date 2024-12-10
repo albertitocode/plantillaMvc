@@ -21,14 +21,78 @@ class SolicitudController
         // $tipo_solicitud = pg_fetch_all($obj->consult($sql));
 
         if ($id_solicitud == 1) {
-            include_once '../view/solicitudSenal/malEstado/create.php';
+            // include_once '../view/solicitudSenal/malEstado/create.php';
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateSenialMalEstado"));
         } else if ($id_solicitud == 2) {
-            include_once '../view/solicitudVial/create.php';
+            // include_once '../view/solicitudVial/create.php';
+            redirect(getUrl("Solicitud", "Solicitud", "GetCreateVia"));
         } else if ($id_solicitud == 4) {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateAccidente"));
+        } else if ($id_solicitud == 5){
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateNuevaSenial"));
+        } else if ($id_solicitud == 3){
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorMalEstado"));
+        }else if ($id_solicitud == 6){
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorNuevo"));
         }
     }
+    public function getCreateNuevaSenial()
+    {
+        $obj = new SolicitudModel();
 
+        $sql = "SELECT * FROM categoria_seniales";
+        $categoria_senal = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM tipo_seniales";
+        $tipo_senal = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT  * FROM seniales";
+        $seniales = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/nuevo/create.php';
+    }
+
+    public function postCreateNuevaSenial()
+    {
+
+        $obj = new SolicitudModel();
+
+        //añadir campo fecha
+        //agregar los cambios de estados
+        
+        $categoria_senal_id = $_POST['categoria_senal_id'];
+        $tipo_senal_id = $_POST['tipo_senal_id'];
+        $senial_id = $_POST['senial_id'];
+        $solicitud_senial_nueva_descripcion = $_POST['solicitud_senial_nueva_descripcion'];
+        $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
+        
+        $usuario_id = $_SESSION['id'];
+        //solucionar el problema de la rideccion
+        $sql = "INSERT INTO solicitud_seniales_nuevas (solicitud_senial_nueva_descripcion,solicitud_senial_nueva_direccion,senial_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_senial_nueva_descripcion','$solicitud_senial_nueva_direccion',$senial_id,$usuario_id,5,1)";
+        $ejecutar = $obj->insert($sql);
+        if ($ejecutar) {
+            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
+        } else {
+            echo "Se ha presentado un error al insertar";
+        }
+
+
+
+        // $categoria_reduc_id = $_POST[''];
+        // $categoria_reduc_nombre = $_POST[''];
+        // $tipo_reduc_id = $_POST[''];
+
+        // $sql = "INSERT INTO  VALUES()";
+        // $ejecutar = $obj->insert($sql);
+        // if ($ejecutar) {
+        //     redirect(getUrl("Solicitud", "Solicitud", ""));
+        // } else {
+        //     echo "Se ha presentado un error al insertar";
+        // }
+
+
+    }
+    
     public function getCreateSenialMalEstado()
     {
         $obj = new SolicitudModel();
@@ -42,6 +106,9 @@ class SolicitudController
         $sql = "SELECT  * FROM seniales";
         $seniales = pg_fetch_all($obj->consult($sql));
 
+        $sql = "SELECT * FROM danios where tipo_solicitud_id=1";
+        $danio = pg_fetch_all($obj->consult($sql));
+
         include_once '../view/solicitudSenal/malEstado/create.php';
     }
     public function postCreateSenialMalEstado()
@@ -49,7 +116,8 @@ class SolicitudController
 
         $obj = new SolicitudModel();
 
-        // $senal_id=$_POST['senal_id'];
+        //añadir campo fecha
+        //agregar los cambios de estados
         $categoria = $_POST['categoria_senal_id'];
         $categoria_senal_id = $_POST['categoria_senal_id'];
         $tipo_senal_id = $_POST['tipo_senal_id'];
@@ -58,29 +126,29 @@ class SolicitudController
         $solicitud_senial_mal_estado_direccion = $_POST['solicitud_senial_mal_estado_direccion'];
         $solicitud_senial_mal_estado_imagen = $_POST['solicitud_senial_mal_estado_imagen'];
         $danio_id = $_POST['danio_id'];
-        $usuario_id = 1;
+        $usuario_id = $_SESSION['id'];
 
-        $sql = "INSERT INTO usuarios VALUES(null,$senial_id,$solicitud_senial_mal_estado_descripcion,$danio_id,$usuario_id,$solicitud_senial_mal_estado_direccion,$solicitud_senial_mal_estado_imagen,1,1)";
+        $sql = "INSERT INTO solicitud_seniales_mal_estado (senial_id,solicitud_senial_mal_estado_descripcion,danio_id,usuario_id,solicitud_senial_mal_estado_direccion,solicitud_senial_mal_estado_imagen,tipo_solicitud_id,estado_id) VALUES($senial_id,'$solicitud_senial_mal_estado_descripcion',$danio_id,$usuario_id,'$solicitud_senial_mal_estado_direccion','$solicitud_senial_mal_estado_imagen',1,1)";
         $ejecutar = $obj->insert($sql);
         if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "getSenialMalEstado"));
+            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
         } else {
             echo "Se ha presentado un error al insertar";
         }
 
 
 
-        $categoria_reduc_id = $_POST[''];
-        $categoria_reduc_nombre = $_POST[''];
-        $tipo_reduc_id = $_POST[''];
+        // $categoria_reduc_id = $_POST[''];
+        // $categoria_reduc_nombre = $_POST[''];
+        // $tipo_reduc_id = $_POST[''];
 
-        $sql = "INSERT INTO  VALUES()";
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", ""));
-        } else {
-            echo "Se ha presentado un error al insertar";
-        }
+        // $sql = "INSERT INTO  VALUES()";
+        // $ejecutar = $obj->insert($sql);
+        // if ($ejecutar) {
+        //     redirect(getUrl("Solicitud", "Solicitud", ""));
+        // } else {
+        //     echo "Se ha presentado un error al insertar";
+        // }
 
 
     }
@@ -91,30 +159,45 @@ class SolicitudController
 
 
     //Empieza reductor
-    public function GetCreateReductor()
+    public function getCreateReductorMalEstado()
     {
         $obj = new SolicitudModel();
 
-        $sql = "SELECT r.*, t_r.tipo_reductor_nombre FROM reductor r, tipo_señal t_r WHERE r.tipo_reductor_id=t_r.tipo_reductor_id ";
+        $sql = "SELECT * FROM categoria_reductores";
+        $categoria_reductores = pg_fetch_all($obj->consult($sql));
 
-        $reductor = $obj->consult($sql);
+        $sql = "SELECT  * FROM reductores";
+        $reductores = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudReductor/consult.php';
+        $sql = "SELECT * FROM danios where tipo_solicitud_id=1";
+        $danio = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudReductor/malEstado/create.php';
 
 
     }
-    public function PostCreateReductor()
+    public function postCreateReductorMalEstado()
     {
         $obj = new SolicitudModel();
 
-        $categoria_reduc_id = $_POST[''];
-        $categoria_reduc_nombre = $_POST[''];
-        $tipo_reduc_id = $_POST[''];
+        //añadir campo fecha
+        //agregar los cambios de estados
+        // $categoria = $_POST['categoria_reductor_id'];
+        // $senial_id = $_POST['senial_id'];
+        $solicitud_reductores_mal_estado_descripcion = $_POST['solicitud_reductores_mal_estado_descripcion'];
+        $carrera = $_POST['carrera'];
+        $calle = $_POST['calle'];
+        $barrio = $_POST['barrio'];
+        $direccion = "carrera $carrera, calle $calle, barrio $barrio";
+        $solicitud_reductores_mal_estado_imagen = $_POST['solicitud_reductores_mal_estado_imagen'];
+        $danio_id = $_POST['danio_id'];
+        $usuario_id = $_SESSION['id'];
+        $reductor_id = $_POST['reductor_id'];
 
-        $sql = "INSERT INTO  VALUES()";
+        $sql = "INSERT INTO solicitud_reductores_mal_estado (solicitud_reductores_mal_estado_descripcion,solicitud_reductores_mal_estado_direccion,solicitud_reductores_mal_estado_imagen,reductor_id,danio_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductores_mal_estado_descripcion','$direccion','$solicitud_reductores_mal_estado_imagen',$reductor_id,$danio_id,$usuario_id,3,1)";
         $ejecutar = $obj->insert($sql);
         if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "GetCreateReductor"));
+            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
         } else {
             echo "Se ha presentado un error al insertar";
         }
@@ -133,6 +216,15 @@ class SolicitudController
 
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM danios WHERE tipo_solicitud_id=2";
+        $danios = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM estados";
+        $estado = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM tipo_solicitudes";
+        $tipo_solicitudes=pg_fetch_all($obj->consult($sql));
 
 
 
@@ -154,7 +246,7 @@ class SolicitudController
         $descripcion = $_POST['solicitud_via_mal_estado_descripcion'];
         $imagen = $_POST['solicitud_via_mal_estado_imagen'];
         $danio = $_POST['danio_id'];
-
+        $usuario = $_SESSION['id'];
 
         //VALIDACIONES
         $validacion = true;
@@ -181,9 +273,8 @@ class SolicitudController
 
         // }
 
-        $sql = "INSERT INTO solicitud_vias_mal_estado (solicitud_via_mal_estado_descripcion, danio_id, usuario_id, 
-        solicitud_via_mal_estado_direccion, solicitud_via_mal_estado_imagen, tipo_solicitud_id, estado_id) VALUES(
-       '$descripcion',  $danio,  1, '$direccion', '$imagen', 5, 1)";
+        $sql = "INSERT INTO solicitud_vias_mal_estado (solicitud_via_mal_estado_descripcion, solicitud_via_mal_estado_direccion, solicitud_via_mal_estado_imagen, danio_id, usuario_id, 
+        tipo_solicitud_id, estado_id) VALUES( '$descripcion', '$direccion', '$imagen', $danio,  $usuario,   2, 1)";
 
         if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
@@ -214,14 +305,14 @@ class SolicitudController
 
 
 
-        if ($ejecutar) {
+        // if ($ejecutar) {
 
 
-        } else {
-            echo "Se ha presentado un error al insertar";
+        // } else {
+        //     echo "Se ha presentado un error al insertar";
 
 
-        }
+        // }
 
 
     }
@@ -276,7 +367,7 @@ class SolicitudController
         $sql = "SELECT * FROM letras_via LIMIT 10";
         $letras = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM tipo_via";
+        $sql = "SELECT * FROM tipos_via";
         $vias = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM orientaciones";

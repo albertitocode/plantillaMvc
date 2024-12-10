@@ -13,7 +13,7 @@
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
+                    <a href="<?php echo getUrl("Solicitud", "Solicitud", "getSolicitud"); ?>">
                         <i class="icon-home"></i>
                     </a>
                 </li>
@@ -97,12 +97,12 @@
 
                             <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="danio_id" class="fw-bold">Tipo de daño</label>
+                                    <label for="danio_id" class="fw-bold">Daño</label>
                                     <select name="danio_id" id="danio_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <?php
-                                        foreach ($tipo_solicitudes as $tipo_s) {
-                                            echo "<option  value='" . $tipo_s['tipo_solicitud_id'] . "'>" . $tipo_s['tipo_solicitud_nombre'] . "</option>";
+                                        foreach ($danios as $danio) {
+                                            echo "<option  value='" . $danio['danio_id'] . "'>" . $danio['danio_nombre'] . "</option>";
                                         }
 
                                         ?>

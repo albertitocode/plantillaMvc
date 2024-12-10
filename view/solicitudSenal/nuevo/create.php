@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateNuevaSenial"); ?>" method="post" id="form">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -47,7 +47,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tittle">
-                            Registro Solicitud Reductor
+                            Registro Solicitud Nueva señal
                         </div>
                     </div>
                     <div class="card-body">
@@ -64,19 +64,9 @@
                                         ?>
                                     </select>
                                 </div>
+                              
                                 <div class="form-group">
-                                    <label for="danio_id"> Daño</label>
-                                    <select name="danio_id" id="" class="form-control">
-                                        <option value="">Seleccione daño...</option>
-                                        <?php
-                                        foreach ($danio as $dani) {
-                                            echo "<option  value='" . $dani['danio_id'] . "'>" . $dani['danio_nombre'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
+                                    <label for="solicitud_senial_nueva_direccion" class="fw-bold">Direccion
                                         via</label>
                                     <div class="d-flex">
 
@@ -110,8 +100,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="solicitud_senial_mal_estado_descripcion"> Describa el daño</label>
-                                    <input type="text" name="solicitud_senial_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
+                                    <label for="solicitud_senial_nueva_descripcion"> Describa el motivo</label>
+                                    <input type="text" name="solicitud_senial_nueva_descripcion" id="" class="form-control" placeholder="Motivo de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
@@ -126,10 +116,7 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="image" class="d-block">Imagen de la señal dañada</label>
-                                    <input type="file" name="solicitud_senial_mal_estado_imagen">
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

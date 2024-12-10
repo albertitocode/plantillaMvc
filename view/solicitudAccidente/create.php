@@ -91,7 +91,7 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
-                                                            echo "<option  value='" . $letra['tipo_solicitud_id'] . "'>" . $letra['tipo_solicitud_nombre'] . "</option>";
+                                                            echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
                                                         }
 
                                                         ?>
@@ -124,7 +124,7 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
-                                                            echo "<option  value='" . $letra['tipo_solicitud_id'] . "'>" . $letra['tipo_solicitud_nombre'] . "</option>";
+                                                            echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
                                                         }
 
                                                         ?>
@@ -139,7 +139,7 @@
                                                         <option value="">Barrio...</option>
                                                         <?php
                                                         foreach ($barrios as $barrio) {
-                                                            echo "<option  value='" . $barrio['tipo_solicitud_id'] . "'>" . $barrio['tipo_solicitud_nombre'] . "</option>";
+                                                            echo "<option  value='" . $barrio['barrio_id'] . "'>" . $barrio['barrio_nombre'] . "</option>";
                                                         }
 
                                                         ?>
