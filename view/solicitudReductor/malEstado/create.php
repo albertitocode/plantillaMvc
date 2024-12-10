@@ -1,24 +1,14 @@
-<div class="mt-2">
-    <h4 class="display-4">Señales viales en mal Estado</h4>
-</div>
+<!-- <div class="mt-5">
+    <h3 class="display-4">Registrar usuario</h3>
+</div> -->
 
 
 <div class="mt-5">
     <div class="alert alert-danger d-none" role="alert" id="error">
 
     </div>
-    <!--     
-    //   if(isset($_SESSION['errores'])){
-    //         echo "<div class='alert alert-danger' role='alert'>";
-    //           foreach ($_SESSION['errores'] as $error) {
-    //             echo $error."<br>";
-    //           }
-    //        echo "</div>";
-    //        unset($_SESSION['errores']);
-    //     }
 
-    //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorMalEstado"); ?>" method="post" id="form">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -37,7 +27,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Registro Solicitudes</a>
+                    <a href="#">Reductores en mal estado</a>
                 </li>
             </ul>
         </div>
@@ -51,6 +41,8 @@
                         </div>
                     </div>
                     <div class="card-body">
+
+
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
@@ -58,8 +50,8 @@
                                     <select name="categoria_senal_id" id="" class="form-control">
                                         <option value="">Seleccione categoria...</option>
                                         <?php
-                                        foreach ($categoria_senal as $categoria) {
-                                            echo "<option  value='" . $categoria['categoria_senial_id'] . "'>" . $categoria['categoria_senial_nombre'] . "</option>";
+                                        foreach ($categoria_reductores as $categoria) {
+                                            echo "<option  value='" . $categoria['categoria_reductor_id'] . "'>" . $categoria['categoria_reductor_nombre'] . "</option>";
                                         }
                                         ?>
                                     </select>
@@ -76,7 +68,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
+                                    <label for="olicitud_reductores_mal_estado_direccion" class="fw-bold">Direccion
                                         via</label>
                                     <div class="d-flex">
 
@@ -98,37 +90,27 @@
 
                             </div>
                             <div class="col-md-6 col-lg-4">
+                               
                                 <div class="form-group">
-                                    <label for="tipo_senal_id">Tipo de señal</label>
-                                    <select name="tipo_senal_id" id="" class="form-control">
-                                        <option value="">Seleccione señal...</option>
-                                        <?php
-                                        foreach ($tipo_senal as $tipo) {
-                                            echo "<option  value='" . $tipo['tipo_senal_id'] . "'>" . $tipo['tipo_senal_nombre'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="solicitud_senial_mal_estado_descripcion"> Describa el daño</label>
-                                    <input type="text" name="solicitud_senial_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
+                                    <label for="solicitud_reductores_mal_estado_descripcion"> Describa el daño</label>
+                                    <input type="text" name="solicitud_reductores_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="senial_id">Nombre de la señal</label>
-                                    <select name="senial_id" id="" class="form-control">
-                                        <option value="">Seleccione categoria...</option>
+                                    <label for="reductor_id">Nombre del Reductor</label>
+                                    <select name="reductor_id" id="" class="form-control">
+                                        <option value="">Seleccione reductor...</option>
                                         <?php
-                                        foreach ($seniales as $senial) {
-                                            echo "<option  value='" . $senial['senial_id'] . "'>" . $senial['senial_nombre'] . "</option>";
+                                        foreach ($reductores as $reductor) {
+                                            echo "<option  value='" . $reductor['reductor_id'] . "'>" . $reductor['reductor_nombre'] . "</option>";
                                         }
                                         ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="image" class="d-block">Imagen de la señal dañada</label>
-                                    <input type="file" name="solicitud_senial_mal_estado_imagen">
+                                    <label for="image" class="d-block">Imagen del reductor dañado</label>
+                                    <input type="file" name="solicitud_reductores_mal_estado_imagen">
                                 </div>
                             </div>
                         </div>

@@ -83,39 +83,20 @@
                   <span class="sub-item">Consultar</span>
                 </a>
               </li>
-
-            </ul>
-          </div>
-          <div class="collapse" id="usuarios">
-            <ul class="nav nav-collapse">
               <li>
                 <a href="<?php echo getUrl("Usuarios","Usuarios","getCreate");?>">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li>
-
-            </ul>
-          </div>
-          <div class="collapse" id="usuarios">
-            <ul class="nav nav-collapse">
               <li>
                 <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>">
                   <span class="sub-item">Actualizar usuarios</span>
                 </a>
               </li>
-
             </ul>
           </div>
-          <div class="collapse" id="usuarios">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","updateStatus");?>">
-                  <span class="sub-item">Inhabilitar/Habilitar</span>
-                </a>
-              </li>
-
-            </ul>
-          </div>
+          
+      
 
           </li>
 

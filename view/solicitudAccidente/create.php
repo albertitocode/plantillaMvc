@@ -104,7 +104,11 @@
                                                         <option value="">Letra...</option>
                                                         <?php
                                                         foreach ($letras as $letra) {
+<<<<<<< HEAD
+                                                            echo "<option  value='" . $letra['letra_via_id'] . "'>" . $letra['letra_via'] . "</option>";
+=======
                                                             echo "<option  value='" . $letra['letra_id'] . "'>" . $letra['letra_via'] . "</option>";
+>>>>>>> e5ecbe9b22bde87d55a4f30a4fe6bd5925ed65cb
                                                         }
 
                                                         ?>
