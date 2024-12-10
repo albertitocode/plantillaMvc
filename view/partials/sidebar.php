@@ -62,7 +62,7 @@
                 </a>
               </li>
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getCreateSenialMalEstado");?>">
+                <a href="<?php echo getUrl("Solicitud","Solicitud","postSolicitud");?>">
                   <span class="sub-item">Consultar</span>
                 </a>
               </li>

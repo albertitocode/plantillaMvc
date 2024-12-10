@@ -202,39 +202,54 @@ $(document).ready(function () {
   });
 
   $('#tipo_choque').on('change', function () {
- 
 
 
 
-    var url = $(this).data('data-url');  
-    var tipo_choque = $(this).val();  
-   
-    
-      alert("Funciona data: "+tipo_choque);
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: { 'tipo_choque': tipo_choque },
-        success: function (data) {
-          alert(data);
-          $('#detalle_choque').empty();
 
-          // Verificar si la respuesta contiene datos
-          if (data && Array.isArray(data) && data.length > 0) {
-              // Iterar sobre los detalles del choque y agregar opciones al select
-              data.forEach(function(detalle) {
-                  $('#detalle_choque').append(
-                      `<option value="${detalle.choque_detalle_id}">${detalle.choque_detalle_descripcion}</option>`
-                  );
-              });
-          } 
+    var url = $(this).data('data-url');
+    var tipo_choque = $(this).val();
+
+
+    alert("Funciona data: " + tipo_choque);
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 'tipo_choque': tipo_choque },
+      success: function (data) {
+        alert(data);
+        // Iterar sobre los detalles del choque y agregar opciones al select
+        data.forEach(function (detalle) {
+
+
+          $('#detalle_choque').append(
+            `<option value="${detalle.choque_detalle_id}">${detalle.choque_detalle_descripcion}</option>`
+          );
+        });
+
       },
-      error: function() {
-          // Manejo de error en caso de que la solicitud falle
-          alert('Error al cargar los detalles del choque.');
+      error: function () {
+        // Manejo de error en caso de que la solicitud falle
+        alert('Error al cargar los detalles del choque.');
       }
-      });
-   
+    });
+
   });
+
+
+  $(document).on('change', "#id_consult_solicitud", function () {
+    let id_consult_solicitud = $(this).val();
+    let url = $(this).attr('data-url');
+    console.log("gola");
+    alert("Valor seleccionado: " + id_consult_solicitud)
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 'id_solicitud': id_consult_solicitud },
+      success: function (data) {
+        $('#formularios').html(data);
+      }
+    });
+  });
+
 });
 
