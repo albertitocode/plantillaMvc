@@ -58,7 +58,7 @@
                                 </div>
                             
                                 <div class="form-group">
-                                    <label for="olicitud_reductores_mal_estado_direccion" class="fw-bold">Direccion
+                                    <label for="olicitud_reductor_nuevo_direccion" class="fw-bold">Direccion
                                         via</label>
                                     <div class="d-flex">
 
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen del reductor dañado</label>
-                                    <input type="file" name="solicitud_reductores_mal_estado_imagen">
+                                    <input type="file" name="solicitud_reductor_nuevo_imagen">
                                 </div>
                             </div>
                         </div>
