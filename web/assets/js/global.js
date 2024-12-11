@@ -201,34 +201,25 @@ $(document).ready(function () {
     $(this).parent().parent().parent().remove();
   });
 
+
   $('#tipo_choque').on('change', function () {
 
 
 
 
-    var url = $(this).data('data-url');
+    var url = $(this).attr('data-url');
     var tipo_choque = $(this).val();
 
-
-    alert("Funciona data: " + tipo_choque);
     $.ajax({
       url: url,
       type: 'POST',
       data: { 'tipo_choque': tipo_choque },
       success: function (data) {
-        alert(data);
         // Iterar sobre los detalles del choque y agregar opciones al select
-        data.forEach(function (detalle) {
-
-
-          $('#detalle_choque').append(
-            `<option value="${detalle.choque_detalle_id}">${detalle.choque_detalle_descripcion}</option>`
-          );
-        });
+        $("#detalle_choque").html(data);
 
       },
       error: function () {
-        // Manejo de error en caso de que la solicitud falle
         alert('Error al cargar los detalles del choque.');
       }
     });

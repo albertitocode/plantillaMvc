@@ -174,8 +174,7 @@
                                     <div class="col-md-6 col-lg-6">
                                         <div class="form-group mb-3">
                                             <label for="danio_id" class="fw-bold">Tipo de choque</label>
-                                            <select name="tipo_choque" id="tipo_choque" class="form-select "
-                                                data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
+                                            <select name="tipo_choque" id="tipo_choque" class="form-select" data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
 
                                                 <option value="">Seleccione...</option>
                                                 <?php

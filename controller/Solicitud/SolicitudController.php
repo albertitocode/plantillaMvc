@@ -62,7 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+            redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 3) {
@@ -476,15 +476,24 @@ class SolicitudController
 
     public function getDetalleChoque()
     {
-        echo "si";
-        if (isset($_POST['tipo_choque_id'])) {
+        //echo "si";
+        $obj = new SolicitudModel();
+        if (isset($_POST['tipo_choque'])) {
             $tipo_choque = $_POST['tipo_choque'];
-
+           
             $sql = "SELECT * from choque_detalles WHERE tipo_choque_id=$tipo_choque";
-            $detalleChoques = pg_fetch_all($this->consult($sql));
+            $detalleChoques = pg_fetch_all($obj->consult($sql));
 
+            $i=0;
+            foreach($detalleChoques as $det_choque){
+                if($i==0){
+                    echo "<option value=''>Seleccione...</option>";
+                    $i=1;
+                }else{
 
-            include_once '../view/solicitudAccidente/create.php';
+                    echo "<option value='".$det_choque['choque_detalle_id']."'>".$det_choque['choque_detalle_descripcion']."</option>";
+                }
+            }
 
 
         }
@@ -583,6 +592,48 @@ class SolicitudController
 
 
 
+
+    }
+
+    public function getAccidentes(){
+        
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT sa.*, tc.tipo_choque_nombre, e.estado_nombre, tip.tipo_solicitud_nombre , e.estado_nombre,usu.usuario_num_identificacion FROM
+          solicitud_accidentes sa JOIN
+           tipo_choques tc ON sa.tipo_choque_id=tc.tipo_choque_id JOIN usuarios usu  ON sa.usuario_id=usu.usuario_id JOIN 
+          tipo_solicitudes tip ON sa.tipo_solicitud_id = tip.tipo_solicitud_id JOIN 
+          estados e ON sa.estado_id = e.estado_id";
+        $accidentes = pg_fetch_all($obj->consult($sql));
+
+
+
+        // $sql = "SELECT sa.*, tc.tipo_choque_id, e.estado_nombre, u.usuario_num_identificacion FROM solicitud_accidentes sa,
+        //  tipo_choques tc, estados e, usuarios u WHERE tc.tipo_choque_id=sa.tipo_choque_id AND e.estado_id=sa.estado_id AND 
+        //  u.usuario_id=sa.usuario_id ORDER BY sa.solicitud_accidente_id ASC";
+        // //$sql="SELECT*FROM usuario";
+        // $accidentes = $obj->consult($sql);
+
+        if ($accidentes) {
+            include_once '../view/solicitudAccidente/consult.php';
+
+        } else {
+
+            echo "<script>
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'No hay solicitudes Registradas',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateAccidente") . "';
+                    }
+                });
+            </script>";
+
+        }
 
     }
     //Termina accidentes
