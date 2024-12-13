@@ -114,8 +114,8 @@
           <div class="collapse" id="sidebarLayouts">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","test");?>">
-                  <span class="sub-item">test 1</span>
+                <a href="<?php echo getUrl("Solicitud","Solicitud","GetCreatePQRS");?>">
+                  <span class="sub-item">test 1pq</span>
                 </a>
               </li>
               <li>
