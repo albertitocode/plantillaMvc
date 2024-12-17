@@ -79,11 +79,20 @@ class SolicitudController
 
         $obj = new SolicitudModel();
 
-        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_nuevas s JOIN seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON s.estado_id = e.estado_id";
+        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono,
+         tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_nuevas s JOIN 
+         seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id
+          JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN
+           estados e ON s.estado_id = e.estado_id";
+
         $solicitud_seniales_nuevas = pg_fetch_all($obj->consult($sql));
 
         include_once '../view/solicitudSenal/nueva/consult.php';
     }
+
+
+
+    
     public function getCreateNuevaSenial()
     {
         $obj = new SolicitudModel();

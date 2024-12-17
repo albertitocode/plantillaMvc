@@ -1,5 +1,69 @@
 $(document).ready(function () {
-  $('#formu').submit(function (event) {
+
+
+
+
+  $('#formUsu').submit(function (event) {
+
+    const campos = {
+      'usuario_nombre_1': 'Primer nombre',
+      'usuario_apellido_1': 'Primer apellido',
+      'usuario_correo': 'Correo electrónico',
+      'usuario_direccion': 'Dirección',
+      'usuario_apellido_2': 'Segundo apellido',
+      'usuario_contrasenia': 'Contraseña',
+      'usuario_telefono': 'Teléfono',
+      'tipo_documento_id': 'Tipo de documento',
+      'usuario_num_identificacion': 'Número de documento'
+    };
+    var formData = $(this).serializeArray();
+
+    event.preventDefault();
+
+
+    let mensajes = [];
+
+    document.getElementById("error_usuario_nombre_1").textContent = "";
+    let esValido = true;
+   
+
+    formData.forEach(function (formData) {
+     
+      if (formData.value.trim() === '') {
+        
+        Object.keys(campos).forEach(campo => {
+          
+          if (campo === formData.name) {
+           
+            const error=`error_${formData.name}`;
+            
+            const valor = campos[campo];
+            
+            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+
+          }
+        });
+      
+        esValido = false;
+
+      }
+    });
+
+    
+
+
+    if (esValido) {
+      alert('Formulario valido. Enviando datos..')
+      this.submit();
+    } else {
+      alert('Formulario invalido.')
+
+    }
+  });
+
+
+
+  $('#form').submit(function (event) {
     event.preventDefault();
 
     let mensajes = [];
@@ -45,6 +109,7 @@ $(document).ready(function () {
 
     }
   });
+
 
   $('#formAccidente').submit(function (event) {
 
@@ -112,6 +177,10 @@ $(document).ready(function () {
 
     }
   });
+
+
+
+
   $(document).on('keyup', "#buscar", function () {
     let buscar = $(this).val();
     let url = $(this).attr('data-url');
@@ -216,13 +285,13 @@ $(document).ready(function () {
       data: { 'tipo_choque': tipo_choque },
       success: function (data) {
         // Iterar sobre los detalles del choque y agregar opciones al select
-        if(!data.includes("error")){
+        if (!data.includes("error")) {
 
           $("#detalle_choque").html(data);
           $('#dc').removeClass('d-none');
           console.log(data);
-  
-        }else{
+
+        } else {
           $('#dc').addClass('d-none');
         }
 

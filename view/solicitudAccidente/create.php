@@ -184,7 +184,7 @@
 
                                                 ?>
                                             </select>
-                                            <span class=" error" id="tipoError"></span>
+                                            <span class=" text-danger" id="tipoError"></span>
                                         </div>
 
                                         <?php 
