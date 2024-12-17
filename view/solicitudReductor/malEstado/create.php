@@ -4,9 +4,7 @@
 
 
 <div class="mt-5">
-    <div class="alert alert-danger d-none" role="alert" id="error">
 
-    </div>
 
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorMalEstado"); ?>" method="post" id="form">
         <div class="page-header">
@@ -32,7 +30,20 @@
             </ul>
         </div>
         <div class="row">
+            <div class="alert alert-danger d-none" role="alert" id="errorReductorMalEstado">
 
+            </div>
+            <?php
+            if (isset($_SESSION['errores'])) {
+                echo "<div class='alert alert-danger' role='alert'>";
+                foreach ($_SESSION['errores'] as $error) {
+                    echo $error . "<br>";
+                }
+                echo "</div>";
+                unset($_SESSION['errores']);
+            }
+
+            ?>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -44,10 +55,11 @@
 
 
                         <div class="row">
+
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senal_id" id="" class="form-control">
+                                    <label for="categoria_reductor_id">Categoria del reductor</label>
+                                    <select name="categoria_reductor_id" id="" class="form-control">
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_reductores as $categoria) {
@@ -90,7 +102,7 @@
 
                             </div>
                             <div class="col-md-6 col-lg-4">
-                               
+
                                 <div class="form-group">
                                     <label for="solicitud_reductores_mal_estado_descripcion"> Describa el daño</label>
                                     <input type="text" name="solicitud_reductores_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">

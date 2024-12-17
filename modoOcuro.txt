@@ -1,0 +1,50 @@
+html
+<body onload="loadColor();">
+    <h1>Modo Oscuro y Claro</h1>
+    <button id="toggleButton">Cambiar a Modo Oscuro</button>
+
+    <script src="script.js"></script>
+</body>
+
+
+css
+body {
+    background-color: #ffffff; /* Color de fondo claro */
+    color: #000000; /* Color de texto oscuro */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+body.dark {
+    background-color: #1f1f1f; /* Color de fondo oscuro */
+    color: #ffffff; /* Color de texto claro */
+}
+
+
+javaScript
+function loadColor() {
+    // Verifica el modo guardado en localStorage
+    const darkMode = localStorage.getItem('dark-mode');
+    
+    if (darkMode === 'enabled') {
+        document.body.classList.add('dark');
+        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
+    } else {
+        document.body.classList.remove('dark');
+        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Oscuro';
+    }
+}
+
+document.getElementById('toggleButton').addEventListener('click', function() {
+    // Alterna el modo oscuro
+    document.body.classList.toggle('dark');
+    
+    // Actualiza el texto del botón
+    if (document.body.classList.contains('dark')) {
+        localStorage.setItem('dark-mode', 'enabled');
+        this.textContent = 'Cambiar a Modo Claro';
+    } else {
+        localStorage.setItem('dark-mode', 'disabled');
+        this.textContent = 'Cambiar a Modo Oscuro';
+    }
+});
+

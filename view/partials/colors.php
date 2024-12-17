@@ -182,6 +182,11 @@
                   class="changeSideBarColor"
                   data-color="dark2"
                 ></button>
+                <button
+                  type="button"
+                  class="changeSideBarColor"
+                  data-color="black"
+                ></button>
               </div>
             </div>
           </div>

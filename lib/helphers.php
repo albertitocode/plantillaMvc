@@ -22,6 +22,19 @@
         }
         return $url;
     }
+    function getUrl2($modulo, $controlador, $funcion,$parametros=false,$pagina=false){
+        if($pagina==false){
+            $pagina="ajax";
+        }
+    
+        $url= "$pagina.php?modulo=$modulo&controlador=$controlador&funcion=$funcion";
+        if ($parametros != false) {
+            foreach ($parametros as $key => $value) {
+                $url.="&$key=$value";
+            }
+        }
+        return $url;
+    }
     function resolve(){
         $modulo=ucwords($_GET['modulo']);
         $controlador=ucwords($_GET['controlador']);
@@ -59,18 +72,16 @@
         $patron="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.*_@-]).{8,}$/";
         return preg_match($patron,$input) == 1;
     }
-    function validaciones($letras,$numeros,$correo, $contrasena){
-       $pat[0]="/^[a-zA-Z\s]+$/";
-       $pat[1]="/^[0-9]+$/";
-       $pat[2]="/^([a-zA-Z0-9_.-]+)@([a-zA-Z]+)\.([a-zA-Z]{2,})$/";
-       $pat[3]="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.*_@-]).{8,}$/";
-
-       $validar= preg_match($pat[0],$letras) ==1;
-       $validar= preg_match($pat[1],$numeros) ==1;
-       $validar= preg_match($pat[2],$correo) ==1;
-       $validar= preg_match($pat[3],$contrasena) ==1;
-       return $validar;
-       
+    //revisar expresion regular
+    function validacionGeneral($input){
+        $patron = '/^(?=(?:[^a-zA-Z]ñÑ*[a-zA-ZñÑ]){10})([a-zA-ZnÑ0-9_()$?"¿]*[a-zA-ZñÑ][a-zA-ZñÑ0-9_()$?"¿]*)*$/';
+        return preg_match($patron,$input) == 1;
+    }
+    function generarCodigo() {
+        $longitud = 6;
+        $min = pow(10, $longitud - 1);
+        $max = pow(10, $longitud) - 1;
+        return random_int($min, $max);
     }
 
 ?>

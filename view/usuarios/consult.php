@@ -80,7 +80,7 @@ class="mt-5">
                                 echo "<td>" . $usu['usuario_apellido_2'] . "</td>";
                                 echo "<td>" . $usu['estado_nombre'] . "</td>";
                                 echo "<td>" . $usu['usuario_correo'] . "</td>";
-                                echo "<td>" . $usu['usuario_contrasena'] . "</td>";
+                                echo "<td>" . $usu['usuario_contrasenia'] . "</td>";
                                 echo "<td>" . $usu['rol_nombre'] . "</td>";
                                 echo "<td>" . $usu['usuario_telefono'] . "</td>";
                                 echo "<td>" . $usu['tipo_documento_nombre'] . "</td>";

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title>Tura visor</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -132,8 +132,8 @@ body {
                             </div>
                             
                             <div class="form-group">
-                                <label for="usuario_contrasena">Contraseña</label>
-                                <input type="password" name="usuario_contrasena" id="" class="form-control" placeholder="Clave">
+                                <label for="usuario_contrasenia">Contraseña</label>
+                                <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="Clave">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">

@@ -4,20 +4,7 @@
 
 
 <div class="mt-5">
-    <div class="alert alert-danger d-none" role="alert" id="error">
 
-    </div>
-    <!--     
-    //   if(isset($_SESSION['errores'])){
-    //         echo "<div class='alert alert-danger' role='alert'>";
-    //           foreach ($_SESSION['errores'] as $error) {
-    //             echo $error."<br>";
-    //           }
-    //        echo "</div>";
-    //        unset($_SESSION['errores']);
-    //     }
-
-    //  -->
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "PostCreatePQRS"); ?>" method="post" id="form">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
@@ -33,11 +20,25 @@
                 <li class="nav-item">
                     <a href="#">PQRS</a>
                 </li>
-               
+
             </ul>
         </div>
         <div class="row">
+            <div class="alert alert-danger d-none" role="alert" id="errorPQRS">
 
+            </div>
+            <?php
+            if (isset($_SESSION['errores'])) {
+                echo "<div class='alert alert-danger' role='alert'>";
+                foreach ($_SESSION['errores'] as $error) {
+                    echo $error . "<br>";
+                }
+                echo "</div>";
+                unset($_SESSION['errores']);
+            }
+
+
+            ?>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -59,7 +60,7 @@
                                         ?>
                                     </select>
                                 </div>
-                              
+
 
 
                             </div>
@@ -72,9 +73,9 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="adjuncion_pqrs">Archivo adjuntado (Opcional)</label>
-                                    <input type="file" name="adjuncion_pqrs" class="form-control" >
+                                    <input type="file" name="adjuncion_pqrs" class="form-control">
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
         </div>
 
 
-        <!--Usuarios id se va coger desde sesion_start -->
+        
 
         <div class="mt-5">
             <input type="submit" value="Enviar" class="btn btn-success">

@@ -32,12 +32,22 @@
             </ul>
         </div>
         <div class="row">
+        <?php
+                                if (isset($_SESSION['errores'])) {
+                                    echo "<div class='alert alert-danger' role='alert'>";
+                                    foreach ($_SESSION['errores'] as $error) {
+                                        echo $error . "<br>";
+                                    }
+                                    echo "</div>";
+                                    unset($_SESSION['errores']);
+                                }
 
+                                ?>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tittle">
-                            Registro Solicitud Vial
+                            Registro Solicitud Vias
                         </div>
                     </div>
                     <div class="card-body">
@@ -51,17 +61,7 @@
 
 
                             <div class="col-md-6 col-lg-6">
-                                <?php
-                                if (isset($_SESSION['errores'])) {
-                                    echo "<div class='alert alert-danger' role='alert'>";
-                                    foreach ($_SESSION['errores'] as $error) {
-                                        echo $error . "<br>";
-                                    }
-                                    echo "</div>";
-                                    unset($_SESSION['errores']);
-                                }
-
-                                ?>
+                                
                                 <div class="form-group">
                                     <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
                                         via</label>

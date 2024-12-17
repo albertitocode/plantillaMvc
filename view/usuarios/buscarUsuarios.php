@@ -25,8 +25,8 @@
             <input type="text" name="usuario_apellido_2" id="" class="form-control" placeholder="<?= $usu['usuario_apellido_2'] ?>" value="">
         </div>
         <div class="form-group">
-            <label for="usuario_contrasena">Contraseña</label>
-            <input type="password" name="usuario_contrasena" id="" class="form-control" placeholder="<?= $usu['usuario_apellido_1'] ?>" value="">
+            <label for="usuario_contrasenia">Contraseña</label>
+            <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="<?= $usu['usuario_apellido_1'] ?>" value="">
         </div>
         <div class="form-group">
             <label for="rol_id">Rol</label>

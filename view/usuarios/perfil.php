@@ -123,9 +123,9 @@
                                            
 
                                             <div class="form-group">
-                                                <label for="usuario_contrasena">Contraseña</label>
-                                                <input type="password" name="usuario_contrasena" id=""
-                                                    class="form-control" placeholder="<?= $_SESSION['contrasena'] ?>">
+                                                <label for="usuario_contrasenia">Contraseña</label>
+                                                <input type="password" name="usuario_contrasenia" id=""
+                                                    class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="usuario_telefono">Telefono</label>
@@ -172,9 +172,9 @@
 
                                 </div>
 
-                                <!-- Botón de envío -->
-                                <div class="mt-3 text-center">
-                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                <div class="form-group">
+                                    <label for="usuario_contrasenia">Contraseña</label>
+                                    <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
                                 </div>
                             </div>
                         </div>

@@ -105,7 +105,11 @@
                                 </div>
 
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label for="usuario_contrasena">Contraseña</label>
+=======
+                                    <label for="usuario_contrasenia">Contraseña</label>
+>>>>>>> e915b02f2cd3bcdd4641cfcb9facb1804599d8e1
                                     <input type="password" name="usuario_contrasenia" id="" class="form-control"
                                         placeholder="Clave">
                                     <span class=" text-danger" id="error_usuario_contrasenia"></span>

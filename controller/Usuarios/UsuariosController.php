@@ -39,7 +39,7 @@ class UsuariosController
         $usu_apellido_1 = $_POST['usuario_apellido_1'];
         $usu_apellido_2 = $_POST['usuario_apellido_2'];
         $usu_correo = $_POST['usuario_correo'];
-        $usu_contrasena = $_POST['usuario_contrasenia'];
+        $usu_contrasenia = $_POST['usuario_contrasenia'];
         // $rol=$_POST['rol'];
         $usu_telefono = $_POST['usuario_telefono'];
         $tipo_documento = $_POST['tipo_documento_id'];
@@ -57,7 +57,7 @@ class UsuariosController
             'usu_apellido_1' => 'El campo nombre es requerido',
             'usu_apellido_2' => 'El campo nombre es requerido',
             'usu_correo' => 'El campo nombre es requerido',
-            'usu_contrasena' => 'El campo nombre es requerido',
+            'usu_contrasenia' => 'El campo nombre es requerido',
             'usu_telefono' => 'El campo telefono es requerido',
             'tipo_documento' => 'El campo nombre es requerido',
             'numero_documento' => 'El campo nombre es requerido',
@@ -77,9 +77,9 @@ class UsuariosController
         // // $id= $obj->autoIncrement("usu_id","usuarios");
         // $usu_clave=password_hash($usu_clave,PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1,
-         usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasena, usuario_correo,
+         usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasenia, usuario_correo,
           usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, 
-          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasena', '$usu_correo',
+          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasenia', '$usu_correo',
            $usu_telefono, '$usu_direccion', 2, 1)";
 
         echo $sql;

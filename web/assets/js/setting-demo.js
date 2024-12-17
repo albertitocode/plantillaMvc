@@ -1,5 +1,28 @@
 "use strict";
+$(document).ready(function () {
+  //navbar
+  let colorNavbar = localStorage.getItem("topBarColor");
+  
+  if (colorNavbar) {
+    $(".main-header .navbar-header").attr("data-background-color", colorNavbar);
+    $(".changeTopBarColor[data-color='" + colorNavbar + "']").addClass("selected");
+  }
+  
+  //sidebar
+  let colorSidebar = localStorage.getItem("sideBarColor");
 
+  if(colorSidebar){
+    $(".sidebar").attr("data-background-color",colorSidebar);
+    $(".changeSideBarColor[data-color='"+ colorSidebar + "']").addClass("selected");
+  }
+
+  //logo header
+  let colorHeaderLogo = localStorage.getItem("logoHeaderColor");
+  if (colorHeaderLogo){
+    $(".logo-header").attr("data-background-color", colorHeaderLogo);
+    $(".changeLogoHeaderColor[data-color='"+ colorHeaderLogo +"']").addClass("selected");
+  }
+});
 // Setting Color
 
 $(window).resize(function () {
@@ -22,10 +45,13 @@ $(".changeBodyBackgroundFullColor").on("click", function () {
 });
 
 $(".changeLogoHeaderColor").on("click", function () {
+  let color = $(this).attr("data-color");
   if ($(this).attr("data-color") == "default") {
     $(".logo-header").removeAttr("data-background-color");
+    localStorage.removeItem("logoHeaderColor");
   } else {
-    $(".logo-header").attr("data-background-color", $(this).attr("data-color"));
+    $(".logo-header").attr("data-background-color", color);
+    localStorage.setItem("logoHeaderColor",color)
   }
 
   $(this).parent().find(".changeLogoHeaderColor").removeClass("selected");
@@ -36,23 +62,32 @@ $(".changeLogoHeaderColor").on("click", function () {
 });
 
 $(".changeTopBarColor").on("click", function () {
+  let color = $(this).attr("data-color");
   if ($(this).attr("data-color") == "default") {
     $(".main-header .navbar-header").removeAttr("data-background-color");
+    localStorage.removeItem("topBarColor");
   } else {
-    $(".main-header .navbar-header").attr("data-background-color", $(this).attr("data-color"));
+    $(".main-header .navbar-header").attr("data-background-color", color);
+    localStorage.setItem("topBarColor",color);
   }
 
   $(this).parent().find(".changeTopBarColor").removeClass("selected");
   $(this).addClass("selected");
   layoutsColors();
   getCheckmark();
+
+
+  
 });
 
 $(".changeSideBarColor").on("click", function () {
+  let color = $(this).attr("data-color");
   if ($(this).attr("data-color") == "default") {
     $(".sidebar").removeAttr("data-background-color");
+    localStorage.removeItem("sideBarColor");
   } else {
-    $(".sidebar").attr("data-background-color", $(this).attr("data-color"));
+    $(".sidebar").attr("data-background-color", color);
+    localStorage.setItem("sideBarColor", color)
   }
 
   $(this).parent().find(".changeSideBarColor").removeClass("selected");
@@ -72,9 +107,9 @@ $(".changeBackgroundColor").on("click", function () {
 function customCheckColor() {
   var logoHeader = $(".logo-header").attr("data-background-color");
   if (logoHeader !== "white") {
-    $(".logo-header .navbar-brand").attr("src", "assets/img/kaiadmin/logo_light.svg");
+    $(".logo-header .navbar-brand").attr("src", "assets/img/calvo.jpg");
   } else {
-    $(".logo-header .navbar-brand").attr("src", "assets/img/kaiadmin/logo_dark.svg");
+    $(".logo-header .navbar-brand").attr("src", "assets/img/calva.jpg");
   }
 }
 
