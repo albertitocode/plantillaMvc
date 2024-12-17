@@ -197,7 +197,8 @@ class SolicitudController
 
     //Empieza reductor
 
-    public function getReductorMalEstado(){
+    public function getReductorMalEstado()
+    {
 
         $obj = new SolicitudModel();
 
@@ -480,20 +481,32 @@ class SolicitudController
         $obj = new SolicitudModel();
         if (isset($_POST['tipo_choque'])) {
             $tipo_choque = $_POST['tipo_choque'];
-           
+
             $sql = "SELECT * from choque_detalles WHERE tipo_choque_id=$tipo_choque";
-            $detalleChoques = pg_fetch_all($obj->consult($sql));
+            $detalleChoques = $obj->consult($sql);
 
-            $i=0;
-            foreach($detalleChoques as $det_choque){
-                if($i==0){
-                    echo "<option value=''>Seleccione...</option>";
-                    $i=1;
-                }else{
 
-                    echo "<option value='".$det_choque['choque_detalle_id']."'>".$det_choque['choque_detalle_descripcion']."</option>";
+            $i = 0;
+            if (pg_num_rows($detalleChoques)>0) {
+                $detalleChoques = pg_fetch_all($detalleChoques);
+                foreach ($detalleChoques as $det_choque) {
+                    print_r($det_choque);
+
+                    if ($i == 0) {
+                        echo "<option value=''>Seleccione...</option>";
+                        $i = 1;
+                    }
+
+                    echo "<option value='" . $det_choque['choque_detalle_id'] . "'>" . $det_choque['choque_detalle_descripcion'] . "</option>";
+
                 }
+
+            } else {
+
+                echo "error";
             }
+
+
 
 
         }
@@ -516,15 +529,15 @@ class SolicitudController
         $descripcion = $_POST['observacion'];
         $imagen = $_POST['imagen'];
         $tipo_choque = $_POST['tipo_choque'];
-       
 
-       
+
+
         if (isset($_POST['lesionados'])) {
             $lesionados = $_POST['lesionados'];
-        }else{
+        } else {
             $lesionados = "Sin lesionados";
         }
-        echo "les".$lesionados;
+        echo "les" . $lesionados;
         if (isset($_POST['bis'])) {
             $bis = $_POST['bis'];
         } else {
@@ -595,8 +608,9 @@ class SolicitudController
 
     }
 
-    public function getAccidentes(){
-        
+    public function getAccidentes()
+    {
+
         $obj = new SolicitudModel();
 
         $sql = "SELECT sa.*, tc.tipo_choque_nombre, e.estado_nombre, tip.tipo_solicitud_nombre , e.estado_nombre,usu.usuario_num_identificacion FROM

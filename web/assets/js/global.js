@@ -216,7 +216,17 @@ $(document).ready(function () {
       data: { 'tipo_choque': tipo_choque },
       success: function (data) {
         // Iterar sobre los detalles del choque y agregar opciones al select
-        $("#detalle_choque").html(data);
+        if(!data.includes("error")){
+
+          $("#detalle_choque").html(data);
+          $('#dc').removeClass('d-none');
+          console.log(data);
+  
+        }else{
+          $('#dc').addClass('d-none');
+        }
+
+
 
       },
       error: function () {

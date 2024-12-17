@@ -41,7 +41,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <!-- <?php var_dump($detallesChoques); ?> -->
 
 
                         <!-- <div class="col-md-4">
@@ -66,6 +65,7 @@
                             ?>
                             <div class="col-md-12">
                                 <?php
+                                
                                 if (isset($_SESSION['errores'])) {
                                     echo "<div class='alert alert-danger' role='alert'>";
                                     foreach ($_SESSION['errores'] as $error) {
@@ -186,7 +186,17 @@
                                             </select>
                                             <span class=" error" id="tipoError"></span>
                                         </div>
-                                        <div class="form-group mb-3">
+
+                                        <?php 
+                                         $class="form-group mb-3 d-none";
+                                       
+                                        
+                                        ?>
+                                        <?php 
+                                       
+                                         if(!empty($class))echo "<div class='$class' id='dc'>";
+                                        ?>
+                                            
                                             <label for="detalle_choque" class="fw-bold">Detalle de choque</label>
                                             <select name="detalle_choque" id="detalle_choque" class="form-select">
                                                 <?php
@@ -198,7 +208,10 @@
 
                                             </select>
                                             <span class="error" id="tipoError"></span>
-                                        </div>
+                                       <?php
+                                        echo "</div>";
+                                        ?>
+                                   
                                         <div class="form-group mb-3">
                                             <label for="bis" class="fw-bold">¿Hay lesionados?</label>
                                             <input type="checkbox" id="lesionados" name="lesionados"
