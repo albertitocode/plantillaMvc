@@ -94,8 +94,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="usuario_contrasena">Contraseña</label>
-                                    <input type="password" name="usuario_contrasena" id="" class="form-control"
+                                    <label for="usuario_contrasenia">Contraseña</label>
+                                    <input type="password" name="usuario_contrasenia" id="" class="form-control"
                                         placeholder="Clave">
                                 </div>
                             </div>

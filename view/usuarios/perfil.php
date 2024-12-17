@@ -106,8 +106,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="usuario_contrasena">Contraseña</label>
-                                    <input type="password" name="usuario_contrasena" id="" class="form-control" placeholder="<?= $_SESSION['contrasena'] ?>">
+                                    <label for="usuario_contrasenia">Contraseña</label>
+                                    <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="rol_id">Rol</label><br>

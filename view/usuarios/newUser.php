@@ -132,8 +132,8 @@ body {
                             </div>
                             
                             <div class="form-group">
-                                <label for="usuario_contrasena">Contraseña</label>
-                                <input type="password" name="usuario_contrasena" id="" class="form-control" placeholder="Clave">
+                                <label for="usuario_contrasenia">Contraseña</label>
+                                <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="Clave">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">

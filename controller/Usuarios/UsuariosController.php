@@ -39,7 +39,7 @@ class UsuariosController
         $usu_apellido_1 = $_POST['usuario_apellido_1'];
         $usu_apellido_2 = $_POST['usuario_apellido_2'];
         $usu_correo = $_POST['usuario_correo'];
-        $usu_contrasena = $_POST['usuario_contrasena'];
+        $usu_contrasenia = $_POST['usuario_contrasenia'];
         // $rol=$_POST['rol'];
         $usu_telefono = $_POST['usuario_telefono'];
         $tipo_documento = $_POST['tipo_documento_id'];
@@ -112,7 +112,7 @@ class UsuariosController
         // }
         // // $id= $obj->autoIncrement("usu_id","usuarios");
         // $usu_clave=password_hash($usu_clave,PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1, usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasena, usuario_correo, usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasena', '$usu_correo', $usu_telefono, '$usu_direccion', 2, 1)";
+        $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1, usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasenia, usuario_correo, usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasenia', '$usu_correo', $usu_telefono, '$usu_direccion', 2, 1)";
 
         echo $sql;
 
@@ -234,7 +234,7 @@ class UsuariosController
         $usu_apellido_1 = $_POST['usuario_apellido_1'];
         $usu_apellido_2 = $_POST['usuario_apellido_2'];
         $usu_correo = $_POST['usuario_correo'];
-        $usu_contrasena = $_POST['usuario_contrasena'];
+        $usu_contrasenia = $_POST['usuario_contrasenia'];
         $rol = $_POST['rol_id'];
         $usu_telefono = $_POST['usuario_telefono'];
         $tipo_documento = $_POST['tipo_documento_id'];
@@ -270,8 +270,8 @@ class UsuariosController
             $campos[] = "usuario_correo='$usu_correo'";
             $cont = $cont + 1;
         }
-        if (!empty($usu_contrasena)) {
-            $campos[] = "usuario_contrasena='$usu_contrasena'";
+        if (!empty($usu_contrasenia)) {
+            $campos[] = "usuario_contrasenia='$usu_contrasenia'";
             $cont = $cont + 1;
         }
         if (!empty($rol)) {
