@@ -1,0 +1,56 @@
+require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer(true);
+
+try {
+    // Configuración del servidor SMTP
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Para depuración (opcional)
+    $mail->isSMTP();
+    $mail->Host       = 'tu_servidor_smtp'; // Ej: smtp.gmail.com
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'tu_correo@ejemplo.com';
+    $mail->Password   = 'tu_contraseña';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // o PHPMailer::ENCRYPTION_SMTPS
+    $mail->Port       = 587; // o 465 si usas SMTPS
+
+    // Configuración del correo
+    $mail->setFrom('tu_correo@ejemplo.com', 'Tu Nombre');
+    $mail->addAddress('destinatario@ejemplo.com', 'Nombre Destinatario');
+    $mail->Subject = 'Asunto del correo';
+    $mail->Body    = 'Este es el cuerpo del correo en texto plano.';
+    $mail->AltBody = 'Este es el cuerpo del correo para clientes que no soportan HTML.';
+
+    $mail->send();
+    echo 'El mensaje ha sido enviado.';
+} catch (Exception $e) {
+    echo "El mensaje no pudo ser enviado. Error: {$mail->ErrorInfo}";
+}
+
+
+function generarCodigoNumerico($longitud = 6) {
+    $min = pow(10, $longitud - 1);
+    $max = pow(10, $longitud) - 1;
+    return random_int($min, $max);
+}
+
+$codigo = generarCodigoNumerico(); // Genera un código numérico de 6 dígitos
+
+
+function generarCodigo($longitud = 12) {
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $max = strlen($caracteres) - 1;
+    $codigo = '';
+    for ($i = 0; $i < $longitud; $i++) {
+        $codigo .= $caracteres[random_int(0, $max)];
+    }
+    return $codigo;
+}
+
+$codigo = generarCodigo(); // Genera un código de 12 caracteres por defecto
+
+INSERT INTO restablecimiento_claves (usuario_id, codigo, fecha_expiracion)
+VALUES (:usuario_id, :codigo, DATE_ADD(NOW(), INTERVAL 1 HOUR));

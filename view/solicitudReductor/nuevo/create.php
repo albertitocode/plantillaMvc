@@ -4,9 +4,7 @@
 
 
 <div class="mt-5">
-    <div class="alert alert-danger d-none" role="alert" id="error">
 
-    </div>
 
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorNuevo"); ?>" method="post" id="form">
         <div class="page-header">
@@ -32,7 +30,20 @@
             </ul>
         </div>
         <div class="row">
+            <div class="alert alert-danger d-none" role="alert" id="errorNuevoreductor">
 
+            </div>
+            <?php
+            if (isset($_SESSION['errores'])) {
+                echo "<div class='alert alert-danger' role='alert'>";
+                foreach ($_SESSION['errores'] as $error) {
+                    echo $error . "<br>";
+                }
+                echo "</div>";
+                unset($_SESSION['errores']);
+            }
+
+            ?>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -56,7 +67,7 @@
                                         ?>
                                     </select>
                                 </div>
-                            
+
                                 <div class="form-group">
                                     <label for="olicitud_reductor_nuevo_direccion" class="fw-bold">Direccion
                                         via</label>
@@ -80,8 +91,8 @@
 
                             </div>
                             <div class="col-md-6 col-lg-4">
-                               
-                              <div class="form-group">
+
+                                <div class="form-group">
                                     <label for="solicitud_reductor_nuevo_descripcion"> Describa el caso</label>
                                     <input type="text" name="solicitud_reductor_nuevo_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
                                 </div>

@@ -326,6 +326,7 @@ class UsuariosController
 
         include_once '../view/usuarios/buscar.php';
     }
-  
+    
+   
     
 }

@@ -42,12 +42,25 @@
             </ul>
         </div>
         <div class="row">
+            <div class="alert alert-danger d-none" role="alert" id="errorSenialMalEstado">
 
+            </div>
+            <?php
+            if (isset($_SESSION['errores'])) {
+                echo "<div class='alert alert-danger' role='alert'>";
+                foreach ($_SESSION['errores'] as $error) {
+                    echo $error . "<br>";
+                }
+                echo "</div>";
+                unset($_SESSION['errores']);
+            }
+
+            ?>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-tittle">
-                            Registro Solicitud Reductor
+                            Registro Solicitud Señal en mal estado
                         </div>
                     </div>
                     <div class="card-body">

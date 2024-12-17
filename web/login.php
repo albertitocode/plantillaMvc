@@ -33,6 +33,10 @@
             <!-- <label>
                 <input type="checkbox" checked="checked" name="remember"> Recordarme
             </label> -->
+            <a href="<?php echo getUrl("Acceso","Acceso","ObtenerCodigo","","ajax");?>">
+
+                <p>Olvidó su contraseña?</p>
+            </a>
          
     </form>
     <form action="<?php echo getUrl("Usuarios","Usuarios","getCreate","","ajax");?>" method="post" id="form2" >

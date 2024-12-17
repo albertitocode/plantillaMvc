@@ -1,0 +1,61 @@
+//VALIDACIONES
+        $validacion = true;
+        $campos = [
+            'tipo_via' => 'El campo tipo de vía es requerido',
+            'num_via' => 'El campo número de vía es requerido',
+            'barrio' => 'El campo barrio es requerido',
+            'tipo_choque' => 'El campo tipo de choque es requerido'
+        ];
+
+        // Bucle para validar los campos
+        foreach ($campos as $campo => $mensaje) {
+            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
+
+        }
+
+        // function validarNumeros($input){
+        //     $patron = "/^[0-9]+$/";
+        //     return preg_match($patron,$input)===1;
+
+        // }
+
+        $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
+        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id) VALUES (
+    '$direccion', $tipo_choque, '$imagen','$descripcion','$lesionados', 3, 1, 4 );";
+
+        if ($validacion == true) {
+            $ejecutar = $obj->insert($sql);
+
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateAccidente") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        } else {
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateAccidente"));
+        }
+
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "El correo electrónico no es válido.";
+}
+$edad = $_POST['edad'];
+if (!filter_var($edad, FILTER_VALIDATE_INT) || $edad < 18 || $edad > 100) {
+    $errors[] = "La edad debe ser un número entero entre 18 y 100.";
+}

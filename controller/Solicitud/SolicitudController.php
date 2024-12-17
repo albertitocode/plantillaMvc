@@ -9,7 +9,7 @@ class SolicitudController
 
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitud = pg_fetch_all($obj->consult($sql));
-
+        
         include_once '../view/solicitudes/registrar.php';
     }
     public function buscarSolicitud()
@@ -62,11 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-<<<<<<< HEAD
             redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
-=======
-            redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
->>>>>>> e081bc7b3126bf9a931e88fc373d18e19432586a
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
@@ -78,6 +74,9 @@ class SolicitudController
 
 
     }
+
+//Empieza señales
+    //Empieza señales nuevas
 
     public function getSenialNueva(){
 
@@ -119,32 +118,59 @@ class SolicitudController
         $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
 
         $usuario_id = $_SESSION['id'];
-        //solucionar el problema de la rideccion
+
+        //validaciones 
+        $validacion= true;
+        $campos = [
+            'categoria_senal_id' => 'Es requerido llenar el campo categoria',
+            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
+            'senial_id' => 'Es requerido llenar el campo señal',
+            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
+            'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion'
+
+        ];
+
+        foreach ($campos as $campo =>$mensaje){
+            if (empty(trim($$campo))) {  
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }else{
+
+            }
+        }
+        
+
+        
         $sql = "INSERT INTO solicitud_seniales_nuevas (solicitud_senial_nueva_descripcion,solicitud_senial_nueva_direccion,senial_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_senial_nueva_descripcion','$solicitud_senial_nueva_direccion',$senial_id,$usuario_id,5,1)";
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
-        } else {
-            echo "Se ha presentado un error al insertar";
+        if($validacion == true){
+            $ejecutar = $obj->insert($sql);
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getCreateNuevaSenial") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        }else{
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateNuevaSenial"));
         }
 
 
-
-        // $categoria_reduc_id = $_POST[''];
-        // $categoria_reduc_nombre = $_POST[''];
-        // $tipo_reduc_id = $_POST[''];
-
-        // $sql = "INSERT INTO  VALUES()";
-        // $ejecutar = $obj->insert($sql);
-        // if ($ejecutar) {
-        //     redirect(getUrl("Solicitud", "Solicitud", ""));
-        // } else {
-        //     echo "Se ha presentado un error al insertar";
-        // }
-
-
     }
+    //Termina señales nuevas
 
+    //Empieza Señal en mal estado
     public function getSenialMalEstado(){
 
         $obj = new SolicitudModel();
@@ -179,7 +205,7 @@ class SolicitudController
 
         //añadir campo fecha
         //agregar los cambios de estados
-        $categoria = $_POST['categoria_senal_id'];
+        // $categoria = $_POST['categoria_senal_id'];
         $categoria_senal_id = $_POST['categoria_senal_id'];
         $tipo_senal_id = $_POST['tipo_senal_id'];
         $senial_id = $_POST['senial_id'];
@@ -189,13 +215,50 @@ class SolicitudController
         $danio_id = $_POST['danio_id'];
         $usuario_id = $_SESSION['id'];
 
+
+         //validaciones 
+         $validacion= true;
+         $campos = [
+             'categoria_senal_id' => 'Es requerido llenar el campo categoria',
+             'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
+             'senial_id' => 'Es requerido llenar el campo señal',
+             'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
+             'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
+             'danio_id' => 'Es requerido llenar el campo daño'
+         ];
+ 
+         foreach ($campos as $campo =>$mensaje){
+            if (empty(trim($$campo))) {  
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }else{
+             }
+         }
         $sql = "INSERT INTO solicitud_seniales_mal_estado (senial_id,solicitud_senial_mal_estado_descripcion,danio_id,usuario_id,solicitud_senial_mal_estado_direccion,solicitud_senial_mal_estado_imagen,tipo_solicitud_id,estado_id) VALUES($senial_id,'$solicitud_senial_mal_estado_descripcion',$danio_id,$usuario_id,'$solicitud_senial_mal_estado_direccion','$solicitud_senial_mal_estado_imagen',1,1)";
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
-        } else {
-            echo "Se ha presentado un error al insertar";
+        if ($validacion == true){
+            $ejecutar = $obj->insert($sql);
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        }else{
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateSenialMalEstado"));
         }
+        
 
 
 
@@ -216,11 +279,11 @@ class SolicitudController
 
 
 
+    //termina señales en mal estado
+//termina señales
 
-
-
-    //Empieza reductor
-
+//Empieza reductor
+    //Empieza reductores en mal estado
     public function getReductorMalEstado(){
 
         $obj = new SolicitudModel();
@@ -264,19 +327,69 @@ class SolicitudController
         $danio_id = $_POST['danio_id'];
         $usuario_id = $_SESSION['id'];
         $reductor_id = $_POST['reductor_id'];
+        $categoria = $_POST['categoria_reductor_id'];
+
+        $validacion = true;
+        $campos = [
+            'solicitud_reductores_mal_estado_descripcion' => 'El campo Descripcion es requerido',
+            'danio_id' => 'El campo daño es requerido',
+            'barrio' => 'El campo barrio es requerido',
+            'calle' => 'El campo calle es requerido',
+            'carrera' => 'El campo carrera es requerido',
+            'reductor_id' => 'El campo reductor es requerido',
+            'categoria_reductor_id' => 'El campo categoria es requerido'
+
+        ];
+
+        
+        foreach ($campos as $campo => $mensaje) {
+            if (empty(trim($$campo))) {  
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
+
+        }
+        // if(validarCampoLetras($usu_nombre)==false){
+        //     $_SESSION['errores'][]="El campo nombre debe contener solo letras";
+        //         $validaciones= false;
+        //     }
 
         $sql = "INSERT INTO solicitud_reductores_mal_estado (solicitud_reductores_mal_estado_descripcion,solicitud_reductores_mal_estado_direccion,solicitud_reductores_mal_estado_imagen,reductor_id,danio_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductores_mal_estado_descripcion','$direccion','$solicitud_reductores_mal_estado_imagen',$reductor_id,$danio_id,$usuario_id,3,1)";
-        var_dump($sql);
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
-        } else {
-            echo "Se ha presentado un error al insertar";
+        // var_dump($sql);
+
+        if($validacion == true){
+            $ejecutar = $obj->insert($sql);
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        }else{
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorMalEstado"));
         }
+        
+        
 
 
 
     }
+    //Termina reductores en mal estado
+    
+    //Empieza nuevos reductores
+
 
     public function getReductorNuevo(){
 
@@ -315,25 +428,61 @@ class SolicitudController
         $barrio = $_POST['barrio'];
         $direccion = "carrera $carrera, calle $calle, barrio $barrio";
         $solicitud_reductor_nuevo_imagen = $_POST['solicitud_reductor_nuevo_imagen'];
-        var_dump($solicitud_reductor_nuevo_imagen);
-        // $danio_id = $_POST['danio_id'];
+        // var_dump($solicitud_reductor_nuevo_imagen);
         $usuario_id = $_SESSION['id'];
         $reductor_id = $_POST['reductor_id'];
 
+        $validacion = true;
+        $campos = [
+            'solicitud_reductores_mal_estado_descripcion' => 'El campo Descripcion es requerido',
+            'barrio' => 'El campo barrio es requerido',
+            'calle' => 'El campo calle es requerido',
+            'carrera' => 'El campo carrera es requerido',
+            'reductor_id' => 'El campo reductor es requerido',
+            'categoria_reductor_id' => 'El campo categoria es requerido'
+
+        ];
+
+        
+        foreach ($campos as $campo => $mensaje) {
+            if (empty(trim($$campo))) {  
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
+
+        }
         $sql = "INSERT INTO solicitud_reductores_nuevos(solicitud_reductor_nuevo_descripcion,solicitud_reductor_nuevo_direccion,solicitud_reductor_nuevo_imagen,reductor_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductor_nuevo_descripcion','$direccion','$solicitud_reductor_nuevo_imagen',$reductor_id,$usuario_id,6,1)";
-        $ejecutar = $obj->insert($sql);
-        if ($ejecutar) {
-            redirect(getUrl("Solicitud", "Solicitud", "getSolicitud"));//corregir el redirect
-        } else {
-            echo "Se ha presentado un error al insertar";
+        if($validacion == true){
+            $ejecutar = $obj->insert($sql);
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        }else{
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorNuevo"));
         }
 
 
     }
-    //Termina Reductor
+    //Termina nuevos reductores
+//Termina Reductor
 
 
-    //empieza Vias
+//Empieza Vias
 
     public function GetCreateVia()
     {
@@ -385,7 +534,7 @@ class SolicitudController
 
         // Bucle para validar los campos
         foreach ($campos as $campo => $mensaje) {
-            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+            if (empty(trim($$campo))) {  
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
@@ -423,7 +572,7 @@ class SolicitudController
                 echo "Se ha presentado un error al insertar";
             }
         } else {
-            redirect(getUrl("Usuarios", "Usuarios", "getCreate"));
+            redirect(getUrl("Solicitud", "Solicitud", "getCreateVia"));
         }
 
 
@@ -472,7 +621,8 @@ class SolicitudController
         }
 
     }
-    //termina vias
+//termina vias
+//Empieza pqrs
     public function GetCreatePQRS()
     {
 
@@ -507,28 +657,25 @@ class SolicitudController
         //VALIDACIONES
          $validacion = true;
          $campos = [
-             'descripcion_pqrs' => 'El campo carrera es requerido',
+             'tipo_pqrs_id' => 'El campo tipo pqrs es requerido',
+             'descripcion_pqrs' => 'El campo descripcion es requerido'
          ];
 
         // Bucle para validar los campos
-        // foreach ($campos as $campo => $mensaje) {
-        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+        foreach ($campos as $campo => $mensaje) {
+            if (empty(trim($$campo))) {  
 
-        //         $_SESSION['errores'][] = $mensaje;
-        //         $validacion = false;
-        //     }
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
 
-        // }
+         }
 
-        // function validarNumeros($input){
-        //     $patron = "/^[0-9]+$/";
-        //     return preg_match($patron,$input)===1;
-
-        // }
+   
 
         $sql = "INSERT INTO pqrs ( tipo_pqrs_id, pqrs_descripcion, usuario_id, pqrs_archivo) VALUES(  '$tipo_p','$descripcion', '$usuario', '$archivo')";
 
-        // if ($validacion == true) {
+        if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
 
             if ($ejecutar) {
@@ -548,10 +695,10 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-        // } else {
-        //     echo "feo";
-        //     // redirect(getUrl("Solicitud", "Solicitud", "GetcreatePQRS"));
-        // }
+         } else {
+            echo "feo";
+         redirect(getUrl("Solicitud", "Solicitud", "GetcreatePQRS"));
+         }
 
 
 
@@ -570,7 +717,7 @@ class SolicitudController
 
     }
 
-    //Empieza Accidentes
+//Empieza Accidentes
     public function GetCreateAccidente()
     {
 
