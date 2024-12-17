@@ -57,21 +57,36 @@ class SolicitudController
 
         if ($id_solicitud == 1) {
             // include_once '../view/solicitudSenal/malEstado/create.php';
-            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+            redirect(getUrl("Solicitud", "Solicitud", "getSenialMalEstado"));
         } else if ($id_solicitud == 2) {
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
+<<<<<<< HEAD
+            redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
+=======
             redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
+>>>>>>> e081bc7b3126bf9a931e88fc373d18e19432586a
         } else if ($id_solicitud == 5) {
-            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+            redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
             redirect(getUrl("Solicitud", "Solicitud", "getReductorMalEstado"));
         } else if ($id_solicitud == 6) {
-            redirect(getUrl("Solicitud", "Solicitud", "getVias"));
+            redirect(getUrl("Solicitud", "Solicitud", "getReductorNuevo"));
         }
 
 
+
+    }
+
+    public function getSenialNueva(){
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_nuevas s JOIN seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON s.estado_id = e.estado_id";
+        $solicitud_seniales_nuevas = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/nueva/consult.php';
     }
     public function getCreateNuevaSenial()
     {
@@ -86,7 +101,7 @@ class SolicitudController
         $sql = "SELECT  * FROM seniales";
         $seniales = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudSenal/nuevo/create.php';
+        include_once '../view/solicitudSenal/nueva/create.php';
     }
 
     public function postCreateNuevaSenial()
@@ -130,6 +145,15 @@ class SolicitudController
 
     }
 
+    public function getSenialMalEstado(){
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, da.danio_nombre, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_mal_estado s JOIN seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON s.estado_id = e.estado_id JOIN danios da ON s.danio_id=da.danio_id";
+        $solicitud_seniales_mal_estado = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/malEstado/consult.php';
+    }
     public function getCreateSenialMalEstado()
     {
         $obj = new SolicitudModel();
@@ -253,6 +277,16 @@ class SolicitudController
 
 
 
+    }
+
+    public function getReductorNuevo(){
+
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT r.*, re.reductor_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_reductores_nuevos r JOIN reductores re ON r.reductor_id=re.reductor_id JOIN usuarios usu  ON r.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON r.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON r.estado_id = e.estado_id";
+        $solicitud_reductores_nuevos = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudReductor/nuevo/consult.php';
     }
     public function getCreateReductorNuevo()
     {
@@ -414,11 +448,8 @@ class SolicitudController
     {
 
         $obj = new SolicitudModel();
-        $sql = "SELECT sv.*, d.danio_nombre,e.estado_nombre, u.usuario_num_identificacion FROM solicitud_vias_mal_estado sv,
-         danios d, estados e, usuarios u WHERE sv.danio_id=d.danio_id AND e.estado_id=sv.estado_id AND 
-         u.usuario_id=sv.usuario_id ORDER BY sv.solicitud_via_mal_estado_id ASC";
-        //$sql="SELECT*FROM usuario";
-        $vias = $obj->consult($sql);
+        $sql = "SELECT v.*, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, da.danio_nombre, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_vias_mal_estado v JOIN usuarios usu  ON v.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON v.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON v.estado_id = e.estado_id JOIN danios da ON v.danio_id=da.danio_id";
+        $vias = pg_fetch_all($obj->consult($sql));
 
         if ($vias) {
             include_once '../view/solicitudVial/consult.php';
@@ -443,7 +474,102 @@ class SolicitudController
 
     }
     //termina vias
+    public function GetCreatePQRS()
+    {
 
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM tipo_pqrs";
+        $tipo_pqrs = pg_fetch_all($obj->consult($sql));
+
+        
+
+        $sql = "SELECT * FROM estados";
+        $estado = pg_fetch_all($obj->consult($sql));
+
+        
+
+
+
+        include_once '../view/solicitudPQRS/create.php';
+
+
+    }
+
+    public function PostCreatePQRS()
+    {
+
+        $obj = new SolicitudModel();
+        $descripcion = $_POST['descripcion_pqrs'];
+        $archivo = $_POST['adjuncion_pqrs'];
+        $usuario = $_SESSION['id'];
+        $tipo_p = $_POST['tipo_pqrs_id'];
+
+        //VALIDACIONES
+         $validacion = true;
+         $campos = [
+             'descripcion_pqrs' => 'El campo carrera es requerido',
+         ];
+
+        // Bucle para validar los campos
+        // foreach ($campos as $campo => $mensaje) {
+        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+
+        //         $_SESSION['errores'][] = $mensaje;
+        //         $validacion = false;
+        //     }
+
+        // }
+
+        // function validarNumeros($input){
+        //     $patron = "/^[0-9]+$/";
+        //     return preg_match($patron,$input)===1;
+
+        // }
+
+        $sql = "INSERT INTO pqrs ( tipo_pqrs_id, pqrs_descripcion, usuario_id, pqrs_archivo) VALUES(  '$tipo_p','$descripcion', '$usuario', '$archivo')";
+
+        // if ($validacion == true) {
+            $ejecutar = $obj->insert($sql);
+
+            if ($ejecutar) {
+                echo "<script>
+                Swal.fire({
+                    title: '¡Gracias!',
+                    text: 'Tu solicitud se ha registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetcreatePQRS") . "';
+                    }
+                });
+            </script>";
+            } else {
+                echo "Se ha presentado un error al insertar";
+            }
+        // } else {
+        //     echo "feo";
+        //     // redirect(getUrl("Solicitud", "Solicitud", "GetcreatePQRS"));
+        // }
+
+
+
+
+
+
+        // if ($ejecutar) {
+
+
+        // } else {
+        //     echo "Se ha presentado un error al insertar";
+
+
+        // }
+
+
+    }
 
     //Empieza Accidentes
     public function GetCreateAccidente()

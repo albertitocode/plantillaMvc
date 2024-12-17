@@ -10,7 +10,7 @@ class="mt-5">
     <h3 class="display-4">Consultar solicitudes</h3>
 </div>
 <div class="page-header">
-    <h3 class="fw-bold mb-3">Reductor</h3>
+    <h3 class="fw-bold mb-3">Señales</h3>
     <ul class="breadcrumbs mb-3">
         <li class="nav-home">
             <a href="<?php echo getUrl("Solicitud", "Solicitud", "postSolicitud"); ?>">
@@ -21,7 +21,7 @@ class="mt-5">
             <i class="icon-arrow-right"></i>
         </li>
         <li class="nav-item">
-            <a href="#">Reductor en mal estado</a>
+            <a href="#">Señal en mal estado</a>
         </li>
     </ul>
 </div>
@@ -40,13 +40,13 @@ class="mt-5">
                             placeholder="Buscar por nombre o correo" data-url='<?php echo getUrl("Usuarios", "Usuarios", "buscar", false, "ajax"); ?>'>
                     </div> -->
                     <?php
-                    if (!empty($solicitud_reductores_mal_estado)) {
+                    if (!empty($solicitud_seniales_mal_estado)) {
                     ?>
                         <table class="table table-striped table hover ">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Fecha</th>
+                                    <!-- <th>Fecha</th> -->
                                     <th>Descripcion</th>
                                     <th>Direccion</th>
                                     <th>Imagen</th>
@@ -63,21 +63,21 @@ class="mt-5">
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($solicitud_reductores_mal_estado as $reductor_malo) {
+                            foreach ($solicitud_seniales_mal_estado as $senial_malo) {
                                 // $clase="";
                                 // $texto="";
                                 echo "<tr>";
-                                echo "<td>" . $reductor_malo['solicitud_reductores_mal_estado_id'] . "</td>";
-                                echo "<td>" . $reductor_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
-                                echo "<td>" . $reductor_malo['solicitud_reductores_mal_estado_descripcion'] . "</td>";
-                                echo "<td>" . $reductor_malo['solicitud_reductores_mal_estado_direccion'] . "</td>";
-                                echo "<td>" . $reductor_malo['solicitud_reductores_mal_estado_imagen'] . "</td>";
-                                echo "<td>" . $reductor_malo['reductor_nombre'] . "</td>";
-                                echo "<td>" . $reductor_malo['danio_nombre'] . "</td>";
-                                echo "<td>" . $reductor_malo['tipo_solicitud_nombre'] . "</td>";
-                                echo "<td>" . $reductor_malo['estado_nombre'] . "</td>";
-                                echo "<td>" . $reductor_malo['usuario_nombre_1'] ."  ". $reductor_malo['usuario_apellido_1'] ."</td>";
-                                echo "<td>" . $reductor_malo['usuario_telefono'] . "</td>";
+                                echo "<td>" . $senial_malo['solicitud_senial_mal_estado_id'] . "</td>";
+                                // echo "<td>" . $senial_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
+                                echo "<td>" . $senial_malo['solicitud_senial_mal_estado_descripcion'] . "</td>";
+                                echo "<td>" . $senial_malo['solicitud_senial_mal_estado_direccion'] . "</td>";
+                                echo "<td>" . $senial_malo['solicitud_senial_mal_estado_imagen'] . "</td>";
+                                echo "<td>" . $senial_malo['senial_nombre'] . "</td>";
+                                echo "<td>" . $senial_malo['danio_nombre'] . "</td>";
+                                echo "<td>" . $senial_malo['tipo_solicitud_nombre'] . "</td>";
+                                echo "<td>" . $senial_malo['estado_nombre'] . "</td>";
+                                echo "<td>" . $senial_malo['usuario_nombre_1'] ."  ". $senial_malo['usuario_apellido_1'] ."</td>";
+                                echo "<td>" . $senial_malo['usuario_telefono'] . "</td>";
                                 
 
                                 // if($usu['estado_id']==1){
