@@ -62,11 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-<<<<<<< HEAD
-            redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
-=======
             redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
->>>>>>> e081bc7b3126bf9a931e88fc373d18e19432586a
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
