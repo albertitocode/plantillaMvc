@@ -51,97 +51,135 @@
             <input type="text" name="usu_id" class="form-control" placeholder="Id">
             
         </div> -->
-                       
-                        <div class="row">
-
-                            <div class="col-md-6 col-lg-4">
-                            <div class="avatar-xl">
-                            <img
-                                src="<?= $_SESSION['foto'] ?>"
-                                alt="image profile"
-                                class="avatar- rounded avatar-xl" />
-                        </div>
-                        <style>
-                            .img {
-                                width: 150px;
-                                /* Cambia este valor según lo necesites */
-                                height: auto;
-                                /* Mantiene la proporción */
-                            }
-                        </style>
-                                <div class="form-group">
-                                    <label for="usuario_id">Id de usuario</label>
-                                    <input type="text" name="usuario_id" id="" class="form-control"  value="<?= $_SESSION['id'] ?>" readonly>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="usuario_nombre_1">Primer nombre</label>
-                                    <input type="text" name="usuario_nombre_1" id="" class="form-control"  value="<?= $_SESSION['primer nombre'] ?>" readonly>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="usuario_apellido_1">Primer apellido</label>
-                                    <input type="text" name="usuario_apellido_1" id="" class="form-control" value="<?= $_SESSION['primer apellido'] ?>" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_correo">correo</label>
-                                    <input type="text" name="usuario_correo" id="" class="form-control" placeholder="<?= $_SESSION['correo'] ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_direccion">Direccion </label>
-                                    <input type="text" name="usuario_direccion" id="" class="form-control" placeholder="<?= $_SESSION['direccion'] ?>">
-                                </div>
+                        <div class="row justify-content-center align-items-center">
+                            <style>
+                                .img {
+                                    width: 150px;
+                                    /* Cambia este valor según lo necesites */
+                                    height: auto;
+                                    /* Mantiene la proporción */
+                                }
+                            </style>
+                            <div class="avatar-xxl ">
+                                <img src="<?= $_SESSION['foto'] ?>" alt="image profile"
+                                    class="avatar- rounded-circle avatar-xxl" />
                             </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    <label for="usuario_nombre_2">Segundo nombre</label>
-                                    <input type="text" name="usuario_nombre_2" id="" class="form-control" placeholder="<?= $_SESSION['segundo nombre'] ?>">
+                            <div class="col-md-12">
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_apellido_2">Segundo apellido</label>
-                                    <input type="text" name="usuario_apellido_2" id="" class="form-control" value="<?= $_SESSION['segundo apellido'] ?>" readonly>
+                                <div class="row">
+
+                                    <div class="col-md-6 col-lg-4">
+
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label for="usuario_id">Id de usuario</label>
+                                                <input type="text" name="usuario_id" id="" class="form-control"
+                                                    value="<?= $_SESSION['id'] ?>" readonly>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="usuario_nombre_1">Primer nombre</label>
+                                                <input type="text" name="usuario_nombre_1" id="" class="form-control"
+                                                    value="<?= $_SESSION['primer nombre'] ?>" readonly>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="usuario_nombre_2">Segundo nombre</label>
+                                                <input type="text" name="usuario_nombre_2" id="" class="form-control"
+                                                    value="<?= $_SESSION['segundo nombre'] ?>">
+
+                                            </div>
+
+                                           
+                                            <div class="form-group">
+                                                <label for="usuario_correo">correo</label>
+                                                <input type="text" name="usuario_correo" id="" class="form-control"
+                                                    value="<?= $_SESSION['correo'] ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+
+                                        <div class="form-group mb-3">
+                                        <div class="form-group">
+                                                <label for="tipo_documento_id">Tipo de documento</label>
+                                                <select name="tipo_documento_id" id="" class="form-control">
+                                                    <option value=""><?= $_SESSION['tipo_documento_id'] ?></option>
+                                                    <?php
+                                                    foreach ($tipo_documento as $tipo_d) {
+                                                        echo "<option  value='" . $tipo_d['tipo_documento_id'] . "'>" . $tipo_d['tipo_documento_nombre'] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                          
+                                            <div class="form-group">
+                                                <label for="usuario_apellido_1">Primer apellido</label>
+                                                <input type="text" name="usuario_apellido_1" id="" class="form-control"
+                                                    value="<?= $_SESSION['primer apellido'] ?>" readonly>
+                                            </div>
+                                           
+
+                                            <div class="form-group">
+                                                <label for="usuario_contrasenia">Contraseña</label>
+                                                <input type="password" name="usuario_contrasenia" id=""
+                                                    class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="usuario_telefono">Telefono</label>
+                                                <input type="text" name="usuario_telefono" id="" class="form-control"
+                                                    value="<?= $_SESSION['telefono'] ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-lg-4">
+
+                                        <div class="form-group mb-3">
+                                        <div class="form-group">
+                                                <label for="usuario_num_identificacion">Numero documento</label>
+                                                <input type="text" name="usuario_num_identificacion" id=""
+                                                    class="form-control" value="<?= $_SESSION['numero_documento'] ?>"
+                                                    readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="usuario_apellido_2">Segundo apellido</label>
+                                                <input type="text" name="usuario_apellido_2" id="" class="form-control"
+                                                    value="<?= $_SESSION['segundo apellido'] ?>" readonly>
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <label for="usuario_direccion">Direccion </label>
+                                                <input type="text" name="usuario_direccion" id="" class="form-control"
+                                                    value="<?= $_SESSION['direccion'] ?>">
+                                            </div>
+                                           
+                                          
+
+                                            <div class="form-group">
+                                                <label for="rol_id">Rol</label><br>
+                                                <input type="text" name="rol_id" id="" class="form-control"
+                                                    value="<?= $_SESSION['rol'] ?>" readonly>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
 
                                 <div class="form-group">
                                     <label for="usuario_contrasenia">Contraseña</label>
                                     <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
                                 </div>
-                                <div class="form-group">
-                                    <label for="rol_id">Rol</label><br>
-                                    <input type="text" name="rol_id" id="" class="form-control" value="<?= $_SESSION['rol'] ?>" readonly>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    <label for="usuario_telefono">Telefono</label>
-                                    <input type="text" name="usuario_telefono" id="" class="form-control" placeholder="<?= $_SESSION['telefono'] ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo_documento_id">Tipo de documento</label>
-                                    <select name="tipo_documento_id" id="" class="form-control">
-                                        <option value="">"<?= $_SESSION['tipo_documento_id'] ?>"</option>
-                                        <?php
-                                        foreach ($tipo_documento as $tipo_d) {
-                                            echo "<option  value='" . $tipo_d['tipo_documento_id'] . "'>" . $tipo_d['tipo_documento_nombre'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario_num_identificacion">Numero documento</label>
-                                    <input type="text" name="usuario_num_identificacion" id="" class="form-control" value="<?= $_SESSION['numero_documento'] ?>" readonly>
-                                </div>
-
-                            </div>
-                            <div class="mt-5">
-                                <input type="submit" value="Enviar" class="btn btn-success">
-
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

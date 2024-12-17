@@ -10,11 +10,8 @@ use PHPMailer\PHPMailer\Exception;
 class AccesoController
 {
 
-    public function login()
-    {
-
-
-        $obj = new UsuariosModel();
+        public function login(){
+            $obj = new UsuariosModel();
 
         $user = $_POST['user'];
         $pass = $_POST['pass'];
@@ -54,9 +51,10 @@ class AccesoController
                         // </script>";
                         echo "Error";
                         redirect('../web/login.php');
-                    } else {
-                        $_SESSION['auth'] = 'ok';
-
+                            
+                        }else{
+                        $_SESSION['auth']='ok';
+                        
                         redirect('../web/index.php');
                     }
                 }
