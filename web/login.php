@@ -63,23 +63,9 @@ include_once '../lib/helphers.php';
 
 
             <!-- <label>
-<<<<<<< HEAD
-                <input type="checkbox" checked="checked" name="remember"> Recordarme
-            </label> -->
-            <a href="<?php echo getUrl("Acceso","Acceso","ObtenerCodigo","","ajax");?>">
-
-                <p>Olvidó su contraseña?</p>
-            </a>
-         
-    </form>
-    <form action="<?php echo getUrl("Usuarios","Usuarios","getCreate","","ajax");?>" method="post" id="form2" >
-    <button type="submit" class="btn btn-success" name="registro">Registrarme</button>
-        
-=======
         <input type="checkbox" checked="checked" name="remember"> Recordarme
     </label> -->
 
->>>>>>> b887f48c12d57f2c620c7d4d1926a18691b9ee63
         </div>
 
 

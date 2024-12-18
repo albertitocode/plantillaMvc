@@ -103,13 +103,16 @@
                                     <span class=" text-danger" id="error_usuario_apellido_2"></span>
 
                                 </div>
+                                <div class="form-group">
+                                    <label for="usuario_fecha_nacimiento">Fecha de nacimiento</label>
+                                    <input type="date" name="usuario_fecha_nacimiento" id="usuario_fecha_nacimiento"
+                                        class="form-control">
+                                    <span class="text-danger" id="error_usuario_fecha_nacimiento"></span>
+                                </div>
+
 
                                 <div class="form-group">
-<<<<<<< HEAD
-                                    <label for="usuario_contrasena">Contraseña</label>
-=======
                                     <label for="usuario_contrasenia">Contraseña</label>
->>>>>>> e915b02f2cd3bcdd4641cfcb9facb1804599d8e1
                                     <input type="password" name="usuario_contrasenia" id="" class="form-control"
                                         placeholder="Clave">
                                     <span class=" text-danger" id="error_usuario_contrasenia"></span>

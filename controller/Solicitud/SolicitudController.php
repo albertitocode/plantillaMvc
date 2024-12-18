@@ -62,11 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-<<<<<<< HEAD
-            redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
-=======
             redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
->>>>>>> e915b02f2cd3bcdd4641cfcb9facb1804599d8e1
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
@@ -822,7 +818,6 @@ class SolicitudController
         } else {
             $lesionados = "Sin lesionados";
         }
-        echo "les" . $lesionados;
         if (isset($_POST['bis'])) {
             $bis = $_POST['bis'];
         } else {
@@ -839,16 +834,31 @@ class SolicitudController
             'barrio' => 'El campo barrio es requerido',
             'tipo_choque' => 'El campo tipo de choque es requerido'
         ];
+       if(validarNumeros( $num_via)){
+        $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+              $validacion = false;
 
+       }
+
+       if(validarNumeros( $numero2)){
+        $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+              $validacion = false;
+
+       }
+       if(validarNumeros( $numero3)){
+        $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+              $validacion = false;
+
+       }
         // Bucle para validar los campos
-        foreach ($campos as $campo => $mensaje) {
-            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+        // foreach ($campos as $campo => $mensaje) {
+        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
 
-                $_SESSION['errores'][] = $mensaje;
-                $validacion = false;
-            }
+        //         $_SESSION['errores'][] = $mensaje;
+        //         $validacion = false;
+        //     }
 
-        }
+        // }
 
         // function validarNumeros($input){
         //     $patron = "/^[0-9]+$/";

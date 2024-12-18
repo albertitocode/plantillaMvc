@@ -33,7 +33,7 @@ class AccesoController
                     // $_SESSION['rol nombre']=$usu['rol_nombre'];
                     $_SESSION['telefono'] = $usu['usuario_telefono'];
                     $_SESSION['direccion'] = $usu['usuario_direccion'];
-                    $_SESSION['contrasena'] = $usu['usuario_contrasenia'];
+                    $_SESSION['contrasenia'] = $usu['usuario_contrasenia'];
                     // $_SESSION['tipo_documento_nombre']=$usu['tipo_documento_nombre'];
                     $_SESSION['tipo_documento_id'] = $usu['tipo_documento_id'];
                     $_SESSION['numero_documento'] = $usu['usuario_num_identificacion'];
@@ -192,7 +192,7 @@ class AccesoController
                             $_SESSION['rol nombre']=$usu['rol_nombre'];
                             $_SESSION['telefono']=$usu['usuario_telefono'];
                             $_SESSION['direccion']=$usu['usuario_direccion'];
-                            $_SESSION['contrasena']=$usu['usuario_contrasenia'];
+                            $_SESSION['contrasenia']=$usu['usuario_contrasenia'];
                             $_SESSION['tipo_documento_nombre']=$usu['tipo_documento_nombre'];
                             $_SESSION['tipo_documento_id']=$usu['tipo_documento_id'];
                             $_SESSION['numero_documento']=$usu['usuario_num_identificacion'];

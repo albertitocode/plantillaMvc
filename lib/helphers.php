@@ -68,7 +68,7 @@
         $patron="/^([a-zA-Z0-9_.-]+)@([a-zA-Z]+)\.([a-zA-Z]{2,})$/";
         return preg_match($patron,$input) == 1;
     }
-    function validarContraseba($input){
+    function validarContrasenia($input){
         $patron="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.*_@-]).{8,}$/";
         return preg_match($patron,$input) == 1;
     }

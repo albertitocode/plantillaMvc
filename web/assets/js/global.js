@@ -1,63 +1,98 @@
 $(document).ready(function () {
+  const campos = {
+    'usuario_nombre_1': 'Primer nombre',
+    'usuario_apellido_1': 'Primer apellido',
+    'usuario_correo': 'Correo electrónico',
+    'usuario_direccion': 'Dirección',
+    'usuario_apellido_2': 'Segundo apellido',
+    'usuario_fecha_nacimiento': 'Fecha de nacimiento',
+    'usuario_contrasenia': 'Contraseña',
+    'usuario_telefono': 'Teléfono',
+    'tipo_documento_id': 'Tipo de documento',
+    'usuario_num_identificacion': 'Número de documento'
+  };
+
+  $(document).on('change', '#formUsu input, #formUsu select', function () {
 
 
+    var formData = $('#formUsu').serializeArray();
+
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(campos).forEach(campo => {
+      const error = `error_${campo}`;
+      document.getElementById(error).textContent = "";
+    });
+
+    // Validación de los campos
+    formData.forEach(function (formData) {
+      if (formData.value.trim() === '') {
+        Object.keys(campos).forEach(campo => {
+          if (campo === formData.name) {
+            const error = `error_${formData.name}`;
+            const valor = campos[campo];
+
+            // Mostrar el mensaje de error correspondiente
+            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+            esValido = false;
+          }
+        });
+      }
+    });
+
+
+  });
 
 
   $('#formUsu').submit(function (event) {
+    event.preventDefault();
 
-    const campos = {
-      'usuario_nombre_1': 'Primer nombre',
-      'usuario_apellido_1': 'Primer apellido',
-      'usuario_correo': 'Correo electrónico',
-      'usuario_direccion': 'Dirección',
-      'usuario_apellido_2': 'Segundo apellido',
-      'usuario_contrasenia': 'Contraseña',
-      'usuario_telefono': 'Teléfono',
-      'tipo_documento_id': 'Tipo de documento',
-      'usuario_num_identificacion': 'Número de documento'
-    };
+
     var formData = $(this).serializeArray();
 
-    event.preventDefault();
+
 
 
     let mensajes = [];
 
-    document.getElementById("error_usuario_nombre_1").textContent = "";
+
     let esValido = true;
-   
+
+    Object.keys(campos).forEach(campo => {
+      const error = `error_${campo}`;
+      document.getElementById(error).textContent = "";
+    });
+
 
     formData.forEach(function (formData) {
-     
+
       if (formData.value.trim() === '') {
-        
+
         Object.keys(campos).forEach(campo => {
-          
+
+
           if (campo === formData.name) {
-           
-            const error=`error_${formData.name}`;
-            
+
+            const error = `error_${formData.name}`;
+
             const valor = campos[campo];
-            
+
             document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+            esValido = false;
 
           }
         });
-      
-        esValido = false;
+
+
 
       }
     });
-
-    
 
 
     if (esValido) {
       alert('Formulario valido. Enviando datos..')
       this.submit();
-    } else {
-      alert('Formulario invalido.')
-
     }
   });
 
@@ -110,73 +145,137 @@ $(document).ready(function () {
     }
   });
 
-
   $('#formAccidente').submit(function (event) {
-
-
     event.preventDefault();
+    const campos = {
+      tipo_via: "Tipo de vía",
+      num_via: "Número de vía",
+      orientacion: "Orientación",
+      numero2: "Número complemento 2",
+      numero3: "Número complemento 3",
+      barrio: "Barrio",
+      tipo_choque: "Tipo de choque",
+      detalle_choque: "Detalle de choque"
+    };
+
+
+    var formData = $(this).serializeArray();
+
+
 
 
     let mensajes = [];
 
-    $('#errorAccidente').html('');
 
     let esValido = true;
 
-    const tipo_via = $('#tipo_via').val().trim();
-    if (tipo_via === '') {
-      mensajes.push('El tipo de via es obligatorio');
-      esValido = false;
-    }
-    const num_via = $('#num_via').val().trim();
-    if (num_via === '') {
-      mensajes.push('El campo numero de via es obligatorio');
-      esValido = false;
-    }
-    const orientacion = $('#orientacion').val().trim();
-    if (orientacion === '') {
-      mensajes.push('El campo orientacion es obligatorio');
-      esValido = false;
-    }
-    const numero2 = $('#numero2').val().trim();
-    if (numero2 === '') {
-      mensajes.push('El campo numero complemento 2 es obligatorio');
-      esValido = false;
-    }
-    const numero3 = $('#numero3').val().trim();
-    if (numero3 === '') {
-      mensajes.push('El campo numero complemento 3 es obligatorio');
-      esValido = false;
-    }
+    Object.keys(campos).forEach(campo => {
+      const error = `error_${campo}`;
+      document.getElementById(error).textContent = "";
+    });
 
-    const barrio = $('#barrio').val().trim();
-    if (barrio === '') {
-      mensajes.push('El campo barrio es obligatorio');
-      esValido = false;
-    }
-    const tipo_choque = $('#tipo_choque').val().trim();
-    if (tipo_choque === '') {
-      mensajes.push('El campo tipo de choque es obligatorio');
-      document.getElementById("tipoError").textContent = "El campo email es obligatorio";
-      esValido = false;
 
-    }
+    formData.forEach(function (formData) {
 
-    // const user = $('#user').val().trim();
-    // if(user ===''){
-    //   mensajes.push('El campo usuario es obligatorio');
-    // }
+      if (formData.value.trim() === '') {
+
+        Object.keys(campos).forEach(campo => {
+
+
+          if (campo === formData.name) {
+
+            const error = `error_${formData.name}`;
+            const valor = campos[campo];
+            if (campo === "tipo_choque" || campo === "detalle_choque") {
+              document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+
+
+
+            } else {
+              mensajes.push(`*El campo ${valor} es obligatorio*`);
+
+            }
+            esValido = false;
+
+          }
+        });
+
+
+
+      }
+    });
+
+
     if (esValido) {
       alert('Formulario valido. Enviando datos..')
-      // $("#error").fadeout(500);
       this.submit();
-    } else {
-
-      $('#errorAccidente').html(mensajes.map(ms => `${ms}<br>`).join(''));
-      $('#errorAccidente').removeClass('d-none');
-
+    }else{
+      console.log("invalido")
     }
   });
+
+  $(document).on('change', '#formAccidente input, #formAccidente select', function () {
+
+    console.log("si net")
+
+    var formData = $('#formAccidente').serializeArray();
+
+    let esValido = true;
+    let mensajes = [];
+    const campos = {
+      tipo_via: "Tipo de vía",
+      num_via: "Número de vía",
+      orientacion: "Orientación",
+      numero2: "Número complemento 2",
+      numero3: "Número complemento 3",
+      barrio: "Barrio",
+      tipo_choque: "Tipo de choque",
+      detalle_choque: "Detalle de choque"
+    };
+
+
+    document.getElementById('error_direccion').textContent = "";
+    document.getElementById('error_tipo_choque').textContent = "";
+
+    document.getElementById('error_detalle_choque').textContent = "";
+
+
+
+    // Validación de los campos
+
+    formData.forEach(function (formData) {
+      if (formData.value.trim() === '') {
+        Object.keys(campos).forEach(campo => {
+          if (campo === formData.name) {
+            const error = `error_${formData.name}`;
+            const valor = campos[campo];
+            if (campo === "tipo_choque" || campo === "detalle_choque") {
+              document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+
+
+
+            } else {
+              mensajes.push(`*El campo ${valor} es obligatorio*`);
+
+            }
+            esValido = false;
+
+          }
+        });
+      }
+    });
+
+    if (!esValido) {
+      document.getElementById("error_direccion").innerHTML = mensajes.join('<br>');
+
+    } else {
+      console.log("datos completos")
+    }
+
+    // Aquí puedes añadir acciones adicionales si es necesario
+  });
+
+
 
 
 

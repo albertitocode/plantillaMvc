@@ -46,43 +46,50 @@ class UsuariosController
         $numero_documento = $_POST['usuario_num_identificacion'];
 
         $usu_direccion = $_POST['usuario_direccion'];
+        $usu_fecha_nac = $_POST['usuario_fecha_nacimiento'];
 
-
+        
         $validaciones = true;
 
-        $campos = [
+         $campos = [
 
-            ' usu_nombre_1' => 'El campo primer nombre es requerido',
-            'usu_nombre_2' => 'El campo nombre es requerido',
-            'usu_apellido_1' => 'El campo nombre es requerido',
-            'usu_apellido_2' => 'El campo nombre es requerido',
-            'usu_correo' => 'El campo nombre es requerido',
-            'usu_contrasenia' => 'El campo nombre es requerido',
-            'usu_telefono' => 'El campo telefono es requerido',
-            'tipo_documento' => 'El campo nombre es requerido',
-            'numero_documento' => 'El campo nombre es requerido',
-            'usu_direccion' => 'El campo nombre es requerido'
-        ];
+             ' usu_nombre_1' => 'El campo primer nombre es requerido',
+             'usu_nombre_2' => 'El campo nombre es requerido',
+             'usu_apellido_1' => 'El campo nombre es requerido',
+             'usu_apellido_2' => 'El campo nombre es requerido',
+             'usu_correo' => 'El campo nombre es requerido',
+             'usu_contrasenia' => 'El campo nombre es requerido',
+             'usu_telefono' => 'El campo telefono es requerido',
+             'tipo_documento' => 'El campo nombre es requerido',
+             'numero_documento' => 'El campo nombre es requerido',
+             'usu_direccion' => 'El campo nombre es requerido',
+              'usu_fecha_nac' => 'El campo fecha de nacimiento es requerido'
+         ];
 
-        // Bucle para validar los campos
-        foreach ($campos as $campo => $mensaje) {
-            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+        // // Bucle para validar los campos
+        // foreach ($campos as $campo => $mensaje) {
+        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
 
-                $_SESSION['errores'][] = $mensaje;
-                $validacion = false;
-            }
+        //         $_SESSION['errores'][] = $mensaje;
+        //         $validacion = false;
+        //     }
+
+        // }
+
+        if (validarContrasenia($usu_contrasenia) == false) {
+            $_SESSION['errores'][] = "En el campo contraseña debes ingresar minimo 8 caracteres y contener al menos una mayuscula, una minuscula, un numero y un caracter especial";
+            $validaciones = false;
 
         }
 
         // // $id= $obj->autoIncrement("usu_id","usuarios");
-        // $usu_clave=password_hash($usu_clave,PASSWORD_DEFAULT);
+        //  $usu_clave=password_hash($usu_contrasenia,PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1,
-         usuario_nombre_2, usuario_apellido_1, usuario_apellido_2, usuario_contrasenia, usuario_correo,
+         usuario_nombre_2, usuario_apellido_1, usuario_apellido_2,usuario_fecha_nacimiento, usuario_contrasenia, usuario_correo,
           usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, 
-          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2', '$usu_contrasenia', '$usu_correo',
+          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2','$usu_fecha_nac', '$usu_contrasenia', '$usu_correo',
            $usu_telefono, '$usu_direccion', 2, 1)";
 
-        echo $sql;
 
         if ($validaciones == true) {
             $ejecutar = $obj->insert($sql);
@@ -204,7 +211,7 @@ class UsuariosController
             $usu_apellido_1 = $_POST['usuario_apellido_1'];
             $usu_apellido_2 = $_POST['usuario_apellido_2'];
             $usu_correo = $_POST['usuario_correo'];
-            $usu_contrasena = $_POST['usuario_contrasena'];
+            $usu_contrasenia = $_POST['usuario_contrasenia'];
             $rol = $_POST['rol_id'];
             $usu_telefono = $_POST['usuario_telefono'];
             $tipo_documento = $_POST['tipo_documento_id'];
@@ -240,8 +247,8 @@ class UsuariosController
             $campos[] = "usuario_correo='$usu_correo'";
             $cont = $cont + 1;
         }
-        if (!empty($usu_contrasena)) {
-            $campos[] = "usuario_contrasena='$usu_contrasena'";
+        if (!empty($usu_contrasenia)) {
+            $campos[] = "usuario_contrasenia='$usu_contrasenia'";
             $cont = $cont + 1;
         }
         if (!empty($rol)) {
