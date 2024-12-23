@@ -76,11 +76,7 @@ class UsuariosController
 
         // }
 
-        if (validarContrasenia($usu_contrasenia) == false) {
-            $_SESSION['errores'][] = "En el campo contraseña debes ingresar minimo 8 caracteres y contener al menos una mayuscula, una minuscula, un numero y un caracter especial";
-            $validaciones = false;
-
-        }
+        
 
         // // $id= $obj->autoIncrement("usu_id","usuarios");
         //  $usu_clave=password_hash($usu_contrasenia,PASSWORD_DEFAULT);

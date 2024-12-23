@@ -93,6 +93,7 @@
                                     <label for="usuario_nombre_2">Segundo nombre</label>
                                     <input type="text" name="usuario_nombre_2" id="" class="form-control"
                                         placeholder="Nombre 2">
+                                        <span class=" text-danger" id="error_usuario_nombre_2"></span>
 
 
                                 </div>
@@ -150,7 +151,7 @@
 
                             </div>
                             <div class="mt-5">
-                                <input type="submit" value="Enviar" class="btn btn-success">
+                                <input type="submit" id="btnSubmit" value="Enviar" class="btn btn-success" disabled>
                             </div>
                         </div>
                     </div>

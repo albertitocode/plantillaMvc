@@ -11,90 +11,204 @@ $(document).ready(function () {
     'tipo_documento_id': 'Tipo de documento',
     'usuario_num_identificacion': 'Número de documento'
   };
+  //   function validarNumeros($input){
+  //     $patron="/^[0-9]+$/";
+  //     return preg_match($patron,$input)===1;
+  // }
 
-  $(document).on('change', '#formUsu input, #formUsu select', function () {
+  function validarCampoLetras(input) {
+    const patron = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u;
+    return patron.test(input);
+  }
 
+  function validarNumeros(input) {
+    const patron = /^[0-9]+$/;
+    return patron.test(input);
+  }
+
+  function validarCorreo(input) {
+    const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return patron.test(input);
+  }
+
+  function validacionGeneral(input) {
+    const patron = /^[a-zA-ZñÑ0-9_()$¿?"\.\s]{10,}$/u;
+    return patron.test(input);
+  }
+
+
+  function validarContrasenia(input) {
+    const patron = /^(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[!@#$%^&*()_+.\-]).{8,}$/;
+
+    /*
+    Patrón explicado:
+    - (?=.*[a-zñ]): Al menos una letra minúscula o 'ñ'.
+    - (?=.*[A-ZÑ]): Al menos una letra mayúscula o 'Ñ'.
+    - (?=.*[0-9]): Al menos un número.
+    - (?=.*[!@#$%^&*()_+.\-]): Al menos un carácter especial.
+    - .{8,}: Longitud mínima de 8 caracteres.
+    */
+
+    return patron.test(input);
+  }
+
+
+
+
+
+  $(document).on('input', '#formUsu input, #formUsu select', function (event) {
+    event.preventDefault();
 
     var formData = $('#formUsu').serializeArray();
-
     let esValido = true;
 
     // Limpiar los mensajes de error antes de comenzar la validación
     Object.keys(campos).forEach(campo => {
       const error = `error_${campo}`;
-      document.getElementById(error).textContent = "";
+      document.getElementById(error).textContent = ""; // Limpia los errores
     });
 
     // Validación de los campos
-    formData.forEach(function (formData) {
-      if (formData.value.trim() === '') {
-        Object.keys(campos).forEach(campo => {
-          if (campo === formData.name) {
-            const error = `error_${formData.name}`;
-            const valor = campos[campo];
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = campos[name];
 
-            // Mostrar el mensaje de error correspondiente
-            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-            esValido = false;
-          }
-        });
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (campos[name]) {
+        
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+
+      // Validar contraseña
+      else if (name === 'usuario_contrasenia') {
+        if (!validarContrasenia(value)) {
+          esValido = false;
+          document.getElementById('error_usuario_contrasenia').textContent = `*En el campo contraseña debes ingresar mínimo 8 caracteres, 
+              incluyendo una mayúscula, una minúscula, un número y un carácter especial.*`;
+        } else {
+          document.getElementById('error_usuario_contrasenia').textContent = ""; // Borrar error
+        }
+      } else {
+        switch (name) {
+          case 'usuario_nombre_1':
+          case 'usuario_nombre_2':
+          case 'usuario_apellido_1':
+          case 'usuario_apellido_2':
+            if (!validarCampoLetras(value)) {
+              document.getElementById(error).textContent = `*El campo ${campos[name]} solo debe contener letras.*`;
+              esValido = false;
+            }
+            break;
+            
+          case 'usuario_correo':
+            if (!validarCorreo(value)) {
+              document.getElementById(error).textContent = `*Ingrese un correo válido.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_telefono':
+            if (!validarNumeros(value)) {
+              document.getElementById(error).textContent = `*El campo Teléfono debe contener solo números.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_contrasenia':
+            if (!validarContrasenia(value)) {
+              document.getElementById(error).textContent = `*La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.*`;
+              esValido = false;
+            }
+            break;
+          case 'tipo_documento_id':
+            if (value === '') {
+              document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_num_identificacion':
+            if (!validarNumeros(value)) {
+              document.getElementById(error).textContent = `*El campo Número de documento debe contener solo números.*`;
+              esValido = false;
+            }
+            break;
+        }
       }
     });
 
-
-  });
-
-
-  $('#formUsu').submit(function (event) {
-    event.preventDefault();
-
-
-    var formData = $(this).serializeArray();
-
-
-
-
-    let mensajes = [];
-
-
-    let esValido = true;
-
-    Object.keys(campos).forEach(campo => {
-      const error = `error_${campo}`;
-      document.getElementById(error).textContent = "";
-    });
-
-
-    formData.forEach(function (formData) {
-
-      if (formData.value.trim() === '') {
-
-        Object.keys(campos).forEach(campo => {
-
-
-          if (campo === formData.name) {
-
-            const error = `error_${formData.name}`;
-
-            const valor = campos[campo];
-
-            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-            esValido = false;
-
-          }
-        });
-
-
-
-      }
-    });
-
-
+    const submitButton = document.getElementById('btnSubmit');
     if (esValido) {
-      alert('Formulario valido. Enviando datos..')
-      this.submit();
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
     }
   });
+
+
+  // $('#formUsu').submit(function (event) {
+  //   event.preventDefault();
+
+
+  //   var formData = $(this).serializeArray();
+
+
+
+
+  //   let mensajes = [];
+
+
+  //   let esValido = true;
+
+  //   Object.keys(campos).forEach(campo => {
+  //     const error = `error_${campo}`;
+  //     document.getElementById(error).textContent = "";
+  //   });
+
+
+  //   formData.forEach(function (formData) {
+
+  //     if (formData.value.trim() === '') {
+
+  //       Object.keys(campos).forEach(campo => {
+
+
+  //         if (campo === formData.name) {
+
+  //           const error = `error_${formData.name}`;
+
+  //           const valor = campos[campo];
+
+  //           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+  //           esValido = false;
+
+  //         }
+  //       });
+
+
+
+  //     } else if (formData.name === 'usuario_contrasenia') {
+  //       if (validarNumeros(formData.name) == false) {
+  //         esValido = false;
+  //         document.getElementById(formData.name).textContent = `*En el campo contraseña debes ingresar minimo 8
+  //          caracteres y contener al menos una mayuscula, una minuscula, 
+  //          un numero y un caracter especial*`;
+
+  //       }
+
+
+  //     }
+  //   });
+
+
+  //   if (esValido) {
+  //     alert('Formulario valido. Enviando datos..')
+  //     this.submit();
+  //   }
+  // });
 
 
 
@@ -209,7 +323,7 @@ $(document).ready(function () {
     if (esValido) {
       alert('Formulario valido. Enviando datos..')
       this.submit();
-    }else{
+    } else {
       console.log("invalido")
     }
   });
