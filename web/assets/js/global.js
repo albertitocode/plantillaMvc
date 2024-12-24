@@ -497,7 +497,6 @@ $(document).ready(function () {
       type: 'POST',
       data: { 'tipo_choque': tipo_choque },
       success: function (data) {
-        // Iterar sobre los detalles del choque y agregar opciones al select
         if (!data.includes("error")) {
 
           $("#detalle_choque").html(data);
@@ -532,6 +531,74 @@ $(document).ready(function () {
         $('#formularios').html(data);
       }
     });
+  });
+
+
+
+  $(document).on('change','#formSenialM select, #formSenialN select' , function () {
+
+    var url = $(this).attr('data-url');
+    var categoria_senial = $('#categoria_senial_id').val();
+    var tipo_senial = $('#tipo_senial_id').val();
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 'tipo_senial': tipo_senial,
+        'categoria_senial': categoria_senial
+       },
+      success: function (data) {
+        if (!data.includes("error")) {
+
+          $("#senial").html(data);
+          $('#senal').removeClass('d-none');
+          console.log(data);
+
+        } else {
+          $('#senal').addClass('d-none');
+        }
+
+
+
+      },
+      error: function () {
+        alert('Error al cargar los detalles del choque.');
+      }
+    });
+
+  });
+
+
+  $(document).on('change','#formReductorM select, #formReductorN select' , function () {
+
+    var url = $(this).attr('data-url');
+    var categoria_reductor = $('#categoria_reductor_id').val();
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 
+        'categoria_reductor': categoria_reductor
+       },
+      success: function (data) {
+        if (!data.includes("error")) {
+
+          $("#reductor_id").html(data);
+          $('#reduct').removeClass('d-none');
+          console.log(data);
+
+        } else {
+          $('#reduct').addClass('d-none');
+        }
+
+
+
+      },
+      error: function () {
+        alert('Error al cargar los detalles del choque.');
+      }
+    });
+
   });
 
 });

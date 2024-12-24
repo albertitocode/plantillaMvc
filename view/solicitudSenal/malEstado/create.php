@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formSenialM">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -68,7 +68,9 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senal_id" id="" class="form-control">
+                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"  data-url='<?php echo
+                                     getUrl("Solicitud", "Solicitud", "getNombreSenial", 
+                                     false, "ajax"); ?>'>
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_senal as $categoria) {
@@ -113,11 +115,13 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="tipo_senal_id">Tipo de señal</label>
-                                    <select name="tipo_senal_id" id="" class="form-control">
+                                    <select name="tipo_senial_id" id="tipo_senial_id" class="form-control" data-url='<?php echo
+                                     getUrl("Solicitud", "Solicitud", "getNombreSenial", 
+                                     false, "ajax"); ?>'>
                                         <option value="">Seleccione señal...</option>
                                         <?php
                                         foreach ($tipo_senal as $tipo) {
-                                            echo "<option  value='" . $tipo['tipo_senal_id'] . "'>" . $tipo['tipo_senal_nombre'] . "</option>";
+                                            echo "<option  value='" . $tipo['tipo_senial_id'] . "'>" . $tipo['tipo_senial_nombre'] . "</option>";
                                         }
                                         ?>
                                     </select>
@@ -128,9 +132,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
+                                <div class="form-group mb-3 d-none" id="senal">
                                     <label for="senial_id">Nombre de la señal</label>
-                                    <select name="senial_id" id="" class="form-control">
+                                    <select name="senial_id" id="senial" class="form-control">
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($seniales as $senial) {
