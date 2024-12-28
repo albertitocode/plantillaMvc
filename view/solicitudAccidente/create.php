@@ -52,17 +52,7 @@
                             <div class="alert alert-danger d-none" role="alert" id="errorAccidente">
 
                             </div>
-                            <?php
-                            if (isset($_SESSION['errores'])) {
-                                echo "<div class='alert alert-danger' role='alert'>";
-                                foreach ($_SESSION['errores'] as $error) {
-                                    echo $error . "<br>";
-                                }
-                                echo "</div>";
-                                unset($_SESSION['errores']);
-                            }
-
-                            ?>
+                           
                             <div class="col-md-12">
                                 <?php
                                 
@@ -159,6 +149,8 @@
                                                         ?>
                                                     </select>
                                                 </div>
+                                                <span class=" text-danger" id="error_direccion"></span>
+
                                             </div>
                                         </div>
 
@@ -184,7 +176,7 @@
 
                                                 ?>
                                             </select>
-                                            <span class=" error" id="tipoError"></span>
+                                            <span class=" text-danger" id="error_tipo_choque"></span>
                                         </div>
 
                                         <?php 
@@ -207,8 +199,9 @@
                                                 ?>
 
                                             </select>
-                                            <span class="error" id="tipoError"></span>
+                                            <span class=" text-danger" id="error_detalle_choque"></span>
                                        <?php
+                                       
                                         echo "</div>";
                                         ?>
                                    

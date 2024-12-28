@@ -172,13 +172,12 @@
 
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="usuario_contrasenia">Contraseña</label>
-                                    <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="<?= $_SESSION['contrasenia'] ?>">
-                                </div>
+                             
                             </div>
                         </div>
-
+                        <div class="mt-3 text-center">
+                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                </div>
 
                     </div>
                 </div>

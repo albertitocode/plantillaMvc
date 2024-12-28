@@ -6,7 +6,8 @@
 <div class="mt-5">
 
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorMalEstado"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorMalEstado"); ?>" method="post"
+        id="formReductorM">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -59,7 +60,14 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_reductor_id">Categoria del reductor</label>
-                                    <select name="categoria_reductor_id" id="" class="form-control">
+                                    <select name="categoria_reductor_id" id="categoria_reductor_id" class="form-control" data-url='<?php echo
+                                        getUrl(
+                                            "Solicitud",
+                                            "Solicitud",
+                                            "getNombreReductor",
+                                            false,
+                                            "ajax"
+                                        ); ?>'>
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_reductores as $categoria) {
@@ -105,13 +113,14 @@
 
                                 <div class="form-group">
                                     <label for="solicitud_reductores_mal_estado_descripcion"> Describa el daño</label>
-                                    <input type="text" name="solicitud_reductores_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
+                                    <input type="text" name="solicitud_reductores_mal_estado_descripcion" id=""
+                                        class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
+                                <div class="form-group mb-3 d-none" id="reduct">
                                     <label for="reductor_id">Nombre del Reductor</label>
-                                    <select name="reductor_id" id="" class="form-control">
+                                    <select name="reductor_id" id="reductor_id" class="form-control">
                                         <option value="">Seleccione reductor...</option>
                                         <?php
                                         foreach ($reductores as $reductor) {

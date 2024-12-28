@@ -9,7 +9,7 @@ class SolicitudController
 
         $sql = "SELECT * FROM tipo_solicitudes";
         $tipo_solicitud = pg_fetch_all($obj->consult($sql));
-        
+
         include_once '../view/solicitudes/registrar.php';
     }
     public function buscarSolicitud()
@@ -75,18 +75,30 @@ class SolicitudController
 
     }
 
-//Empieza señales
+    //Empieza señales
     //Empieza señales nuevas
 
-    public function getSenialNueva(){
+    public function getSenialNueva()
+    {
 
         $obj = new SolicitudModel();
 
-        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_nuevas s JOIN seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON s.estado_id = e.estado_id";
+        $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono,
+         tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_nuevas s JOIN 
+         seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id
+          JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN
+           estados e ON s.estado_id = e.estado_id";
+
         $solicitud_seniales_nuevas = pg_fetch_all($obj->consult($sql));
 
         include_once '../view/solicitudSenal/nueva/consult.php';
     }
+
+
+
+
+
+
     public function getCreateNuevaSenial()
     {
         $obj = new SolicitudModel();
@@ -120,7 +132,7 @@ class SolicitudController
         $usuario_id = $_SESSION['id'];
 
         //validaciones 
-        $validacion= true;
+        $validacion = true;
         $campos = [
             'categoria_senal_id' => 'Es requerido llenar el campo categoria',
             'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal', //todos llegan menos este, revisar
@@ -130,20 +142,20 @@ class SolicitudController
 
         ];
 
-        foreach ($campos as $campo =>$mensaje){
-            if (empty(trim($$campo))) {  
+        foreach ($campos as $campo => $mensaje) {
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
-            }else{
+            } else {
 
             }
         }
-        
 
-        
+
+
         $sql = "INSERT INTO solicitud_seniales_nuevas (solicitud_senial_nueva_descripcion,solicitud_senial_nueva_direccion,senial_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_senial_nueva_descripcion','$solicitud_senial_nueva_direccion',$senial_id,$usuario_id,5,1)";
-        if($validacion == true){
+        if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
                 echo "<script>
@@ -162,7 +174,7 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-        }else{
+        } else {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateNuevaSenial"));
         }
 
@@ -171,7 +183,8 @@ class SolicitudController
     //Termina señales nuevas
 
     //Empieza Señal en mal estado
-    public function getSenialMalEstado(){
+    public function getSenialMalEstado()
+    {
 
         $obj = new SolicitudModel();
 
@@ -180,6 +193,52 @@ class SolicitudController
 
         include_once '../view/solicitudSenal/malEstado/consult.php';
     }
+
+    public function getNombreSenial()
+    {
+        echo "si";
+        $obj = new SolicitudModel();
+        if (isset($_POST['categoria_senial'])) {
+
+            $tipo_senial = $_POST['tipo_senial'];
+            $categoria_senial = $_POST['categoria_senial'];
+            echo $tipo_senial;
+            echo $categoria_senial;
+
+            $sql = "SELECT * from seniales WHERE tipo_senial_id=$tipo_senial AND categoria_senial_id=$categoria_senial";
+            $senial = $obj->consult($sql);
+
+
+            $i = 0;
+            if (pg_num_rows($senial) > 0) {
+                $senial = pg_fetch_all($senial);
+                foreach ($senial as $senia) {
+                    print_r($senia);
+
+                    if ($i == 0) {
+                        echo "<option value=''>Seleccione...</option>";
+                        $i = 1;
+                    }
+
+                    echo "<option value='" . $senia['senial_id'] . "'>" . $senia['senial_nombre'] . "</option>";
+
+                }
+
+            } else {
+
+                echo "error";
+            }
+
+
+
+
+        }
+
+    }
+
+
+
+
     public function getCreateSenialMalEstado()
     {
         $obj = new SolicitudModel();
@@ -216,27 +275,27 @@ class SolicitudController
         $usuario_id = $_SESSION['id'];
 
 
-         //validaciones 
-         $validacion= true;
-         $campos = [
-             'categoria_senal_id' => 'Es requerido llenar el campo categoria',
-             'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
-             'senial_id' => 'Es requerido llenar el campo señal',
-             'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
-             'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
-             'danio_id' => 'Es requerido llenar el campo daño'
-         ];
- 
-         foreach ($campos as $campo =>$mensaje){
-            if (empty(trim($$campo))) {  
+        //validaciones 
+        $validacion = true;
+        $campos = [
+            'categoria_senal_id' => 'Es requerido llenar el campo categoria',
+            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
+            'senial_id' => 'Es requerido llenar el campo señal',
+            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
+            'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
+            'danio_id' => 'Es requerido llenar el campo daño'
+        ];
+
+        foreach ($campos as $campo => $mensaje) {
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
-            }else{
-             }
-         }
+            } else {
+            }
+        }
         $sql = "INSERT INTO solicitud_seniales_mal_estado (senial_id,solicitud_senial_mal_estado_descripcion,danio_id,usuario_id,solicitud_senial_mal_estado_direccion,solicitud_senial_mal_estado_imagen,tipo_solicitud_id,estado_id) VALUES($senial_id,'$solicitud_senial_mal_estado_descripcion',$danio_id,$usuario_id,'$solicitud_senial_mal_estado_direccion','$solicitud_senial_mal_estado_imagen',1,1)";
-        if ($validacion == true){
+        if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
                 echo "<script>
@@ -255,10 +314,10 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-        }else{
+        } else {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateSenialMalEstado"));
         }
-        
+
 
 
 
@@ -282,9 +341,53 @@ class SolicitudController
     //termina señales en mal estado
 //termina señales
 
-//Empieza reductor
+    //Empieza reductor
+
+    public function getNombreReductor()
+    {
+        echo "si";
+        $obj = new SolicitudModel();
+        if (isset($_POST['categoria_reductor'])) {
+
+            $categoria_reductor = $_POST['categoria_reductor'];
+            echo $categoria_reductor;
+
+            $sql = "SELECT * from reductores WHERE categoria_reductor_id=$categoria_reductor";
+            $reductores = $obj->consult($sql);
+
+
+            $i = 0;
+            if (pg_num_rows($reductores) > 0) {
+                $reductores = pg_fetch_all($reductores);
+                foreach ($reductores as $reductor) {
+                    print_r($reductor);
+
+                    if ($i == 0) {
+                        echo "<option value=''>Seleccione...</option>";
+                        $i = 1;
+                    }
+
+                    echo "<option value='" . $reductor['reductor_id'] . "'>" . $reductor['reductor_nombre'] . "</option>";
+
+                }
+
+            } else {
+
+                echo "error";
+            }
+
+
+
+
+        }
+
+    }
     //Empieza reductores en mal estado
-    public function getReductorMalEstado(){
+
+
+
+    public function getReductorMalEstado()
+    {
 
         $obj = new SolicitudModel();
 
@@ -341,9 +444,9 @@ class SolicitudController
 
         ];
 
-        
+
         foreach ($campos as $campo => $mensaje) {
-            if (empty(trim($$campo))) {  
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
@@ -358,7 +461,7 @@ class SolicitudController
         $sql = "INSERT INTO solicitud_reductores_mal_estado (solicitud_reductores_mal_estado_descripcion,solicitud_reductores_mal_estado_direccion,solicitud_reductores_mal_estado_imagen,reductor_id,danio_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductores_mal_estado_descripcion','$direccion','$solicitud_reductores_mal_estado_imagen',$reductor_id,$danio_id,$usuario_id,3,1)";
         // var_dump($sql);
 
-        if($validacion == true){
+        if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
                 echo "<script>
@@ -377,21 +480,22 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-        }else{
+        } else {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorMalEstado"));
         }
-        
-        
+
+
 
 
 
     }
     //Termina reductores en mal estado
-    
+
     //Empieza nuevos reductores
 
 
-    public function getReductorNuevo(){
+    public function getReductorNuevo()
+    {
 
         $obj = new SolicitudModel();
 
@@ -443,9 +547,9 @@ class SolicitudController
 
         ];
 
-        
+
         foreach ($campos as $campo => $mensaje) {
-            if (empty(trim($$campo))) {  
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
@@ -453,7 +557,7 @@ class SolicitudController
 
         }
         $sql = "INSERT INTO solicitud_reductores_nuevos(solicitud_reductor_nuevo_descripcion,solicitud_reductor_nuevo_direccion,solicitud_reductor_nuevo_imagen,reductor_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductor_nuevo_descripcion','$direccion','$solicitud_reductor_nuevo_imagen',$reductor_id,$usuario_id,6,1)";
-        if($validacion == true){
+        if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
                 echo "<script>
@@ -472,7 +576,7 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-        }else{
+        } else {
             redirect(getUrl("Solicitud", "Solicitud", "getCreateReductorNuevo"));
         }
 
@@ -482,7 +586,7 @@ class SolicitudController
 //Termina Reductor
 
 
-//Empieza Vias
+    //Empieza Vias
 
     public function GetCreateVia()
     {
@@ -534,7 +638,7 @@ class SolicitudController
 
         // Bucle para validar los campos
         foreach ($campos as $campo => $mensaje) {
-            if (empty(trim($$campo))) {  
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
@@ -621,7 +725,7 @@ class SolicitudController
         }
 
     }
-//termina vias
+    //termina vias
 //Empieza pqrs
     public function GetCreatePQRS()
     {
@@ -631,12 +735,12 @@ class SolicitudController
         $sql = "SELECT * FROM tipo_pqrs";
         $tipo_pqrs = pg_fetch_all($obj->consult($sql));
 
-        
+
 
         $sql = "SELECT * FROM estados";
         $estado = pg_fetch_all($obj->consult($sql));
 
-        
+
 
 
 
@@ -655,23 +759,23 @@ class SolicitudController
         $tipo_p = $_POST['tipo_pqrs_id'];
 
         //VALIDACIONES
-         $validacion = true;
-         $campos = [
-             'tipo_pqrs_id' => 'El campo tipo pqrs es requerido',
-             'descripcion_pqrs' => 'El campo descripcion es requerido'
-         ];
+        $validacion = true;
+        $campos = [
+            'tipo_pqrs_id' => 'El campo tipo pqrs es requerido',
+            'descripcion_pqrs' => 'El campo descripcion es requerido'
+        ];
 
         // Bucle para validar los campos
         foreach ($campos as $campo => $mensaje) {
-            if (empty(trim($$campo))) {  
+            if (empty(trim($$campo))) {
 
                 $_SESSION['errores'][] = $mensaje;
                 $validacion = false;
             }
 
-         }
+        }
 
-   
+
 
         $sql = "INSERT INTO pqrs ( tipo_pqrs_id, pqrs_descripcion, usuario_id, pqrs_archivo) VALUES(  '$tipo_p','$descripcion', '$usuario', '$archivo')";
 
@@ -695,10 +799,10 @@ class SolicitudController
             } else {
                 echo "Se ha presentado un error al insertar";
             }
-         } else {
+        } else {
             echo "feo";
-         redirect(getUrl("Solicitud", "Solicitud", "GetcreatePQRS"));
-         }
+            redirect(getUrl("Solicitud", "Solicitud", "GetcreatePQRS"));
+        }
 
 
 
@@ -717,7 +821,7 @@ class SolicitudController
 
     }
 
-//Empieza Accidentes
+    //Empieza Accidentes
     public function GetCreateAccidente()
     {
 
@@ -759,7 +863,7 @@ class SolicitudController
 
 
             $i = 0;
-            if (pg_num_rows($detalleChoques)>0) {
+            if (pg_num_rows($detalleChoques) > 0) {
                 $detalleChoques = pg_fetch_all($detalleChoques);
                 foreach ($detalleChoques as $det_choque) {
                     print_r($det_choque);
@@ -809,7 +913,6 @@ class SolicitudController
         } else {
             $lesionados = "Sin lesionados";
         }
-        echo "les" . $lesionados;
         if (isset($_POST['bis'])) {
             $bis = $_POST['bis'];
         } else {
@@ -826,16 +929,31 @@ class SolicitudController
             'barrio' => 'El campo barrio es requerido',
             'tipo_choque' => 'El campo tipo de choque es requerido'
         ];
-
-        // Bucle para validar los campos
-        foreach ($campos as $campo => $mensaje) {
-            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
-
-                $_SESSION['errores'][] = $mensaje;
-                $validacion = false;
-            }
+        if (validarNumeros($num_via)) {
+            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+            $validacion = false;
 
         }
+
+        if (validarNumeros($numero2)) {
+            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+            $validacion = false;
+
+        }
+        if (validarNumeros($numero3)) {
+            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
+            $validacion = false;
+
+        }
+        // Bucle para validar los campos
+        // foreach ($campos as $campo => $mensaje) {
+        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+
+        //         $_SESSION['errores'][] = $mensaje;
+        //         $validacion = false;
+        //     }
+
+        // }
 
         // function validarNumeros($input){
         //     $patron = "/^[0-9]+$/";

@@ -6,7 +6,8 @@
 <div class="mt-5">
 
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorNuevo"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorNuevo"); ?>" method="post"
+        id="formReductorN">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -58,7 +59,14 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senal_id" id="" class="form-control">
+                                    <select name="categoria_senal_id" id="" class="form-control" data-url='<?php echo
+                                        getUrl(
+                                            "Solicitud",
+                                            "Solicitud",
+                                            "getNombreReductor",
+                                            false,
+                                            "ajax"
+                                        ); ?>'>
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_reductores as $categoria) {
@@ -94,11 +102,12 @@
 
                                 <div class="form-group">
                                     <label for="solicitud_reductor_nuevo_descripcion"> Describa el caso</label>
-                                    <input type="text" name="solicitud_reductor_nuevo_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
+                                    <input type="text" name="solicitud_reductor_nuevo_descripcion" id=""
+                                        class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
-                                <div class="form-group">
+                                <div class="form-group mb-3 d-none" id="reductor">
                                     <label for="reductor_id">Nombre del Reductor</label>
                                     <select name="reductor_id" id="" class="form-control">
                                         <option value="">Seleccione reductor...</option>
