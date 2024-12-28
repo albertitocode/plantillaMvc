@@ -1,140 +1,45 @@
-"use strict";
-$(document).ready(function () {
-  //navbar
-  let colorNavbar = localStorage.getItem("topBarColor");
-  
-  if (colorNavbar) {
-    $(".main-header .navbar-header").attr("data-background-color", colorNavbar);
-    $(".changeTopBarColor[data-color='" + colorNavbar + "']").addClass("selected");
-  }
-  
-  //sidebar
-  let colorSidebar = localStorage.getItem("sideBarColor");
 
-  if(colorSidebar){
-    $(".sidebar").attr("data-background-color",colorSidebar);
-    $(".changeSideBarColor[data-color='"+ colorSidebar + "']").addClass("selected");
-  }
-
-  //logo header
-  let colorHeaderLogo = localStorage.getItem("logoHeaderColor");
-  if (colorHeaderLogo){
-    $(".logo-header").attr("data-background-color", colorHeaderLogo);
-    $(".changeLogoHeaderColor[data-color='"+ colorHeaderLogo +"']").addClass("selected");
-  }
-});
-// Setting Color
-
-$(window).resize(function () {
-  $(window).width();
-});
-
-getCheckmark();
-
-$(".changeBodyBackgroundFullColor").on("click", function () {
-  if ($(this).attr("data-color") == "default") {
-    $("body").removeAttr("data-background-full");
-  } else {
-    $("body").attr("data-background-full", $(this).attr("data-color"));
-  }
-
-  $(this).parent().find(".changeBodyBackgroundFullColor").removeClass("selected");
-  $(this).addClass("selected");
-  layoutsColors();
-  getCheckmark();
-});
-
-$(".changeLogoHeaderColor").on("click", function () {
-  let color = $(this).attr("data-color");
-  if ($(this).attr("data-color") == "default") {
-    $(".logo-header").removeAttr("data-background-color");
-    localStorage.removeItem("logoHeaderColor");
-  } else {
-    $(".logo-header").attr("data-background-color", color);
-    localStorage.setItem("logoHeaderColor",color)
-  }
-
-  $(this).parent().find(".changeLogoHeaderColor").removeClass("selected");
-  $(this).addClass("selected");
-  customCheckColor();
-  layoutsColors();
-  getCheckmark();
-});
-
-$(".changeTopBarColor").on("click", function () {
-  let color = $(this).attr("data-color");
-  if ($(this).attr("data-color") == "default") {
-    $(".main-header .navbar-header").removeAttr("data-background-color");
-    localStorage.removeItem("topBarColor");
-  } else {
-    $(".main-header .navbar-header").attr("data-background-color", color);
-    localStorage.setItem("topBarColor",color);
-  }
-
-  $(this).parent().find(".changeTopBarColor").removeClass("selected");
-  $(this).addClass("selected");
-  layoutsColors();
-  getCheckmark();
-
-
-  
-});
-
-$(".changeSideBarColor").on("click", function () {
-  let color = $(this).attr("data-color");
-  if ($(this).attr("data-color") == "default") {
-    $(".sidebar").removeAttr("data-background-color");
-    localStorage.removeItem("sideBarColor");
-  } else {
-    $(".sidebar").attr("data-background-color", color);
-    localStorage.setItem("sideBarColor", color)
-  }
-
-  $(this).parent().find(".changeSideBarColor").removeClass("selected");
-  $(this).addClass("selected");
-  layoutsColors();
-  getCheckmark();
-});
-
-$(".changeBackgroundColor").on("click", function () {
-  $("body").removeAttr("data-background-color");
-  $("body").attr("data-background-color", $(this).attr("data-color"));
-  $(this).parent().find(".changeBackgroundColor").removeClass("selected");
-  $(this).addClass("selected");
-  getCheckmark();
-});
-
-function customCheckColor() {
-  var logoHeader = $(".logo-header").attr("data-background-color");
-  if (logoHeader !== "white") {
-    $(".logo-header .navbar-brand").attr("src", "assets/img/calvo.jpg");
-  } else {
-    $(".logo-header .navbar-brand").attr("src", "assets/img/calva.jpg");
-  }
-}
-
-var toggle_customSidebar = false,
-  custom_open = 0;
-
-if (!toggle_customSidebar) {
-  var toggle = $(".custom-template .custom-toggle");
-
-  toggle.on("click", function () {
-    if (custom_open == 1) {
-      $(".custom-template").removeClass("open");
-      toggle.removeClass("toggled");
-      custom_open = 0;
+$(document).on ('click', "#mode-color", function() {
+    console.log("funca");
+    const darkMode = localStorage.getItem('dark-mode');
+    
+    if (darkMode === 'enabled') {
+        document.body.classList.add('dark');
+        document.getElementById('mode-color').textContent = 'Cambiar a Modo Claro';
     } else {
-      $(".custom-template").addClass("open");
-      toggle.addClass("toggled");
-      custom_open = 1;
+        document.body.classList.remove('dark');
+        
+        document.getElementById('mode-color').textContent = 'Cambiar a Modo Oscuro';
     }
-  });
-  toggle_customSidebar = true;
-}
+    console.log("funca");
+    document.getElementById('mode-color').addEventListener('click', function() {
+        // Alterna el modo oscuro
+        document.body.classList.toggle('dark');
+        
+        // Actualiza el texto del botón
+        if (document.body.classList.contains('dark')) {
+            localStorage.setItem('dark-mode', 'enabled');
+            this.textContent = 'Cambiar a Modo Claro';
+        } else {
+            localStorage.setItem('dark-mode', 'disabled');
+            this.textContent = 'Cambiar a Modo Oscuro';
+        }
+    });
+});
 
-function getCheckmark() {
-  var checkmark = `<i class="gg-check"></i>`;
-  $(".btnSwitch").find("button").empty();
-  $(".btnSwitch").find("button.selected").append(checkmark);
-}
+
+
+// $(document).on('change', "#id_solicitud", function () {
+//     let id_solicitud = $(this).val();
+//     let url = $(this).attr('data-url');
+//     console.log("gola");
+//     console.log("Valor seleccionado: " + id_solicitud);
+//     $.ajax({
+//       url: url,
+//       type: 'POST',
+//       data: { 'id_solicitud': id_solicitud },
+//       success: function (data) {
+//         $('#formularios').html(data);
+//       }
+//     });
+//   });

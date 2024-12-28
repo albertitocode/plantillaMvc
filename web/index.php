@@ -23,7 +23,7 @@ include_once '../view/partials/header.php';
         include_once '../view/partials/footer.php';
       echo "</div>";    
     echo "</div>";
-    include_once '../view/partials/colors.php';
+    // include_once '../view/partials/colors.php';
     include_once '../view/partials/scripts.php';
  echo "</body>";
 echo "</html>";

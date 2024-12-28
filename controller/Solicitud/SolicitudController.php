@@ -123,10 +123,10 @@ class SolicitudController
         $validacion= true;
         $campos = [
             'categoria_senal_id' => 'Es requerido llenar el campo categoria',
-            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
+            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal', //todos llegan menos este, revisar
             'senial_id' => 'Es requerido llenar el campo señal',
-            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
-            'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion'
+            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion'
+            
 
         ];
 

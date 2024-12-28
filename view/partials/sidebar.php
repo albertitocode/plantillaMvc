@@ -4,14 +4,12 @@
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
       <a href="../web/index.php" class="logo align-items-center">
-        <img 
+        <img
           src="assets/img/calva.jpg"
           alt="navbar brand"
           class="navbar-brand"
           height="60"
-          width="70"
-          
-        />
+          width="70" />
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -30,17 +28,23 @@
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
-  
+
         <li class="nav-item active">
 
           <a href="../web/index.php">
-          <i class="fas fa-home"></i>
-           <p>Inicio</p>
-           
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+
           </a>
+        </li>
+        <li class="nav-item active">
 
+          <a
+          id="mode-color">
+            <i class="fas fa-home"></i>
+            <p>Modo oscuro</p>
 
-
+          </a>
         </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
@@ -57,18 +61,18 @@
           <div class="collapse" id="solicitudes">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","getSolicitud");?>">
+                <a href="<?php echo getUrl("Solicitud", "Solicitud", "getSolicitud"); ?>">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li>
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","postSolicitud");?>">
+                <a href="<?php echo getUrl("Solicitud", "Solicitud", "postSolicitud"); ?>">
                   <span class="sub-item">Consultar</span>
                 </a>
               </li>
             </ul>
           </div>
-          
+
         </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#usuarios">
@@ -79,30 +83,30 @@
           <div class="collapse" id="usuarios">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","getUsuarios");?>">
+                <a href="<?php echo getUrl("Usuarios", "Usuarios", "getUsuarios"); ?>">
                   <span class="sub-item">Consultar</span>
                 </a>
               </li>
               <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","getCreate");?>">
+                <a href="<?php echo getUrl("Usuarios", "Usuarios", "getCreate"); ?>">
                   <span class="sub-item">Registrar</span>
                 </a>
               </li>
               <li>
-                <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdateUsuarios");?>">
+                <a href="<?php echo getUrl("Usuarios", "Usuarios", "getUpdateUsuarios"); ?>">
                   <span class="sub-item">Actualizar usuarios</span>
                 </a>
               </li>
             </ul>
           </div>
-          
-      
 
-          </li>
 
-          <!-- termina accidente -->
 
-          <!-- empieza sñal -->
+        </li>
+
+        <!-- termina accidente -->
+
+        <!-- empieza sñal -->
 
         </li>
         <li class="nav-item">
@@ -114,7 +118,7 @@
           <div class="collapse" id="sidebarLayouts">
             <ul class="nav nav-collapse">
               <li>
-                <a href="<?php echo getUrl("Solicitud","Solicitud","GetCreatePQRS");?>">
+                <a href="<?php echo getUrl("Solicitud", "Solicitud", "GetCreatePQRS"); ?>">
                   <span class="sub-item">test 1pq</span>
                 </a>
               </li>
