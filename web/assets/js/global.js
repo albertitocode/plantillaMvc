@@ -439,7 +439,7 @@ $(document).ready(function () {
     let id_solicitud = $(this).val();
     let url = $(this).attr('data-url');
     console.log("gola");
-    console.log("Valor seleccionado: " + id_solicitud);
+    // console.log("Valor seleccionado: " + id_solicitud);
     $.ajax({
       url: url,
       type: 'POST',
@@ -537,7 +537,7 @@ $(document).ready(function () {
     let id_consult_solicitud = $(this).val();
     let url = $(this).attr('data-url');
     console.log("gola");
-    alert("Valor seleccionado: " + id_consult_solicitud)
+    // alert("Valor seleccionado: " + id_consult_solicitud)
     $.ajax({
       url: url,
       type: 'POST',

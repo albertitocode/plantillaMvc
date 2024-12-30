@@ -11,5 +11,14 @@
                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                 <a href="#" class="btn btn-primary btn-round">Add Customer</a>
               </div>
+
+              <!-- <button id="resetButton">Restablecer Datos</button>
+
+<script>
+document.getElementById('resetButton').addEventListener('click', function() {
+    localStorage.clear();
+    alert("Datos restablecidos.");
+});
+</script> -->
             </div>
           

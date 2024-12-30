@@ -48,13 +48,13 @@ include_once '../lib/helphers.php';
 
 
                 </form>
-                <form action="<?php echo getUrl("Usuarios", "Usuarios", "getCreate", "", "ajax"); ?>" method="post"
+                <!-- <form action="<?php echo getUrl("Usuarios", "Usuarios", "getCreate", "", "ajax"); ?>" method="post"
                     id="form2">
                     <button type="submit" class="btn btn-success w-100" name="registro" id="button">Registrarme</button>
 
 
 
-                </form>
+                </form> -->
 
                 </div>
 
@@ -63,9 +63,17 @@ include_once '../lib/helphers.php';
 
 
             <!-- <label>
-        <input type="checkbox" checked="checked" name="remember"> Recordarme
-    </label> -->
+                <input type="checkbox" checked="checked" name="remember"> Recordarme
+            </label> -->
+            <a href="<?php echo getUrl("Acceso","Acceso","ObtenerCodigo","","ajax");?>">
 
+                <p>Olvidó su contraseña?</p>
+            </a>
+         
+    </form>
+    <form action="<?php echo getUrl("Usuarios","Usuarios","getCreate","","ajax");?>" method="post" id="form2" >
+    <button type="submit" class="btn btn-success" name="registro">Registrarme</button>
+        
         </div>
 
 

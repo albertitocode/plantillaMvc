@@ -85,6 +85,11 @@
                   >
                     <i class="fa fa-envelope"></i>
                   </a>
+
+                  <!-- <ul
+                  class="dropdown-menu messages-notif-box animated fadeIn"
+                    aria-labelledby="messageDropdown"
+                  ></ul> -->
                   <ul
                     class="dropdown-menu messages-notif-box animated fadeIn"
                     aria-labelledby="messageDropdown"
