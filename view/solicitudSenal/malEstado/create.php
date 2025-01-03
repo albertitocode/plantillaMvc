@@ -76,6 +76,7 @@
                                     <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
 </span>
 
+
                                     <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
@@ -85,10 +86,6 @@
                                                 false,
                                                 "ajax"
                                             ); ?>'>
-                                    <label for="categoria_senial_id">Categoria de la señal</label>
-                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"  data-url='<?php echo
-                                     getUrl("Solicitud", "Solicitud", "getNombreSenial", 
-                                     false, "ajax"); ?>'>
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_senal as $categoria) {
@@ -99,18 +96,14 @@
                                     </select>
 
 
-                                        //cambia todo a senial 
-                                         ?>
-                                          
-                                    </select>
-                                    <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="danio_id"> Daño</label>
                                     <span class="ms-2 text-primary" tabindex="0" data-bs-toggle="popover"
-    data-bs-trigger="click" data-bs-html="true" data-bs-content="Este es otro ejemplo de popover">
-    <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
-</span>
+                                        data-bs-trigger="click" data-bs-html="true"
+                                        data-bs-content="Este es otro ejemplo de popover">
+                                        <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                                    </span>
                                     <select name="danio_id" id="" class="form-control">
                                         <option value="">Seleccione daño...</option>
                                         <?php
