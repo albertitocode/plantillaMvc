@@ -4,6 +4,7 @@ $(document).ready(function () {
     'usuario_apellido_1': 'Primer apellido',
     'usuario_correo': 'Correo electrónico',
     'usuario_direccion': 'Dirección',
+    'usuario_nombre_2': 'Segundo nombre',
     'usuario_apellido_2': 'Segundo apellido',
     'usuario_fecha_nacimiento': 'Fecha de nacimiento',
     'usuario_contrasenia': 'Contraseña',
@@ -59,20 +60,35 @@ $(document).ready(function () {
 
 
   function validarContrasenia(input) {
-    const patron = /^(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[0-9])(?=.*[!@#$%^&*()_+.\-]).{8,}$/;
+    const errores = [];
+    const longitudMinima = 8;
+    const tieneMinuscula = /[a-zñ]/.test(input);
+    const tieneMayuscula = /[A-ZÑ]/.test(input);
+    const tieneNumero = /[0-9]/.test(input);
+    const tieneEspecial = /[!@#$%^&*()_+.\-]/.test(input);
 
-    /*
-    Patrón explicado:
-    - (?=.*[a-zñ]): Al menos una letra minúscula o 'ñ'.
-    - (?=.*[A-ZÑ]): Al menos una letra mayúscula o 'Ñ'.
-    - (?=.*[0-9]): Al menos un número.
-    - (?=.*[!@#$%^&*()_+.\-]): Al menos un carácter especial.
-    - .{8,}: Longitud mínima de 8 caracteres.
-    */
+    if (input.length < longitudMinima) {
+        errores.push("al menos 8 caracteres");
+    }
+    if (!tieneMinuscula) {
+        errores.push("una letra minúscula");
+    }
+    if (!tieneMayuscula) {
+        errores.push("una letra mayúscula");
+    }
+    if (!tieneNumero) {
+        errores.push("un número");
+    }
+    if (!tieneEspecial) {
+        errores.push("un carácter especial");
+    }
 
-    return patron.test(input);
+    if (errores.length > 0) {
+      document.getElementById('error_usuario_contrasenia').textContent = `*La contraseña debe contener al menos: ${errores.join(', ')}.*`;
+    
   }
-
+  return true;
+}
   function loadColor() {
     // Verifica el modo guardado en localStorage
     const darkMode = localStorage.getItem('dark-mode');
@@ -126,13 +142,16 @@ document.getElementById('toggleButton').addEventListener('click', function() {
         this.textContent = 'Cambiar a Modo Oscuro';
     }
 });
+    
 
 
 
 
-  $(document).on('input', '#formUsu input, #formUsu select', function (event) {
-    event.preventDefault();
-    console.log("fff");
+
+
+
+  $(document).on('input', '#formUsu input, #formUsu select', function () {
+
     var formData = $('#formUsu').serializeArray();
     let esValido = true;
 
@@ -149,24 +168,20 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       const valor = camposUsu[name];
 
       // Validar campos vacíos
-      if (value.trim() === '') {
-        if (camposUsu[name]) {
-        
-          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-          esValido = false;
+      if (value.trim() === '' ) {
+        if (campos[name]) {
+          if(campos[name]!=='usuario_nombre_2'){
+            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+            esValido = false;
+
+          }
+
+         
         }
       }
 
-      // Validar contraseña
-      else if (name === 'usuario_contrasenia') {
-        if (!validarContrasenia(value)) {
-          esValido = false;
-          document.getElementById('error_usuario_contrasenia').textContent = `*En el campo contraseña debes ingresar mínimo 8 caracteres, 
-              incluyendo una mayúscula, una minúscula, un número y un carácter especial.*`;
-        } else {
-          document.getElementById('error_usuario_contrasenia').textContent = ""; // Borrar error
-        }
-      } else {
+    
+       else {
         switch (name) {
           case 'usuario_nombre_1':
           case 'usuario_nombre_2':
@@ -177,7 +192,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
               esValido = false;
             }
             break;
-            
+
           case 'usuario_correo':
             if (!validarCorreo(value)) {
               document.getElementById(error).textContent = `*Ingrese un correo válido.*`;
@@ -190,12 +205,12 @@ document.getElementById('toggleButton').addEventListener('click', function() {
               esValido = false;
             }
             break;
-          case 'usuario_contrasenia':
-            if (!validarContrasenia(value)) {
-              document.getElementById(error).textContent = `*La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.*`;
-              esValido = false;
-            }
-            break;
+            case 'usuario_contrasenia':
+              if (!validarContrasenia(value)) {
+               
+                  esValido = false;
+              }
+              break;
           case 'tipo_documento_id':
             if (value === '') {
               document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
@@ -837,7 +852,7 @@ $(document).on('change', "#id_consult_solicitud", function () {
 
 
 
-  $(document).on('change','#formSenialM select, #formSenialN select' , function () {
+  $(document).on('change', '#formSenialM select, #formSenialN select', function () {
 
     var url = $(this).attr('data-url');
     var categoria_senial = $('#categoria_senial_id').val();
@@ -846,9 +861,10 @@ $(document).on('change', "#id_consult_solicitud", function () {
     $.ajax({
       url: url,
       type: 'POST',
-      data: { 'tipo_senial': tipo_senial,
+      data: {
+        'tipo_senial': tipo_senial,
         'categoria_senial': categoria_senial
-       },
+      },
       success: function (data) {
         if (!data.includes("error")) {
 
@@ -871,7 +887,7 @@ $(document).on('change', "#id_consult_solicitud", function () {
   });
 
 
-  $(document).on('change','#formReductorM select, #formReductorN select' , function () {
+  $(document).on('change', '#formReductorM select, #formReductorN select', function () {
 
     var url = $(this).attr('data-url');
     var categoria_reductor = $('#categoria_reductor_id').val();
@@ -879,9 +895,9 @@ $(document).on('change', "#id_consult_solicitud", function () {
     $.ajax({
       url: url,
       type: 'POST',
-      data: { 
+      data: {
         'categoria_reductor': categoria_reductor
-       },
+      },
       success: function (data) {
         if (!data.includes("error")) {
 
