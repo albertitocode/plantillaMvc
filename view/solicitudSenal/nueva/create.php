@@ -1,5 +1,5 @@
 <div class="mt-2">
-    <h4 class="display-4">Señales viales en mal Estado</h4>
+    <h4 class="display-4">Nueva señal vial</h4>
 </div>
 
 
@@ -19,7 +19,7 @@
 
     //  -->
     <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateNuevaSenial"); ?>" method="post"
-        id="formSenialN">
+        id="formNuevaSenial">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -69,7 +69,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
+                                    <select name="categoria_senial_id" id="" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
                                                 "Solicitud",
@@ -85,6 +85,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -127,6 +128,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_tipo_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="solicitud_senial_nueva_descripcion"> Describa el motivo</label>
@@ -145,6 +147,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_senial_id"></span>
                                 </div>
 
                             </div>
@@ -158,7 +161,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" value="Enviar" class="btn btn-success">
+            <input type="submit" id="btnSenialN" value="Enviar" class="btn btn-success">
         </div>
     </form>
 </div>

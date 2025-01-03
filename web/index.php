@@ -6,8 +6,8 @@ include_once '../view/partials/header.php';
         redirect('login.php');
         exit;
     }
- echo "<body>";
- 
+ echo "<body onload='loadColor();'>";
+    
     echo "<div class ='wrapper'>";
      include_once '../view/partials/sidebar.php';
       echo "<div class='main-panel'>";
@@ -17,7 +17,9 @@ include_once '../view/partials/header.php';
                 if(isset($_GET['modulo'])){
                     resolve();
                 }else{
+                    
                     include_once '../view/partials/content.php';
+                    
                 }
             echo "</div>";
         echo "</div>";

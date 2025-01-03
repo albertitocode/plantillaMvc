@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" onload="loadColor();">
  <div class="container-fluid d-flex justify-content-between">
     <nav class="pull-left">
      <ul class="nav">
@@ -12,6 +12,10 @@
         </li>
         <li class="nav-item">
            <a class="nav-link" href="#"> Licenses </a>
+           
+        </li>
+        <li class="nav-item">
+           <a id="toggleButton" class="btn btn-primary btn-round">Cambiar a Modo Oscuro</a>
         </li>
      </ul>
     </nav>

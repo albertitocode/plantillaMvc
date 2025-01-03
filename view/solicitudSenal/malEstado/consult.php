@@ -46,7 +46,7 @@ class="mt-5">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <!-- <th>Fecha</th> -->
+                                    <th>Fecha</th>
                                     <th>Descripcion</th>
                                     <th>Direccion</th>
                                     <th>Imagen</th>
@@ -68,7 +68,7 @@ class="mt-5">
                                 // $texto="";
                                 echo "<tr>";
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_id'] . "</td>";
-                                // echo "<td>" . $senial_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
+                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_descripcion'] . "</td>";
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_direccion'] . "</td>";
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_imagen'] . "</td>";
