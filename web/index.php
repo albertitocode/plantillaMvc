@@ -4,6 +4,7 @@ include_once '../view/partials/header.php';
  
     if(!isset($_SESSION['auth'])){
         redirect('login.php');
+        exit;
     }
  echo "<body>";
  
@@ -25,7 +26,9 @@ include_once '../view/partials/header.php';
     echo "</div>";
     // include_once '../view/partials/colors.php';
     include_once '../view/partials/scripts.php';
+    
  echo "</body>";
+ 
 echo "</html>";
 
 ?>

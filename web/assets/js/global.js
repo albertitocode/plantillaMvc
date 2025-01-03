@@ -1,4 +1,22 @@
 $(document).ready(function () {
+  
+   
+  
+    // Añadir un evento para cerrar el popover cuando se haga clic fuera del área del popover
+    $(document).on('click', function (e) {
+      $('[data-bs-toggle="popover"]').each(function() {
+        var popoverElement = $(this); // Elemento del popover
+  
+        // Verifica si el clic es fuera del popover
+        if (!popoverElement.is(e.target) && popoverElement.has(e.target).length === 0) {
+          var popoverInstance = bootstrap.Popover.getInstance(popoverElement[0]); // Obtiene la instancia del popover
+          if (popoverInstance && popoverInstance._isShown) {
+            popoverInstance.hide(); // Cierra el popover si está abierto
+          }
+        }
+      });
+    });
+  
   const campos = {
     'usuario_nombre_1': 'Primer nombre',
     'usuario_apellido_1': 'Primer apellido',
@@ -94,20 +112,15 @@ $(document).ready(function () {
       const valor = campos[name];
 
       // Validar campos vacíos
-      if (value.trim() === '' ) {
-        if (campos[name]) {
-          if(campos[name]!=='usuario_nombre_2'){
+      if (valor && valor !== 'Segundo nombre' && value.trim() === '') {
+      
             document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
             esValido = false;
-
-          }
-
-         
-        }
+        
       }
 
     
-       else {
+       if(value.trim() !== '') {
         switch (name) {
           case 'usuario_nombre_1':
           case 'usuario_nombre_2':

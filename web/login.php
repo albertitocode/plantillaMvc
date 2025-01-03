@@ -26,7 +26,7 @@ include_once '../lib/helphers.php';
 
                 <h1>Iniciar Sesión</h1>
 
-                <form action="<?php echo getUrl("Acceso", "Acceso", "login", "", "ajax"); ?>" method="post" id="form1">
+                <form action="<?php echo getUrl("Acceso", "Acceso", "login", "", "ajax"); ?>" method="post" id="formUsu">
                     <div class="inputbox mb-3">
                         <i class='bx bxs-user'></i>
                         <input type="email" class="" name="user" id="user" required>

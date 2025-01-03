@@ -59,7 +59,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="usuario_nombre_1">Primer nombre</label>
-                                    <input type="text" name="usuario_nombre_1" id="nombre_1" class="form-control"
+                                    <input type="text" name="usuario_nombre_1" id="usuario_nombre_1" class="form-control"
                                         placeholder="Nombre 1">
                                     <span class=" text-danger" id="error_usuario_nombre_1"></span>
 
@@ -68,21 +68,21 @@
 
                                 <div class="form-group">
                                     <label for="usuario_apellido_1">Primer apellido</label>
-                                    <input type="text" name="usuario_apellido_1" id="" class="form-control"
+                                    <input type="text" name="usuario_apellido_1" id="usuario_apellido_1" class="form-control"
                                         placeholder="Apellido 1">
                                     <span class=" text-danger" id="error_usuario_apellido_1"></span>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario_correo">Correo Electrónico</label>
-                                    <input type="text" name="usuario_correo" id="" class="form-control"
+                                    <input type="text" name="usuario_correo" id="usuario_correo" class="form-control"
                                         placeholder="Correo">
                                     <span class=" text-danger" id="error_usuario_correo"></span>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario_direccion">Dirección </label>
-                                    <input type="text" name="usuario_direccion" id="" class="form-control"
+                                    <input type="text" name="usuario_direccion" id="usuario_direccion" class="form-control"
                                         placeholder="Dirección">
                                     <span class=" text-danger" id="error_usuario_direccion"></span>
 
@@ -91,7 +91,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="usuario_nombre_2">Segundo nombre</label>
-                                    <input type="text" name="usuario_nombre_2" id="" class="form-control"
+                                    <input type="text" name="usuario_nombre_2" id="usuario_nombre_2" class="form-control"
                                         placeholder="Nombre 2">
                                         <span class=" text-danger" id="error_usuario_nombre_2"></span>
 
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario_apellido_2">Segundo apellido</label>
-                                    <input type="text" name="usuario_apellido_2" id="" class="form-control"
+                                    <input type="text" name="usuario_apellido_2" id="usuario_apellido_2" class="form-control"
                                         placeholder="Apellido 2">
                                     <span class=" text-danger" id="error_usuario_apellido_2"></span>
 
@@ -114,8 +114,8 @@
 
                                 <div class="form-group">
                                     <label for="usuario_contrasenia">Contraseña</label>
-                                    <input type="password" name="usuario_contrasenia" id="" class="form-control"
-                                        placeholder="Clave">
+                                    <input type="password" name="usuario_contrasenia" id="usuario_contrasenia" class="form-control"
+                                        placeholder="Clave" autocomplete="new-password">
                                     <span class=" text-danger" id="error_usuario_contrasenia"></span>
 
                                 </div>
@@ -123,14 +123,14 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="usuario_telefono">Teléfono</label>
-                                    <input type="text" name="usuario_telefono" id="" class="form-control"
+                                    <input type="text" name="usuario_telefono" id="usuario_telefono" class="form-control"
                                         placeholder="Teléfono celular">
                                     <span class=" text-danger" id="error_usuario_telefono"></span>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="tipo_documento_id">Tipo de documento</label>
-                                    <select name="tipo_documento_id" id="" class="form-control">
+                                    <select name="tipo_documento_id" id="tipo_documento_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <?php
                                         foreach ($tipo_documento as $tipo_d) {
@@ -143,7 +143,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario_num_identificacion">Número documento</label>
-                                    <input type="number" name="usuario_num_identificacion" id="numDoc"
+                                    <input type="number" name="usuario_num_identificacion" id="usuario_num_identificacion"
+                                        class="form-control" placeholder="Documento">
+                                    <span class=" text-danger" id="error_usuario_num_identificacion"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario_rol">Rol</label>
+                                    <input type="number" name="usuario_rol" id="usuario_num_identificacion"
                                         class="form-control" placeholder="Documento">
                                     <span class=" text-danger" id="error_usuario_num_identificacion"></span>
 
