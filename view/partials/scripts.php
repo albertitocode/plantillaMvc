@@ -3,7 +3,7 @@
 <script src="assets/js/core/popper.min.js"></script>
 
 <!-- Luego carga Bootstrap (que depende de Popper.js) -->
-<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/core/bootstrap.bundle.min.js"></script>
 
 
 <script src="assets/js/global.js"></script>
