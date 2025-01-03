@@ -6,7 +6,7 @@ class UsuariosController
     // public function test(){
     //     echo"Funciona maifren";
     // }
-
+    
 
     public function getCreate()
     {
@@ -168,6 +168,25 @@ class UsuariosController
         } else {
             echo "No se pudo actualizar";
         }
+    }
+    public function getPerfilAdmin(){
+        $obj = new UsuariosModel();
+
+
+        $sql = "SELECT * FROM roles";
+        $roles = pg_fetch_all($obj->consult($sql));
+
+
+        $sql = "SELECT * FROM tipo_documentos";
+        $tipo_documento = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM estados";
+        $estado = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM usuarios";
+        $usuario = pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/usuarios/perfil.php';
     }
     public function getUpdateUsuarios()
     {

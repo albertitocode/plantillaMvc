@@ -30,7 +30,7 @@ class AccesoController
                     $_SESSION['segundo apellido'] = $usu['usuario_apellido_2'];
                     $_SESSION['correo'] = $usu['usuario_correo'];
                     $_SESSION['rol'] = $usu['rol_id'];
-                    // $_SESSION['rol nombre']=$usu['rol_nombre'];
+                    //$_SESSION['rol nombre']=$usu['rol_nombre'];
                     $_SESSION['telefono'] = $usu['usuario_telefono'];
                     $_SESSION['direccion'] = $usu['usuario_direccion'];
                     $_SESSION['contrasenia'] = $usu['usuario_contrasenia'];
@@ -134,7 +134,7 @@ class AccesoController
 
                     $mailer->send();
                     echo "exito";
-                    redirect(getUrl2("Acceso","Acceso","enviarCodigo"));
+                    redirect(getUrl("Acceso","Acceso","enviarCodigo"));
                 } catch (Exception $e) {
                     echo "El mensaje no pudo ser enviado. Error: {$mailer->ErrorInfo}";
                 }
@@ -229,4 +229,14 @@ class AccesoController
             echo  "No se econtró coincidencia con algun codigo";
         }
     }
+
+    // public function getIndex(){
+
+    //     $obj = new UsuariosModel();
+
+    //     $sql = "SELECT COUNT(*) AS total FROM usuarios";
+    //     $total_usuarios= pg_fetch_all($obj->consult($sql));
+
+    //     redirect('../web/index.php');
+    // }
 }

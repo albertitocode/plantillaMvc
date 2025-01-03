@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formSenialM">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formMalSenial">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -67,8 +67,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"  data-url='<?php echo
+                                    <label for="categoria_senial_id">Categoria de la señal</label>
+                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"  data-url='<?php echo
                                      getUrl("Solicitud", "Solicitud", "getNombreSenial", 
                                      false, "ajax"); ?>'>
                                         <option value="">Seleccione categoria...</option>
@@ -76,8 +76,11 @@
                                         foreach ($categoria_senal as $categoria) {
                                             echo "<option  value='" . $categoria['categoria_senial_id'] . "'>" . $categoria['categoria_senial_nombre'] . "</option>";
                                         }
-                                        ?>
+                                        //cambia todo a senial 
+                                         ?>
+                                          
                                     </select>
+                                    <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="danio_id"> Daño</label>
@@ -89,6 +92,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_danio_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
@@ -125,6 +129,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_tipo_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="solicitud_senial_mal_estado_descripcion"> Describa el daño</label>
@@ -142,6 +147,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="senial_id" id="error_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen de la señal dañada</label>
@@ -158,7 +164,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" value="Enviar" class="btn btn-success">
+            <input type="submit" id="btnSenialM" value="Enviar" class="btn btn-success">
         </div>
     </form>
 </div>

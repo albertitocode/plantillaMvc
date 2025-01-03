@@ -10,8 +10,12 @@ include_once '../lib/helphers.php';
     <link rel="stylesheet" href="assets/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Login</title>
-
+    <title>GEO CALI</title>
+    <link
+      rel="icon"
+      href="assets/img/logo1.png"
+      type="image/x-icon"
+    />
 </head>
 
 <body>
@@ -21,7 +25,7 @@ include_once '../lib/helphers.php';
             <div class="login">
                 <!-- <img src="assets/img/prueba.png" alt=""> -->
                 <div class="logo">
-                    <img src="assets/img/calvo.jpg" alt="log" class="log">
+                    <img src="assets/img/logo1.png" alt="log" class="log">
                 </div>
 
                 <h1>Iniciar Sesión</h1>

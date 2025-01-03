@@ -123,8 +123,8 @@ class SolicitudController
         //añadir campo fecha
         //agregar los cambios de estados
 
-        $categoria_senal_id = $_POST['categoria_senal_id'];
-        $tipo_senal_id = $_POST['tipo_senal_id'];
+        $categoria_senal_id = $_POST['categoria_senial_id'];
+        $tipo_senal_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_nueva_descripcion = $_POST['solicitud_senial_nueva_descripcion'];
         $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
@@ -134,8 +134,8 @@ class SolicitudController
         //validaciones 
         $validacion = true;
         $campos = [
-            'categoria_senal_id' => 'Es requerido llenar el campo categoria',
-            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal', //todos llegan menos este, revisar
+            'categoria_senial_id' => 'Es requerido llenar el campo categoria',
+            'tipo_senial_id' => 'Es requerido llenar el campo tipo de señal', //todos llegan menos este, revisar
             'senial_id' => 'Es requerido llenar el campo señal',
             'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion'
             
@@ -200,8 +200,8 @@ class SolicitudController
         $obj = new SolicitudModel();
         if (isset($_POST['categoria_senial'])) {
 
-            $tipo_senial = $_POST['tipo_senial'];
-            $categoria_senial = $_POST['categoria_senial'];
+            $tipo_senial = $_POST['tipo_senial_id'];
+            $categoria_senial = $_POST['categoria_senial_id'];
             echo $tipo_senial;
             echo $categoria_senial;
 
@@ -265,8 +265,8 @@ class SolicitudController
         //añadir campo fecha
         //agregar los cambios de estados
         // $categoria = $_POST['categoria_senal_id'];
-        $categoria_senal_id = $_POST['categoria_senal_id'];
-        $tipo_senal_id = $_POST['tipo_senal_id'];
+        $categoria_senal_id = $_POST['categoria_senial_id'];
+        $tipo_senal_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_mal_estado_descripcion = $_POST['solicitud_senial_mal_estado_descripcion'];
         $solicitud_senial_mal_estado_direccion = $_POST['solicitud_senial_mal_estado_direccion'];
@@ -278,8 +278,8 @@ class SolicitudController
         //validaciones 
         $validacion = true;
         $campos = [
-            'categoria_senal_id' => 'Es requerido llenar el campo categoria',
-            'tipo_senal_id' => 'Es requerido llenar el campo tipo de señal',
+            'categoria_senial_id' => 'Es requerido llenar el campo categoria',
+            'tipo_senial_id' => 'Es requerido llenar el campo tipo de señal',
             'senial_id' => 'Es requerido llenar el campo señal',
             'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
             'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
@@ -836,7 +836,7 @@ class SolicitudController
         $sql = "SELECT * FROM letras_via";
         $letras = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM tipo_via";
+        $sql = "SELECT * FROM tipos_via";
         $vias = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM orientaciones";

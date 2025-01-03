@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Tura visor</title>
+    <title>GEO CALI</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
     <link
       rel="icon"
-      href="assets/img/kaiadmin/favicon.ico"
+      href="assets/img/logo1.png"
       type="image/x-icon"
     />
 
@@ -81,7 +81,7 @@ body {
     }
 
     ?>
-    <form action="<?php echo getUrl("Usuarios", "Usuarios", "postCreate"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Usuarios", "Usuarios", "postCreate"); ?>" method="post" id="formNewUsu">
         <!-- <div class="page-header">
             <h3 class="fw-bold mb-3">Registrate</h3>
         </div> -->
@@ -104,20 +104,23 @@ body {
                             <div class="form-group">
                                 <label for="usuario_nombre_1">Primer nombre</label>
                                 <input type="text" name="usuario_nombre_1" id="" class="form-control" placeholder="Nombre 1">
-
+                                <span class="text-danger" id="error_new_usuario_nombre_1"></span>
                             </div>
                            
                             <div class="form-group">
                                 <label for="usuario_apellido_1">Primer apellido</label>
                                 <input type="text" name="usuario_apellido_1" id="" class="form-control" placeholder="Apellido 1">
+                                <span class="text-danger" id="error_new_usuario_apellido_1"></span>
                             </div>
                             <div class="form-group">
                                 <label for="usuario_correo">correo</label>
                                 <input type="text" name="usuario_correo" id="" class="form-control" placeholder="Correo">
+                                <span class="text-danger" id="error_new_usuario_correo"></span>
                             </div>  
                             <div class="form-group">
                             <label for="usuario_direccion">Direccion </label>
                             <input type="text" name="usuario_direccion" id="" class="form-control" placeholder="Direccion">
+                            <span class="text-danger" id="error_new_usuario_direccion"></span>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -129,17 +132,26 @@ body {
                             <div class="form-group">
                                 <label for="usuario_apellido_2">Segundo apellido</label>
                                 <input type="text" name="usuario_apellido_2" id="" class="form-control" placeholder="Apellido 2">
+                                <span class="text-danger" id="error_new_usuario_apellido_2"></span>
                             </div>
+                            <div class="form-group">
+                                    <label for="usuario_fecha_nacimiento">Fecha de nacimiento</label>
+                                    <input type="date" name="usuario_fecha_nacimiento" id="usuario_fecha_nacimiento" max="2006-12-31"
+                                        class="form-control">
+                                    <span class="text-danger" id="error_new_usuario_fecha_nacimiento"></span>
+                                </div>
                             
                             <div class="form-group">
                                 <label for="usuario_contrasenia">Contraseña</label>
                                 <input type="password" name="usuario_contrasenia" id="" class="form-control" placeholder="Clave">
+                                <span class="text-danger" id="error_new_usuario_contrasenia"></span>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                                 <label for="usuario_telefono">Telefono</label>
                                 <input type="text" name="usuario_telefono" id="" class="form-control" placeholder="Telefono celular">
+                                <span class="text-danger" id="error_new_usuario_telefono"></span>
                             </div>
                             <div class="form-group">
                                 <label for="tipo_documento_id">Tipo de documento</label>
@@ -151,15 +163,17 @@ body {
                                     }
                                     ?>
                                 </select>
+                                <span class="text-danger" id="error_new_tipo_documento_id"></span>
                             </div>
                             <div class="form-group">
                                 <label for="usuario_num_identificacion">Numero documento</label>
                                 <input type="number" name="usuario_num_identificacion" id="" class="form-control" placeholder="Documento">
+                                <span class="text-danger" id="error_new_usuario_num_identificacion"></span>
                             </div>
                            
                         </div>
                         <div class="mt-5">
-                            <input type="submit" value="Enviar" class="btn btn-success">
+                            <input type="submit" id="btnNewUser" value="Enviar" class="btn btn-success">
                         </div>
                     </div>
                     </div>

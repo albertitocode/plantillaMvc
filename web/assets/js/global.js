@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const campos = {
+  const camposUsu = {
     'usuario_nombre_1': 'Primer nombre',
     'usuario_apellido_1': 'Primer apellido',
     'usuario_correo': 'Correo electrónico',
@@ -10,6 +10,27 @@ $(document).ready(function () {
     'usuario_telefono': 'Teléfono',
     'tipo_documento_id': 'Tipo de documento',
     'usuario_num_identificacion': 'Número de documento'
+  };
+  const camposSenialM = {
+    'categoria_senial_id': 'Categoria',
+    'danio_id': 'Daño',
+    'tipo_senial_id': 'Tipo de señal',
+    'senial_id': 'Señal'
+  };
+  const camposSenialN = {
+    'categoria_senial_id': 'Categoria',
+    'tipo_senial_id': 'Tipo de señal',
+    'senial_id': 'Señal'
+  };
+  const camposReductorM = {
+    'categoria_senial_id': 'Categoria',
+    'danio_id': 'Daño',
+    'tipo_senial_id': 'Tipo de señal',
+    'senial_id': 'Señal'
+  };
+  const camposReductorN = {
+    'categoria_reductor_id': 'Categoria',
+    'reductor_id': 'Reductor'
   };
   //   function validarNumeros($input){
   //     $patron="/^[0-9]+$/";
@@ -52,19 +73,72 @@ $(document).ready(function () {
     return patron.test(input);
   }
 
+  function loadColor() {
+    // Verifica el modo guardado en localStorage
+    const darkMode = localStorage.getItem('dark-mode');
+    
+    if (darkMode === 'enabled') {
+        const sidebar_color = document.querySelector('.sidebar');
+        const header_logo_color = document.querySelector('.logo-header');
+        const main_header_color = document.querySelector('.main-header');
+        const footer_color = document.querySelector('.footer');
+        const card_color = document.querySelector('.card');
+        const userName = document.querySelector('.profile-username');
+        const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
+        document.body.classList.add('dark'); 
+        sidebar_color.classList.add('dark');
+        header_logo_color.classList.add('dark');
+        main_header_color.classList.add('dark');
+        footer_color.classList.add('dark');
+        card_color.classList.add('dark');
+        userName.classList.add('dark');
+        userBox.classList.add('dark');
+        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
+    } else {
+        document.body.classList.remove('dark');
+        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Oscuro';
+    }
+}
+
+document.getElementById('toggleButton').addEventListener('click', function() {
+    // Alterna el modo oscuro
+    const sidebar_color = document.querySelector('.sidebar');
+    const header_logo_color = document.querySelector('.logo-header');
+    const main_header_color = document.querySelector('.main-header');
+    const footer_color = document.querySelector('.footer');
+    const card_color = document.querySelector('.card');
+    const userName = document.querySelector('.profile-username');
+    const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
+    document.body.classList.toggle('dark');
+    sidebar_color.classList.toggle('dark');
+    header_logo_color.classList.toggle('dark');
+    main_header_color.classList.toggle('dark');
+    footer_color.classList.toggle('dark');
+    card_color.classList.toggle('dark');
+    userName.classList.toggle('dark');
+    userBox.classList.toggle('dark');
+    // Actualiza el texto del botón
+    if (document.body.classList.contains('dark') && header_logo_color.classList.contains('dark') && sidebar_color.classList.contains('dark') && main_header_color.classList.contains('dark')) {
+        localStorage.setItem('dark-mode', 'enabled');
+        this.textContent = 'Cambiar a Modo Claro';
+    } else {
+        localStorage.setItem('dark-mode', 'disabled');
+        this.textContent = 'Cambiar a Modo Oscuro';
+    }
+});
 
 
 
 
   $(document).on('input', '#formUsu input, #formUsu select', function (event) {
     event.preventDefault();
-
+    console.log("fff");
     var formData = $('#formUsu').serializeArray();
     let esValido = true;
 
     // Limpiar los mensajes de error antes de comenzar la validación
-    Object.keys(campos).forEach(campo => {
-      const error = `error_${campo}`;
+    Object.keys(camposUsu).forEach(campoUsu => {
+      const error = `error_${campoUsu}`;
       document.getElementById(error).textContent = ""; // Limpia los errores
     });
 
@@ -72,11 +146,11 @@ $(document).ready(function () {
     formData.forEach(function (campoData) {
       const { name, value } = campoData;
       const error = `error_${name}`;
-      const valor = campos[name];
+      const valor = camposUsu[name];
 
       // Validar campos vacíos
       if (value.trim() === '') {
-        if (campos[name]) {
+        if (camposUsu[name]) {
         
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
@@ -99,7 +173,7 @@ $(document).ready(function () {
           case 'usuario_apellido_1':
           case 'usuario_apellido_2':
             if (!validarCampoLetras(value)) {
-              document.getElementById(error).textContent = `*El campo ${campos[name]} solo debe contener letras.*`;
+              document.getElementById(error).textContent = `*El campo ${camposUsu[name]} solo debe contener letras.*`;
               esValido = false;
             }
             break;
@@ -148,7 +222,215 @@ $(document).ready(function () {
     }
   });
 
+  //new perfil
+  $(document).on('input', '#formNewUsu input, #formNewUsu select', function (event) {
+    event.preventDefault();
+    console.log("entraa");
+    var formData = $('#formNewUsu').serializeArray();
+    let esValido = true;
 
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposUsu).forEach(campoUsu => {
+      const error = `error_${campoUsu}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposUsu[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposUsu[name]) {
+        
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+
+      // Validar contraseña
+      else if (name === 'usuario_contrasenia') {
+        if (!validarContrasenia(value)) {
+          esValido = false;
+          document.getElementById('error_usuario_contrasenia').textContent = `*En el campo contraseña debes ingresar mínimo 8 caracteres, 
+              incluyendo una mayúscula, una minúscula, un número y un carácter especial.*`;
+        } else {
+          document.getElementById('error_usuario_contrasenia').textContent = ""; // Borrar error
+        }
+      } else {
+        switch (name) {
+          case 'usuario_nombre_1':
+          case 'usuario_nombre_2':
+          case 'usuario_apellido_1':
+          case 'usuario_apellido_2':
+            if (!validarCampoLetras(value)) {
+              document.getElementById(error).textContent = `*El campo ${camposUsu[name]} solo debe contener letras.*`;
+              esValido = false;
+            }
+            break;
+            
+          case 'usuario_correo':
+            if (!validarCorreo(value)) {
+              document.getElementById(error).textContent = `*Ingrese un correo válido.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_telefono':
+            if (!validarNumeros(value)) {
+              document.getElementById(error).textContent = `*El campo Teléfono debe contener solo números.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_contrasenia':
+            if (!validarContrasenia(value)) {
+              document.getElementById(error).textContent = `*La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.*`;
+              esValido = false;
+            }
+            break;
+          case 'tipo_documento_id':
+            if (value === '') {
+              document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_num_identificacion':
+            if (!validarNumeros(value)) {
+              document.getElementById(error).textContent = `*El campo Número de documento debe contener solo números.*`;
+              esValido = false;
+            }
+            break;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnNewUser');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
+
+
+  $(document).on('input', '#formMalSenial input, #formMalSenial select', function (event) {
+    event.preventDefault();
+    console.log("funca esto");
+    var formData = $('#formMalSenial').serializeArray();
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposSenialM).forEach(campoSenialM => {
+      const error = `error_${campoSenialM}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposSenialM[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposSenialM[name]) {
+        
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnSenialM');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
+  
+
+  $(document).on('input', '#formNuevaSenial input, #formNuevaSenial select', function (event) {
+    event.preventDefault();
+    //console.log("funca esto yes");
+    var formData = $('#formNuevaSenial').serializeArray();
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposSenialN).forEach(campoSenialN => {
+      const error = `error_${campoSenialN}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposSenialN[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposSenialN[name]) {
+        
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnSenialN');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
+
+  //nuevo reductor
+  $(document).on('input', '#formNuevoReductor input, #formNuevoReductor select', function (event) {
+    event.preventDefault();
+    //console.log("funca esto yes");
+    var formData = $('#formNuevoReductor').serializeArray();
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposReductorN).forEach(campoReductorN => {
+      const error = `error_${campoReductorN}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposReductorN[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposReductorN[name]) {
+        
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnReductorN');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
   // $('#formUsu').submit(function (event) {
   //   event.preventDefault();
 
@@ -393,7 +675,7 @@ $(document).ready(function () {
 
 
 
-
+//filtracion
   $(document).on('keyup', "#buscar", function () {
     let buscar = $(this).val();
     let url = $(this).attr('data-url');
@@ -407,6 +689,8 @@ $(document).ready(function () {
       }
     });
   });
+
+  
   $(document).on('keyup', "#id_data", function () {
     let id_data = $(this).val();
     let url = $(this).attr('data-url');
@@ -420,6 +704,7 @@ $(document).ready(function () {
       }
     });
   });
+  //ajax cargar formulario de solicitudes
   $(document).on('change', "#id_solicitud", function () {
     let id_solicitud = $(this).val();
     let url = $(this).attr('data-url');
@@ -434,6 +719,37 @@ $(document).ready(function () {
       }
     });
   });
+//cargar consulta de solicitudes 
+$(document).on('change', "#id_consult_solicitud", function () {
+  let id_consult_solicitud = $(this).val();
+  let url = $(this).attr('data-url');
+  console.log("gola");
+  // alert("Valor seleccionado: " + id_consult_solicitud)
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: { 'id_solicitud': id_consult_solicitud },
+    success: function (data) {
+      $('#formularios').html(data);
+    }
+  });
+});
+  //ajax cargar formulario de reportes
+  $(document).on('change', "#id_reporte", function () {
+    let id_reporte = $(this).val();
+    let url = $(this).attr('data-url');
+    console.log("Helou");
+     console.log("Valor seleccionado: " + id_reporte);
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 'id_reporte': id_reporte},
+      success: function (data) {
+        $('#formulariosReport').html(data);
+      }
+    });
+  });
+
   $(document).on('click', '#cambiar_estado', function () {
     let id = $(this).attr('data-id');
     let url = $(this).attr('data-url');
@@ -518,20 +834,6 @@ $(document).ready(function () {
   });
 
 
-  $(document).on('change', "#id_consult_solicitud", function () {
-    let id_consult_solicitud = $(this).val();
-    let url = $(this).attr('data-url');
-    console.log("gola");
-    // alert("Valor seleccionado: " + id_consult_solicitud)
-    $.ajax({
-      url: url,
-      type: 'POST',
-      data: { 'id_solicitud': id_consult_solicitud },
-      success: function (data) {
-        $('#formularios').html(data);
-      }
-    });
-  });
 
 
 

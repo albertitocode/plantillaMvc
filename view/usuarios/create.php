@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario_fecha_nacimiento">Fecha de nacimiento</label>
-                                    <input type="date" name="usuario_fecha_nacimiento" id="usuario_fecha_nacimiento"
+                                    <input type="date" name="usuario_fecha_nacimiento" id="usuario_fecha_nacimiento" max="2006-12-31"
                                         class="form-control">
                                     <span class="text-danger" id="error_usuario_fecha_nacimiento"></span>
                                 </div>
