@@ -54,3 +54,16 @@ $codigo = generarCodigo(); // Genera un código de 12 caracteres por defecto
 
 INSERT INTO restablecimiento_claves (usuario_id, codigo, fecha_expiracion)
 VALUES (:usuario_id, :codigo, DATE_ADD(NOW(), INTERVAL 1 HOUR));
+
+  
+        }
+      
+    
+                    $mailer->isHTML(true);
+
+                
+                    $mailer->Body = 'Hola señorita ' . $nombre_usuario . '<a href="http://localhost/plantillaMvc/web/index.php?modulo=Solicitud&controlador=Solicitud&funcion=postSolicitud">
+                    Click aquì</a> para cambiar tu contraseña';
+           
+
+           <input type="hidden" name="correo" value="<?php $echo usu ?>"

@@ -100,6 +100,7 @@ $(document).ready(function () {
         const footer_color = document.querySelector('.footer');
         const card_color = document.querySelector('.card');
         const userName = document.querySelector('.profile-username');
+        const sidebarText = document.querySelector('.sub-item');
         const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
         document.body.classList.add('dark'); 
         sidebar_color.classList.add('dark');
@@ -109,6 +110,7 @@ $(document).ready(function () {
         card_color.classList.add('dark');
         userName.classList.add('dark');
         userBox.classList.add('dark');
+        sidebarText.classList.add('dark');
         document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
     } else {
         document.body.classList.remove('dark');
@@ -125,6 +127,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
     const card_color = document.querySelector('.card');
     const userName = document.querySelector('.profile-username');
     const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
+    const sidebarText = document.querySelector('.sub-item');
     document.body.classList.toggle('dark');
     sidebar_color.classList.toggle('dark');
     header_logo_color.classList.toggle('dark');
@@ -133,6 +136,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
     card_color.classList.toggle('dark');
     userName.classList.toggle('dark');
     userBox.classList.toggle('dark');
+    sidebarText.classList.toggle('dark');
     // Actualiza el texto del botón
     if (document.body.classList.contains('dark') && header_logo_color.classList.contains('dark') && sidebar_color.classList.contains('dark') && main_header_color.classList.contains('dark')) {
         localStorage.setItem('dark-mode', 'enabled');
