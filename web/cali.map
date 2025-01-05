@@ -1,0 +1,112 @@
+MAP
+   NAME cali
+     Size 1000 600
+
+     STATUS ON
+     EXTENT  -76.70 3.29 -76.35 3.54
+     SHAPEPATH "datos"
+
+     FONTSET "misc/fonts/fonts.txt"
+     SYMBOLSET "misc/symbols/symbols.sym"
+
+      IMAGECOLOR 255 255 255
+      UNITS dd
+
+    WEB
+    IMAGEPATH "C:/ms4w/tmp/ms_tmp" #Esto puede variar segun tu configuracion
+      IMAGEURL "/ms_tmp/"
+    END
+
+    LAYER
+    CONNECTIONTYPE postgis
+      NAME "Cinco"
+      STATUS ON
+      #DATA "cinco.shp"
+      CONNECTION "user=postgres password=123456 dbname=prueba host=localhost port=5433"
+        DATA "geom FROM (select * from cinco) as cinco using unique gid SRID=4326"
+      TYPE POLYGON
+      #  LABELITEM "BARRIO"
+        CLASS 
+                    STYLE
+                    
+                        COLOR 207 167 248
+                      OUTLINECOLOR 85 107 47
+                    END
+          END
+    END
+
+
+
+     LAYER
+      NAME "Six"
+      STATUS ON
+      #DATA "six.shp"
+
+      TYPE POLYGON
+        CLASS 
+             STYLE
+               COLOR 248 245 245
+               OUTLINECOLOR 0 0 0
+            END
+        END
+    END
+
+     LAYER
+      NAME "One"
+      STATUS ON
+      #DATA "one.shp"
+
+      TYPE POLYGON
+        CLASS 
+             STYLE
+               COLOR 84 236 118
+               OUTLINECOLOR 0 0 0
+            END
+        END
+    END
+
+    LAYER
+		NAME "Two"
+        STATUS ON
+       # DATA "two.shp"
+        TYPE LINE
+        CLASS
+            STYLE
+              COLOR 20 95 248
+              OUTLINECOLOR 0 0 0
+            END
+        END
+    END
+    CONFIG "MS_ERRORFILE" "C:/ms4w/apache/htdocs/log.txt"
+ 	DEBUG 5
+ LAYER
+ NAME "Puntos"
+	  STATUS ON
+    TYPE POINT
+    CONNECTIONTYPE postgis
+      # DATA "puntos.shp"
+       CONNECTION "user=postgres password=123456 dbname=prueba host=localhost port=5433"
+       DATA "geom FROM (select * from lugares) as punto using unique id SRID=4326"
+       
+    #  QUERYMAP
+    #STATUS ON
+    #TYPE POINT
+    #SIZE 15 # Tamaño del radio en píxeles
+    #FORMAT "text/html"
+    #FORMAT application/json
+   #END
+   #TEMPLATE "template.html"
+   
+       CLASS
+            STYLE
+                SYMBOL star
+                SIZE 30
+             
+            END
+        END
+  
+    END
+
+
+    
+END

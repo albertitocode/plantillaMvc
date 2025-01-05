@@ -148,8 +148,8 @@
           <div class="collapse" id="maps">
             <ul class="nav nav-collapse">
               <li>
-                <a href="maps/googlemaps.html">
-                  <span class="sub-item">Google Maps</span>
+              <a href="<?php echo getUrl("Mapa", "Mapa", "abrirMapa")?>">
+              <span class="sub-item">Google Maps</span>
                 </a>
               </li>
               <li>
