@@ -172,6 +172,33 @@ class ReportesController{
     public function postReportes(){
         $obj = new ReportesModel();
 
+        $ho=5;
+
+        $sql = "SELECT COUNT(*) AS totalAcci FROM solicitud_accidentes";
+        $totalAcci = pg_fetch_row($obj->consult($sql));
+        $Accidente = $totalAcci[0];
+
+        $sql = "SELECT COUNT(*) AS totalSeniM FROM solicitud_seniales_mal_estado";
+        $totalSeniM = pg_fetch_row($obj->consult($sql));
+        $totalSm = $totalSeniM[0];
+        // $totalSM = $totalSeniM['totalSeniM'];
+
+        $sql = "SELECT COUNT(*) AS totalReducM FROM solicitud_reductores_mal_estado";
+        $totalReduM = pg_fetch_row($obj->consult($sql));
+        $ReductorM = $totalReduM[0];
+
+        $sql = "SELECT COUNT(*) AS totalSeniN FROM solicitud_seniales_nuevas";
+        $totalSeniN = pg_fetch_row($obj->consult($sql));
+        $SenialN = $totalSeniN[0];
+        
+        $sql = "SELECT COUNT(*) AS totalReduN FROM solicitud_reductores_nuevos";
+        $totalReduN = pg_fetch_row($obj->consult($sql));
+        $ReductorN = $totalReduN[0];
+
+        $sql = "SELECT COUNT(*) AS totalVia FROM solicitud_vias_mal_estado ";
+        $totalVia= pg_fetch_row($obj->consult($sql));
+        $Via = $totalVia[0];
+     
         include_once '../view/reportes/grafica.php';
     }
 }

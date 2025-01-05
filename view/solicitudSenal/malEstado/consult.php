@@ -45,6 +45,7 @@ class="mt-5">
                         <table class="table table-striped table hover ">
                             <thead>
                                 <tr>
+                                <th></th>
                                     <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Descripcion</th>
@@ -67,6 +68,13 @@ class="mt-5">
                                 // $clase="";
                                 // $texto="";
                                 echo "<tr>";
+                                echo "<td>";
+                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalle")."' method='post'>";
+                                echo "<input type='hidden'  name='id_soli' value=" .$senial_malo['solicitud_senial_mal_estado_id'] . "> ";
+                                echo "<input type='hidden'  name='name_soli' value='solicitud_seniales_mal_estado'> ";
+                                echo "<button type ='submit 'class='btnV'>Acción 3</button>";
+                                echo "</form>";
+                                echo "</td> ";
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_id'] . "</td>";
                                  echo "<td>" . $senial_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
                                 echo "<td>" . $senial_malo['solicitud_senial_mal_estado_descripcion'] . "</td>";

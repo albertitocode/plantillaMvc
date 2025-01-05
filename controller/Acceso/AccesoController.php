@@ -124,7 +124,7 @@ class AccesoController
                     $mailer->Password = 'lbwx kwji mtvf iydp';
                     $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mailer->Port = 587;
-
+                    $mailer->isHTML(true);
 
                     $mailer->setFrom('hgustavo1407@gmail.com', 'Tura');
                     $mailer->addAddress($correo, $nombre_usuario);
@@ -134,7 +134,7 @@ class AccesoController
 
                     $mailer->send();
                     echo "exito";
-                    redirect(getUrl("Acceso","Acceso","enviarCodigo"));
+                    redirect(getUrl2("Acceso","Acceso","enviarCodigo"));
                 } catch (Exception $e) {
                     echo "El mensaje no pudo ser enviado. Error: {$mailer->ErrorInfo}";
                 }

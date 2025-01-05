@@ -1,9 +1,58 @@
 <?php
 include_once '../model/Usuarios/UsuariosModel.php';
+include_once '../model/Reportes/ReportesModel.php';
+
+function usuarios(){
 $obj = new UsuariosModel();
 
 $sql = "SELECT COUNT(*) AS total FROM usuarios";
-$total_usuarios = pg_fetch_all($obj->consult($sql));
+$total_usuarios = pg_fetch_assoc($obj->consult($sql));
+}
+
+function reportes(){
+  $obj = new ReportesModel();
+
+  
+  $ho=5;
+
+  $sql = "SELECT COUNT(*) AS totalAcci FROM solicitud_accidentes";
+$totalAcci = pg_fetch_row($obj->consult($sql));
+$Accidente = $totalAcci[0];
+
+$sql = "SELECT COUNT(*) AS totalSeniM FROM solicitud_seniales_mal_estado";
+$totalSeniM = pg_fetch_row($obj->consult($sql));
+$totalSm = $totalSeniM[0];
+// $totalSM = $totalSeniM['totalSeniM'];
+
+$sql = "SELECT COUNT(*) AS totalReducM FROM solicitud_reductores_mal_estado";
+$totalReduM = pg_fetch_row($obj->consult($sql));
+$ReductorM = $totalReduM[0];
+
+$sql = "SELECT COUNT(*) AS totalSeniN FROM solicitud_seniales_nuevas";
+$totalSeniN = pg_fetch_row($obj->consult($sql));
+$SenialN = $totalSeniN[0];
+
+$sql = "SELECT COUNT(*) AS totalReduN FROM solicitud_reductores_nuevos";
+$totalReduN = pg_fetch_row($obj->consult($sql));
+$ReductorN = $totalReduN[0];
+
+$sql = "SELECT COUNT(*) AS totalVia FROM solicitud_vias_mal_estado ";
+$totalVia= pg_fetch_row($obj->consult($sql));
+$Via = $totalVia[0];
+
+return [
+ 'Accidente' => $Accidente,
+ 'SenialM' => $totalSm,
+ 'SenialN' => $SenialN,
+ 'ReductorM' => $ReductorM,
+ 'ReductorN' => $ReductorN,
+ 'Vias' => $Via
+];
+}
+
+$reportes = reportes();
+
+
 ?>
 
 
@@ -117,6 +166,8 @@ $total_usuarios = pg_fetch_all($obj->consult($sql));
                 </div>
               </div> -->
     </div>
+
+   
     <div class="card" style="width: 50rem;">
       <div class="card-body">
         <canvas id="chartPrincipal"></canvas>
@@ -128,7 +179,8 @@ $total_usuarios = pg_fetch_all($obj->consult($sql));
               labels: ['Señales en mal estado', 'Nuevas señales', 'Reductores en mal estado', 'Nuevos reductores', 'Accidentes', 'Vias en mal estado'],
               datasets: [{
                 label: 'Solicitudes realizadas',
-                data: [3, 5, 3, 2, 8, 6],
+                data: [<?= $reportes['SenialM'] ?>, <?=$reportes['SenialN'] ?>, <?= $reportes['ReductorM']  ?>, <?= $reportes['ReductorN']  ?>,  <?=$reportes['Accidente']  ?>, <?= $reportes['Vias']  ?>],
+                
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.4)',
                   'rgba(255, 159, 64, 0.4)',

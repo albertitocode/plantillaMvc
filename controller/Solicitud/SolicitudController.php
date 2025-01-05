@@ -1068,5 +1068,21 @@ class SolicitudController
 
     }
     //Termina accidentes
+
+    public function solicitudDetalle(){
+        $obj = new SolicitudModel();
+
+        $id_soli = $_POST['id_soli'];
+        $name = $_POST['name_soli'];
+        $name_id = $_POST['name_soli']."_id";
+
+        $sql = "SELECT * FROM $name WHERE $name_id=$id_soli";
+        $solicitudes = pg_fetch_row($obj->consult($sql));
+        $solicitud = $solicitudes[0];
+
+        // $sql = "SELECT tipo_solicitud_id From $name";
+
+        include_once '../view/solicitudes/solicitudDetalle.php';
+    }
 }
 ?>

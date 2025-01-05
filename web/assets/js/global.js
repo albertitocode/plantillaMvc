@@ -118,6 +118,7 @@ $(document).ready(function () {
       const footer_color = document.querySelector('.footer');
       const card_color = document.querySelector('.card');
       const userName = document.querySelector('.profile-username');
+        const sidebarText = document.querySelector('.sub-item');
       const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
       document.body.classList.add('dark');
       sidebar_color.classList.add('dark');
@@ -127,6 +128,7 @@ $(document).ready(function () {
       card_color.classList.add('dark');
       userName.classList.add('dark');
       userBox.classList.add('dark');
+        sidebarText.classList.add('dark');
       document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
     } else {
       document.body.classList.remove('dark');

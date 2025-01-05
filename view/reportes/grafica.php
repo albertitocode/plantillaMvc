@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- <head>
@@ -14,72 +16,53 @@
     <h3 class="display-4">Reporte</h3>
 </div>
  <div class="content">
-
+ 
 
  <div class="card" style="width: 50rem;">
       <div class="card-body">
-        <canvas id="chartPrincipal"></canvas>
+        <canvas id="chartis"></canvas>
+        
         <script>
-         const ctx = document.getElementById('chartPrincipal').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar', 
-    data: {
-        labels: labels,
-        datasets: [{
-            label: 'Valores por Fecha',
-            data: dataValues,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: true
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+          var ctx = document.getElementById("chartis").getContext("2d");
+          var mychart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ['Señales en mal estado', 'Nuevas señales', 'Reductores en mal estado', 'Nuevos reductores', 'Accidentes', 'Vias en mal estado'],
+              datasets: [{
+                label: 'Solicitudes realizadas',
+                data: [<?= $totalSm ?>, <?= $SenialN ?>, <?=$ReductorM ?>, <?= $ReductorN ?>,  <?=$Accidente ?>, <?= $Via ?>],
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.4)',
+                  'rgba(255, 159, 64, 0.4)',
+                  'rgba(255, 205, 86, 0.4)',
+                  'rgba(75, 192, 192, 0.4)',
+                  'rgba(54, 162, 235, 0.4)',
+                  'rgba(153, 102, 255, 0.4)'
+                  
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)'
+                  
+                ],
+                borderWidht:1
+              }]
+
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtzero: true
+                  }
+                }]
+              }
             }
-        }
-    }
-});
-          if(document.getElementById('formreportAcci')){
-            id_formulario =document.getElementById('formreportAcci');
-          }
-          document.getElementById(id_formulario).addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar que el formulario se envíe
-
-    // Obtener las fechas del formulario
-    const startDate = new Date(document.getElementById('startDate').value);
-    const endDate = new Date(document.getElementById('endDate').value);
-    
-    // Obtener la frecuencia seleccionada
-    const frequency = document.querySelector('input[name="frequency"]:checked').value;
-
-    // Limpiar los arrays
-    labels.length = 0;
-    dataValues.length = 0;
-
-    let currentDate = startDate;
-
-    // Generar fechas intermedias según la frecuencia seleccionada
-    while (currentDate <= endDate) {
-        labels.push(currentDate.toISOString().split('T')[0]); // Formato YYYY-MM-DD
-        dataValues.push(Math.floor(Math.random() * 100)); // Generar un valor aleatorio para cada fecha
-
-        if (frequency === 'day') {
-            currentDate.setDate(currentDate.getDate() + 1); // Sumar un día
-        } else if (frequency === 'month') {
-            currentDate.setMonth(currentDate.getMonth() + 1); // Sumar un mes
-        } else if (frequency === 'year') {
-            currentDate.setFullYear(currentDate.getFullYear() + 1); // Sumar un año
-        }
-    }
-
-    // Actualizar el gráfico
-    myChart.update();
-    
-    // Limpiar el formulario
-    this.reset();
-});
+          });
         </script>
 
       </div>
