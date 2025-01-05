@@ -236,7 +236,34 @@ class SolicitudController
 
     }
 
+    public function getImgCategoriaSenial(){
+        $obj = new SolicitudModel();
 
+        $sql = "SELECT * FROM categoria_seniales";
+        $imgs= pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/ayuda.php';
+
+    }
+
+    public function getImgTipoSenial(){
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM categoria_seniales";
+        $imgs= pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/ayuda.php';
+
+    }
+    public function getImgSenial(){
+        $obj = new SolicitudModel();
+
+        $sql = "SELECT * FROM seniales";
+        $imgs= pg_fetch_all($obj->consult($sql));
+
+        include_once '../view/solicitudSenal/ayuda.php';
+
+    }
 
 
     public function getCreateSenialMalEstado()

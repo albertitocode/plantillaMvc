@@ -4,6 +4,7 @@ include_once '../view/partials/header.php';
  
     if(!isset($_SESSION['auth'])){
         redirect('login.php');
+        exit;
     }
  echo "<body onload='loadColor();'>";
     
@@ -29,6 +30,7 @@ include_once '../view/partials/header.php';
     include_once '../view/partials/scripts.php';
     
  echo "</body>";
+ 
 echo "</html>";
 
 ?>

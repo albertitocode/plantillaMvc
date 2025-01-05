@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formMalSenial">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formSenialM">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -67,23 +67,43 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="categoria_senial_id">Categoria de la señal</label>
-                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"  data-url='<?php echo
-                                     getUrl("Solicitud", "Solicitud", "getNombreSenial", 
-                                     false, "ajax"); ?>'>
+                                    <label for="categoria_senal_id">Categoria de la señal</label>
+                                    <span class="ms-2 text-primary" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-trigger="click" data-bs-html="true" data-bs-content="Por favor, ingresa la <strong>Categoria de la señal</strong> 
+                                    que se encuentra en mal estado.<br> Si no sabes cuáles son las categorías, 
+                                    consúltalas en el siguiente enlace <br> <a href='<?php echo getUrl("Solicitud", "Solicitud", "getImgCategoriaSenial"); ?>' 
+                                    target='_blank'>Ver más</a>">
+                                    <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
+</span>
+
+
+                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
+                                        data-url='<?php echo
+                                            getUrl(
+                                                "Solicitud",
+                                                "Solicitud",
+                                                "getNombreSenial",
+                                                false,
+                                                "ajax"
+                                            ); ?>'>
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($categoria_senal as $categoria) {
                                             echo "<option  value='" . $categoria['categoria_senial_id'] . "'>" . $categoria['categoria_senial_nombre'] . "</option>";
                                         }
-                                        //cambia todo a senial 
-                                         ?>
-                                          
+                                        ?>
+
                                     </select>
-                                    <span class="text-danger" id="error_categoria_senial_id"></span>
+
+
                                 </div>
                                 <div class="form-group">
                                     <label for="danio_id"> Daño</label>
+                                    <span class="ms-2 text-primary" tabindex="0" data-bs-toggle="popover"
+                                        data-bs-trigger="click" data-bs-html="true"
+                                        data-bs-content="Este es otro ejemplo de popover">
+                                        <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                                    </span>
                                     <select name="danio_id" id="" class="form-control">
                                         <option value="">Seleccione daño...</option>
                                         <?php
@@ -120,8 +140,13 @@
                                 <div class="form-group">
                                     <label for="tipo_senal_id">Tipo de señal</label>
                                     <select name="tipo_senial_id" id="tipo_senial_id" class="form-control" data-url='<?php echo
-                                     getUrl("Solicitud", "Solicitud", "getNombreSenial", 
-                                     false, "ajax"); ?>'>
+                                        getUrl(
+                                            "Solicitud",
+                                            "Solicitud",
+                                            "getNombreSenial",
+                                            false,
+                                            "ajax"
+                                        ); ?>'>
                                         <option value="">Seleccione señal...</option>
                                         <?php
                                         foreach ($tipo_senal as $tipo) {
@@ -133,7 +158,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="solicitud_senial_mal_estado_descripcion"> Describa el daño</label>
-                                    <input type="text" name="solicitud_senial_mal_estado_descripcion" id="" class="form-control" placeholder="Describa el estado de la señal">
+                                    <input type="text" name="solicitud_senial_mal_estado_descripcion" id=""
+                                        class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">

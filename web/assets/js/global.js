@@ -1,4 +1,22 @@
 $(document).ready(function () {
+
+
+
+  // Añadir un evento para cerrar el popover cuando se haga clic fuera del área del popover
+  $(document).on('click', function (e) {
+    $('[data-bs-toggle="popover"]').each(function () {
+      var popoverElement = $(this); // Elemento del popover
+
+      // Verifica si el clic es fuera del popover
+      if (!popoverElement.is(e.target) && popoverElement.has(e.target).length === 0) {
+        var popoverInstance = bootstrap.Popover.getInstance(popoverElement[0]); // Obtiene la instancia del popover
+        if (popoverInstance && popoverInstance._isShown) {
+          popoverInstance.hide(); // Cierra el popover si está abierto
+        }
+      }
+    });
+  });
+
   const camposUsu = {
     'usuario_nombre_1': 'Primer nombre',
     'usuario_apellido_1': 'Primer apellido',
@@ -68,85 +86,86 @@ $(document).ready(function () {
     const tieneEspecial = /[!@#$%^&*()_+.\-]/.test(input);
 
     if (input.length < longitudMinima) {
-        errores.push("al menos 8 caracteres");
+      errores.push("al menos 8 caracteres");
     }
     if (!tieneMinuscula) {
-        errores.push("una letra minúscula");
+      errores.push("una letra minúscula");
     }
     if (!tieneMayuscula) {
-        errores.push("una letra mayúscula");
+      errores.push("una letra mayúscula");
     }
     if (!tieneNumero) {
-        errores.push("un número");
+      errores.push("un número");
     }
     if (!tieneEspecial) {
-        errores.push("un carácter especial");
+      errores.push("un carácter especial");
     }
 
     if (errores.length > 0) {
       document.getElementById('error_usuario_contrasenia').textContent = `*La contraseña debe contener al menos: ${errores.join(', ')}.*`;
-    
+
+    }
+    return true;
   }
-  return true;
-}
   function loadColor() {
     // Verifica el modo guardado en localStorage
     const darkMode = localStorage.getItem('dark-mode');
-    
-    if (darkMode === 'enabled') {
-        const sidebar_color = document.querySelector('.sidebar');
-        const header_logo_color = document.querySelector('.logo-header');
-        const main_header_color = document.querySelector('.main-header');
-        const footer_color = document.querySelector('.footer');
-        const card_color = document.querySelector('.card');
-        const userName = document.querySelector('.profile-username');
-        const sidebarText = document.querySelector('.sub-item');
-        const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
-        document.body.classList.add('dark'); 
-        sidebar_color.classList.add('dark');
-        header_logo_color.classList.add('dark');
-        main_header_color.classList.add('dark');
-        footer_color.classList.add('dark');
-        card_color.classList.add('dark');
-        userName.classList.add('dark');
-        userBox.classList.add('dark');
-        sidebarText.classList.add('dark');
-        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
-    } else {
-        document.body.classList.remove('dark');
-        document.getElementById('toggleButton').textContent = 'Cambiar a Modo Oscuro';
-    }
-}
 
-document.getElementById('toggleButton').addEventListener('click', function() {
-    // Alterna el modo oscuro
-    const sidebar_color = document.querySelector('.sidebar');
-    const header_logo_color = document.querySelector('.logo-header');
-    const main_header_color = document.querySelector('.main-header');
-    const footer_color = document.querySelector('.footer');
-    const card_color = document.querySelector('.card');
-    const userName = document.querySelector('.profile-username');
-    const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
-    const sidebarText = document.querySelector('.sub-item');
-    document.body.classList.toggle('dark');
-    sidebar_color.classList.toggle('dark');
-    header_logo_color.classList.toggle('dark');
-    main_header_color.classList.toggle('dark');
-    footer_color.classList.toggle('dark');
-    card_color.classList.toggle('dark');
-    userName.classList.toggle('dark');
-    userBox.classList.toggle('dark');
-    sidebarText.classList.toggle('dark');
-    // Actualiza el texto del botón
-    if (document.body.classList.contains('dark') && header_logo_color.classList.contains('dark') && sidebar_color.classList.contains('dark') && main_header_color.classList.contains('dark')) {
+    if (darkMode === 'enabled') {
+      const sidebar_color = document.querySelector('.sidebar');
+      const header_logo_color = document.querySelector('.logo-header');
+      const main_header_color = document.querySelector('.main-header');
+      const footer_color = document.querySelector('.footer');
+      const card_color = document.querySelector('.card');
+      const userName = document.querySelector('.profile-username');
+        const sidebarText = document.querySelector('.sub-item');
+      const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
+      document.body.classList.add('dark');
+      sidebar_color.classList.add('dark');
+      header_logo_color.classList.add('dark');
+      main_header_color.classList.add('dark');
+      footer_color.classList.add('dark');
+      card_color.classList.add('dark');
+      userName.classList.add('dark');
+      userBox.classList.add('dark');
+        sidebarText.classList.add('dark');
+      document.getElementById('toggleButton').textContent = 'Cambiar a Modo Claro';
+    } else {
+      document.body.classList.remove('dark');
+      document.getElementById('toggleButton').textContent = 'Cambiar a Modo Oscuro';
+    }
+  }
+
+  $(document).ready(function () {
+    $('#toggleButton').on('click', function () {
+      // Alterna el modo oscuro
+      const sidebar_color = document.querySelector('.sidebar');
+      const header_logo_color = document.querySelector('.logo-header');
+      const main_header_color = document.querySelector('.main-header');
+      const footer_color = document.querySelector('.footer');
+      const card_color = document.querySelector('.card');
+      const userName = document.querySelector('.profile-username');
+      const userBox = document.querySelector('.dropdown-user-scroll scrollbar-outer');
+      document.body.classList.toggle('dark');
+      sidebar_color.classList.toggle('dark');
+      header_logo_color.classList.toggle('dark');
+      main_header_color.classList.toggle('dark');
+      footer_color.classList.toggle('dark');
+      card_color.classList.toggle('dark');
+      userName.classList.toggle('dark');
+      userBox.classList.toggle('dark');
+      // Actualiza el texto del botón
+      if (document.body.classList.contains('dark') && header_logo_color.classList.contains('dark') && sidebar_color.classList.contains('dark') && main_header_color.classList.contains('dark')) {
         localStorage.setItem('dark-mode', 'enabled');
         this.textContent = 'Cambiar a Modo Claro';
-    } else {
+      } else {
         localStorage.setItem('dark-mode', 'disabled');
         this.textContent = 'Cambiar a Modo Oscuro';
-    }
-});
-    
+      }
+    });
+  });
+
+
 
 
 
@@ -172,20 +191,15 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       const valor = camposUsu[name];
 
       // Validar campos vacíos
-      if (value.trim() === '' ) {
-        if (campos[name]) {
-          if(campos[name]!=='usuario_nombre_2'){
-            document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-            esValido = false;
+      if (valor && valor !== 'Segundo nombre' && value.trim() === '') {
 
-          }
+        document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+        esValido = false;
 
-         
-        }
       }
 
-    
-       else {
+
+      if (value.trim() !== '') {
         switch (name) {
           case 'usuario_nombre_1':
           case 'usuario_nombre_2':
@@ -209,12 +223,12 @@ document.getElementById('toggleButton').addEventListener('click', function() {
               esValido = false;
             }
             break;
-            case 'usuario_contrasenia':
-              if (!validarContrasenia(value)) {
-               
-                  esValido = false;
-              }
-              break;
+          case 'usuario_contrasenia':
+            if (!validarContrasenia(value)) {
+
+              esValido = false;
+            }
+            break;
           case 'tipo_documento_id':
             if (value === '') {
               document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
@@ -263,7 +277,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       // Validar campos vacíos
       if (value.trim() === '') {
         if (camposUsu[name]) {
-        
+
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
         }
@@ -289,7 +303,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
               esValido = false;
             }
             break;
-            
+
           case 'usuario_correo':
             if (!validarCorreo(value)) {
               document.getElementById(error).textContent = `*Ingrese un correo válido.*`;
@@ -356,7 +370,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       // Validar campos vacíos
       if (value.trim() === '') {
         if (camposSenialM[name]) {
-        
+
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
         }
@@ -372,7 +386,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       submitButton.disabled = true;
     }
   });
-  
+
 
   $(document).on('input', '#formNuevaSenial input, #formNuevaSenial select', function (event) {
     event.preventDefault();
@@ -395,7 +409,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       // Validar campos vacíos
       if (value.trim() === '') {
         if (camposSenialN[name]) {
-        
+
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
         }
@@ -434,7 +448,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       // Validar campos vacíos
       if (value.trim() === '') {
         if (camposReductorN[name]) {
-        
+
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
         }
@@ -694,7 +708,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
 
 
 
-//filtracion
+  //filtracion
   $(document).on('keyup', "#buscar", function () {
     let buscar = $(this).val();
     let url = $(this).attr('data-url');
@@ -709,7 +723,7 @@ document.getElementById('toggleButton').addEventListener('click', function() {
     });
   });
 
-  
+
   $(document).on('keyup', "#id_data", function () {
     let id_data = $(this).val();
     let url = $(this).attr('data-url');
@@ -738,31 +752,31 @@ document.getElementById('toggleButton').addEventListener('click', function() {
       }
     });
   });
-//cargar consulta de solicitudes 
-$(document).on('change', "#id_consult_solicitud", function () {
-  let id_consult_solicitud = $(this).val();
-  let url = $(this).attr('data-url');
-  console.log("gola");
-  // alert("Valor seleccionado: " + id_consult_solicitud)
-  $.ajax({
-    url: url,
-    type: 'POST',
-    data: { 'id_solicitud': id_consult_solicitud },
-    success: function (data) {
-      $('#formularios').html(data);
-    }
+  //cargar consulta de solicitudes 
+  $(document).on('change', "#id_consult_solicitud", function () {
+    let id_consult_solicitud = $(this).val();
+    let url = $(this).attr('data-url');
+    console.log("gola");
+    // alert("Valor seleccionado: " + id_consult_solicitud)
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: { 'id_solicitud': id_consult_solicitud },
+      success: function (data) {
+        $('#formularios').html(data);
+      }
+    });
   });
-});
   //ajax cargar formulario de reportes
   $(document).on('change', "#id_reporte", function () {
     let id_reporte = $(this).val();
     let url = $(this).attr('data-url');
     console.log("Helou");
-     console.log("Valor seleccionado: " + id_reporte);
+    console.log("Valor seleccionado: " + id_reporte);
     $.ajax({
       url: url,
       type: 'POST',
-      data: { 'id_reporte': id_reporte},
+      data: { 'id_reporte': id_reporte },
       success: function (data) {
         $('#formulariosReport').html(data);
       }
