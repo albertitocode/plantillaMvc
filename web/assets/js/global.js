@@ -39,8 +39,7 @@ $(document).ready(function () {
     'categoria_senial_id': 'Categoria',
     'danio_id': 'Daño',
     'tipo_senial_id': 'Tipo de señal',
-    'senial_id': 'Señal'
-  };
+    'senial_id': 'Señal'  };
   const camposSenialN = {
     'categoria_senial_id': 'Categoria',
     'tipo_senial_id': 'Tipo de señal',
@@ -231,7 +230,7 @@ $(document).ready(function () {
           if (!validarCorreo(value)) {
             document.getElementById(error).textContent = `*Por favor, ingrese un correo electrónico válido (ejemplo: usuario@dominio.com).*`;
             esValido = false;
-          }else if (value.length > 50) {
+          } else if (value.length > 50) {
             document.getElementById(error).textContent = `*Correo muy largo*`;
             esValido = false;
           }
@@ -249,7 +248,7 @@ $(document).ready(function () {
             if (value.length < 10) { // Validar longitud específica (10 dígitos para teléfono)
               document.getElementById(error).textContent = `*El Teléfono tiene menos de 10 dígitos.*`;
               esValido = false;
-            }else if(value.length > 10){
+            } else if (value.length > 10) {
               document.getElementById(error).textContent = `*El Teléfono tiene más de 10 dígitos.*`;
               esValido = false;
 
@@ -258,12 +257,12 @@ $(document).ready(function () {
             if (value.length < 6) {
               document.getElementById(error).textContent = `*El Número de identificación debe tener mínimo 5 dígitos*`;
               esValido = false;
-            }else if(value.length > 10){
+            } else if (value.length > 10) {
               document.getElementById(error).textContent = `*El Número de identificacion debe tener máximo 10 digitos*`;
               esValido = false;
 
             }
-          } else if (campoUsu == 'num_via'||campoUsu == 'numero2'||campoUsu == 'numero3') { // Validar longitud específica (10 dígitos para teléfono)
+          } else if (campoUsu == 'num_via' || campoUsu == 'numero2' || campoUsu == 'numero3') { // Validar longitud específica (10 dígitos para teléfono)
             if (value.length > 3) {
               document.getElementById(error).textContent = `*El Número debe tener máximo 3 dígitos*`;
               esValido = false;
@@ -284,7 +283,7 @@ $(document).ready(function () {
           break;
 
 
-        
+
         case 'usuario_fecha_nacimiento':
           // Validar si la fecha de nacimiento no es futura y mayor de edad
           const fechaNacimiento = new Date(value);
@@ -309,8 +308,8 @@ $(document).ready(function () {
 
 
 
- // new perfil
- $('#formUsu').submit(function (event) {
+  // new perfil
+  $('#formUsu').submit(function (event) {
     event.preventDefault();
     console.log("submit");
 
@@ -349,92 +348,92 @@ $(document).ready(function () {
       if (value.trim() !== '') {
         switch (name) {
           case 'usuario_nombre_1':
-            case 'usuario_nombre_2':
-            case 'usuario_apellido_1':
-            case 'usuario_apellido_2':
-              if (value.length > 30) {
-                document.getElementById(error).textContent = `*El campo ${valor} no puede tener más de 50 caracteres.*`;
+          case 'usuario_nombre_2':
+          case 'usuario_apellido_1':
+          case 'usuario_apellido_2':
+            if (value.length > 30) {
+              document.getElementById(error).textContent = `*El campo ${valor} no puede tener más de 50 caracteres.*`;
+              esValido = false;
+            } else if (!validarCampoLetras(value)) {
+              document.getElementById(error).textContent = `*El campo ${valor} solo debe contener letras.*`;
+              esValido = false;
+            }
+            break;
+
+          case 'usuario_correo':
+            if (!validarCorreo(value)) {
+              document.getElementById(error).textContent = `*Por favor, ingrese un correo electrónico válido (ejemplo: usuario@dominio.com).*`;
+              esValido = false;
+            } else if (value.length > 50) {
+              document.getElementById(error).textContent = `*Correo muy largo*`;
+              esValido = false;
+            }
+            break;
+          case 'usuario_telefono':
+          case 'num_via':
+          case 'numero2':
+          case 'numero3':
+          case 'usuario_num_identificacion':
+            if (!validarNumeros(value)) {
+              document.getElementById(error).textContent = `*El campo ${valor} debe contener solo números.*`;
+              esValido = false;
+            } else if (name == 'usuario_telefono') {
+
+              if (value.length < 10) { // Validar longitud específica (10 dígitos para teléfono)
+                document.getElementById(error).textContent = `*El Teléfono tiene menos de 10 dígitos.*`;
                 esValido = false;
-              } else if (!validarCampoLetras(value)) {
-                document.getElementById(error).textContent = `*El campo ${valor} solo debe contener letras.*`;
+              } else if (value.length > 10) {
+                document.getElementById(error).textContent = `*El Teléfono tiene más de 10 dígitos.*`;
+                esValido = false;
+
+              }
+            } else if (name == 'usuario_num_identificacion') { // Validar longitud específica (10 dígitos para teléfono)
+              if (value.length < 6) {
+                document.getElementById(error).textContent = `*El Número de identificación debe tener mínimo 5 dígitos*`;
+                esValido = false;
+              } else if (value.length > 10) {
+                document.getElementById(error).textContent = `*El Número de identificacion debe tener máximo 10 digitos*`;
+                esValido = false;
+
+              }
+            } else if (name == 'num_via' || name == 'numero2' || name == 'numero3') { // Validar longitud específica (10 dígitos para teléfono)
+              if (value.length > 3) {
+                document.getElementById(error).textContent = `*El Número debe tener máximo 3 dígitos*`;
                 esValido = false;
               }
-              break;
-    
-            case 'usuario_correo':
-              if (!validarCorreo(value)) {
-                document.getElementById(error).textContent = `*Por favor, ingrese un correo electrónico válido (ejemplo: usuario@dominio.com).*`;
-                esValido = false;
-              }else if (value.length > 50) {
-                document.getElementById(error).textContent = `*Correo muy largo*`;
-                esValido = false;
-              }
-              break;
-            case 'usuario_telefono':
-            case 'num_via':
-            case 'numero2':
-            case 'numero3':
-            case 'usuario_num_identificacion':
-              if (!validarNumeros(value)) {
-                document.getElementById(error).textContent = `*El campo ${valor} debe contener solo números.*`;
-                esValido = false;
-              } else if (name == 'usuario_telefono') {
-    
-                if (value.length < 10) { // Validar longitud específica (10 dígitos para teléfono)
-                  document.getElementById(error).textContent = `*El Teléfono tiene menos de 10 dígitos.*`;
-                  esValido = false;
-                }else if(value.length > 10){
-                  document.getElementById(error).textContent = `*El Teléfono tiene más de 10 dígitos.*`;
-                  esValido = false;
-    
-                }
-              } else if (name == 'usuario_num_identificacion') { // Validar longitud específica (10 dígitos para teléfono)
-                if (value.length < 6) {
-                  document.getElementById(error).textContent = `*El Número de identificación debe tener mínimo 5 dígitos*`;
-                  esValido = false;
-                }else if(value.length > 10){
-                  document.getElementById(error).textContent = `*El Número de identificacion debe tener máximo 10 digitos*`;
-                  esValido = false;
-    
-                }
-              } else if (name == 'num_via'||name == 'numero2'||name == 'numero3') { // Validar longitud específica (10 dígitos para teléfono)
-                if (value.length > 3) {
-                  document.getElementById(error).textContent = `*El Número debe tener máximo 3 dígitos*`;
-                  esValido = false;
-                }
-              }
-              break;
-            case 'usuario_contrasenia':
-              if (!validarContrasenia(value)) {
-    
-                esValido = false;
-              }
-              break;
-            case 'tipo_documento_id':
-              if (value === '') {
-                document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
-                esValido = false;
-              }
-              break;
-    
-    
-            
-            case 'usuario_fecha_nacimiento':
-              // Validar si la fecha de nacimiento no es futura y mayor de edad
-              const fechaNacimiento = new Date(value);
-              const hoy = new Date();
-              const edadMinima = 18;
-              const fechaLimite = new Date(hoy.setFullYear(hoy.getFullYear() - edadMinima));
-    
-              if (fechaNacimiento > new Date()) {
-                document.getElementById(error).textContent = `*La fecha de nacimiento no puede estar en el futuro*`;
-                esValido = false;
-              } else if (fechaNacimiento > fechaLimite) {
-                document.getElementById(error).textContent = `*Debe ser mayor de 18 años*`;
-                esValido = false;
-              }
-              break;
-    
+            }
+            break;
+          case 'usuario_contrasenia':
+            if (!validarContrasenia(value)) {
+
+              esValido = false;
+            }
+            break;
+          case 'tipo_documento_id':
+            if (value === '') {
+              document.getElementById(error).textContent = `*Debe seleccionar un tipo de documento.*`;
+              esValido = false;
+            }
+            break;
+
+
+
+          case 'usuario_fecha_nacimiento':
+            // Validar si la fecha de nacimiento no es futura y mayor de edad
+            const fechaNacimiento = new Date(value);
+            const hoy = new Date();
+            const edadMinima = 18;
+            const fechaLimite = new Date(hoy.setFullYear(hoy.getFullYear() - edadMinima));
+
+            if (fechaNacimiento > new Date()) {
+              document.getElementById(error).textContent = `*La fecha de nacimiento no puede estar en el futuro*`;
+              esValido = false;
+            } else if (fechaNacimiento > fechaLimite) {
+              document.getElementById(error).textContent = `*Debe ser mayor de 18 años*`;
+              esValido = false;
+            }
+            break;
+
         }
       }
     });
@@ -451,15 +450,33 @@ $(document).ready(function () {
 
   $(document).on('input', '#formMalaSenial input, #formMalaSenial select', function (event) {
     event.preventDefault();
-    console.log("funca esto");
     var formData = $('#formMalaSenial').serializeArray();
+
+    const fileInput = document.querySelector('input[name="solicitud_senial_imagen"]');
+    const file = fileInput.files[0]; // Accede al archivo seleccionado
     let esValido = true;
+
+    if (!file) {
+      console.log('El archivo no fue seleccionado');
+      
+
+    } else if (![ 'image/png', 'image/jpeg', 'image/jpg'].includes(file.type)) {
+      document.getElementById("error_solicitud_senial_imagen").textContent =  `*El formato de la imagen no es valido*`;
+      esValido = false;
+
+    } else if (file.size > 2 * 1024 * 1024) { // 2 MB
+      document.getElementById("error_solicitud_senial_imagen").textContent =  `*El archivo es demasiado grande*`;
+      esValido = false;
+
+    }else{
+      console.log('archivo ingresado')
+    }
 
     // Limpiar los mensajes de error antes de comenzar la validación
     Object.keys(camposSenialM).forEach(campoSenialM => {
       const error = `error_${campoSenialM}`;
       document.getElementById(error).textContent = ""; // Limpia los errores
-    });x
+    });
 
     // Validación de los campos
     formData.forEach(function (campoData) {
@@ -556,44 +573,6 @@ $(document).ready(function () {
     });
 
     const submitButton = document.getElementById('btnReductorN');
-    if (esValido) {
-      console.log('Formulario válido');
-      submitButton.disabled = false;
-    } else {
-      console.log('Formulario no válido');
-      submitButton.disabled = true;
-    }
-  });
-  //reductor en mal estado
-  $(document).on('input', '#formReductorM input, #formReductorM select', function (event) {
-    event.preventDefault();
-    console.log("funca esto");
-    var formData = $('#formReductorM').serializeArray();
-    let esValido = true;
-
-    // Limpiar los mensajes de error antes de comenzar la validación
-    Object.keys(camposReductorM).forEach(campoReductorM => {
-      const error = `error_${campoReductorM}`;
-      document.getElementById(error).textContent = ""; // Limpia los errores
-    });
-
-    // Validación de los campos
-    formData.forEach(function (campoData) {
-      const { name, value } = campoData;
-      const error = `error_${name}`;
-      const valor = camposReductorM[name];
-
-      // Validar campos vacíos
-      if (value.trim() === '') {
-        if (camposReductorM[name]) {
-
-          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-          esValido = false;
-        }
-      }
-    });
-
-    const submitButton = document.getElementById('btnReductorM');
     if (esValido) {
       console.log('Formulario válido');
       submitButton.disabled = false;
@@ -998,8 +977,7 @@ $(document).ready(function () {
 
 
 
-  $('#tipo_senial_id').on('change', function () {
-  
+  $('#tipo_senial_id, #categoria_senial_id').on('change', function () {
     var url = $(this).attr('data-url');
     var categoria_senial = $('#categoria_senial_id').val();
     var tipo_senial = $('#tipo_senial_id').val();
@@ -1007,7 +985,7 @@ $(document).ready(function () {
     console.log(tipo_senial)
 
     $.ajax({
-      
+
       url: url,
       type: 'POST',
       data: {
@@ -1036,8 +1014,7 @@ $(document).ready(function () {
   });
 
 
-  $('#categoria_reductor_id').on('change', function () {
-    // $(document).on('change', '#formReductorM select, #formReductorN select', function () {
+  $(document).on('change', '#formReductorM select, #formReductorN select', function () {
 
     var url = $(this).attr('data-url');
     var categoria_reductor = $('#categoria_reductor_id').val();

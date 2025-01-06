@@ -62,7 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-            redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
+            redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
@@ -91,7 +91,26 @@ class SolicitudController
 
         $solicitud_seniales_nuevas = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudSenal/nueva/consult.php';
+        if ( $solicitud_seniales_nuevas) {
+            include_once '../view/solicitudSenal/nueva/consult.php';
+
+        } else {
+
+            echo "<script>
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'No hay solicitudes Registradas',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateNuevaSenial") . "';
+                    }
+                });
+            </script>";
+        }
+
     }
 
 
@@ -191,7 +210,26 @@ class SolicitudController
         $sql = "SELECT s.*, se.senial_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, da.danio_nombre, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_seniales_mal_estado s JOIN seniales se ON s.senial_id=se.senial_id JOIN usuarios usu  ON s.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON s.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON s.estado_id = e.estado_id JOIN danios da ON s.danio_id=da.danio_id";
         $solicitud_seniales_mal_estado = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudSenal/malEstado/consult.php';
+        if ($solicitud_seniales_mal_estado) {
+            include_once '../view/solicitudSenal/malEstado/consult.php';
+
+        } else {
+
+            echo "<script>
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'No hay solicitudes Registradas',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateSenialMalEstado") . "';
+                    }
+                });
+            </script>";
+
+        }
     }
 
     public function getNombreSenial()
@@ -290,37 +328,57 @@ class SolicitudController
 
         //añadir campo fecha
         //agregar los cambios de estados
-        // $categoria = $_POST['categoria_senal_id'];
-        $categoria_senal_id = $_POST['categoria_senial_id'];
-        $tipo_senal_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
-        $solicitud_senial_mal_estado_descripcion = $_POST['solicitud_senial_mal_estado_descripcion'];
-        $solicitud_senial_mal_estado_direccion = $_POST['solicitud_senial_mal_estado_direccion'];
-        $solicitud_senial_mal_estado_imagen = $_POST['solicitud_senial_mal_estado_imagen'];
         $danio_id = $_POST['danio_id'];
         $usuario_id = $_SESSION['id'];
+
+       
+        
+        if (isset($_FILES['solicitud_senial_imagen']) && $_FILES['solicitud_senial_imagen']['error'] === 0) {
+            $img = $_FILES['solicitud_senial_imagen']['name'];
+        
+            // Usar una ruta absoluta para evitar problemas con rutas relativas
+            $ruta = __DIR__ . "/../web/assets/img/img_solicitudes/$img";
+        
+            move_uploaded_file($_FILES['solicitud_senial_imagen']['tmp_name'], $ruta);
+               
+        } else {
+            $img = "Sin imagen";
+            echo "No se ha subido ninguna imagen.";
+        }
+        
+
+
+
+        if (isset($_POST['solicitud_senial_mal_estado_descripcion'])){
+            $solicitud_senial_mal_estado_descripcion = $_POST['solicitud_senial_mal_estado_descripcion'];
+
+        }else{
+            $solicitud_senial_mal_estado_descripcion = "Sin descripción";
+
+        }
+
 
 
         //validaciones 
         $validacion = true;
         $campos = [
-            'categoria_senial_id' => 'Es requerido llenar el campo categoria',
-            'tipo_senial_id' => 'Es requerido llenar el campo tipo de señal',
+            
             'senial_id' => 'Es requerido llenar el campo señal',
-            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
-            'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
-            'danio_id' => 'Es requerido llenar el campo daño'
+            'danio_id' => 'Es requerido llenar el campo daño',
         ];
 
         foreach ($campos as $campo => $mensaje) {
-            if (empty(trim($$campo))) {
-
-                $_SESSION['errores'][] = $mensaje;
-                $validacion = false;
-            } else {
+            if (empty($_POST[$campo])) {
+                $_SESSION['errores'][] = $mensaje; // Guardamos el error en sesión
+                $validacion = false; // Marcamos que la validación falló
             }
         }
-        $sql = "INSERT INTO solicitud_seniales_mal_estado (senial_id,solicitud_senial_mal_estado_descripcion,danio_id,usuario_id,solicitud_senial_mal_estado_direccion,solicitud_senial_mal_estado_imagen,tipo_solicitud_id,estado_id) VALUES($senial_id,'$solicitud_senial_mal_estado_descripcion',$danio_id,$usuario_id,'$solicitud_senial_mal_estado_direccion','$solicitud_senial_mal_estado_imagen',1,4)";
+
+        $sql = "INSERT INTO solicitud_seniales_mal_estado (senial_id,solicitud_senial_mal_estado_descripcion,
+        danio_id,usuario_id,solicitud_senial_mal_estado_imagen,
+        tipo_solicitud_id,estado_id) VALUES($senial_id,'$solicitud_senial_mal_estado_descripcion',$danio_id,
+        $usuario_id,'$img',1,3)";
         if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
@@ -333,7 +391,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getCreateSenialMalEstado") . "';
                     }
                 });
             </script>";
@@ -373,9 +431,9 @@ class SolicitudController
     {
         echo "si";
         $obj = new SolicitudModel();
-        if (isset($_POST['categoria_reductor'])) {
+        if (isset($_POST['categoria_reductor_id'])) {
 
-            $categoria_reductor = $_POST['categoria_reductor'];
+            $categoria_reductor = $_POST['categoria_reductor_id'];
             echo $categoria_reductor;
 
             $sql = "SELECT * from reductores WHERE categoria_reductor_id=$categoria_reductor";
@@ -420,7 +478,26 @@ class SolicitudController
         $sql = "SELECT r.*, re.reductor_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, da.danio_nombre, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_reductores_mal_estado r JOIN reductores re ON r.reductor_id=re.reductor_id JOIN usuarios usu  ON r.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON r.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON r.estado_id = e.estado_id JOIN danios da ON r.danio_id=da.danio_id";
         $solicitud_reductores_mal_estado = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudReductor/malEstado/consult.php';
+        if ($solicitud_reductores_mal_estado) {
+            include_once '../view/solicitudReductor/malEstado/consult.php';
+
+        } else {
+
+            echo "<script>
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'No hay solicitudes Registradas',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateReductorMalEstado") . "';
+                    }
+                });
+            </script>";
+
+        }
     }
     public function getCreateReductorMalEstado()
     {
@@ -528,7 +605,25 @@ class SolicitudController
         $sql = "SELECT r.*, re.reductor_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono, tip.tipo_solicitud_nombre, e.estado_nombre FROM solicitud_reductores_nuevos r JOIN reductores re ON r.reductor_id=re.reductor_id JOIN usuarios usu  ON r.usuario_id=usu.usuario_id JOIN tipo_solicitudes tip ON r.tipo_solicitud_id = tip.tipo_solicitud_id JOIN estados e ON r.estado_id = e.estado_id";
         $solicitud_reductores_nuevos = pg_fetch_all($obj->consult($sql));
 
-        include_once '../view/solicitudReductor/nuevo/consult.php';
+        if ( $solicitud_reductores_nuevos) {
+            include_once '../view/solicitudReductor/nuevo/consult.php';
+
+        } else {
+
+            echo "<script>
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'No hay solicitudes Registradas',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateReductorNuevo") . "';
+                    }
+                });
+            </script>";
+        }
     }
     public function getCreateReductorNuevo()
     {
@@ -743,7 +838,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateVia") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getCreateVia") . "';
                     }
                 });
             </script>";

@@ -4,21 +4,10 @@
 
 
 <div class="mt-5">
-    <div class="alert alert-danger d-none" role="alert" id="error">
-
-    </div>
-    <!--     
-    //   if(isset($_SESSION['errores'])){
-    //         echo "<div class='alert alert-danger' role='alert'>";
-    //           foreach ($_SESSION['errores'] as $error) {
-    //             echo $error."<br>";
-    //           }
-    //        echo "</div>";
-    //        unset($_SESSION['errores']);
-    //     }
-
-    //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formMalaSenial">
+    
+  
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post"
+        id="formMalaSenial" enctype="multipart/form-data">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -69,11 +58,12 @@
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
                                     <span class="ms-2 text-primary" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="click" data-bs-html="true" data-bs-content="Por favor, ingresa la <strong>Categoria de la señal</strong> 
+                                        data-bs-trigger="click" data-bs-html="true" data-bs-content="Por favor, ingresa la <strong>Categoria de la señal</strong> 
                                     que se encuentra en mal estado.<br> Si no sabes cuáles son las categorías, 
                                     consúltalas en el siguiente enlace <br> <a href='<?php echo getUrl("Solicitud", "Solicitud", "getImgCategoriaSenial"); ?>' 
                                     target='_blank'>Ver más</a>">
-                                    <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i> </span>
+                                        <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
+                                    </span>
 
 
                                     <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
@@ -113,26 +103,7 @@
                                     </select>
                                     <span class="text-danger" id="error_danio_id"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
-                                        via</label>
-                                    <div class="d-flex">
 
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
-
-                                </div>
 
                             </div>
                             <div class="col-md-6 col-lg-4">
@@ -157,14 +128,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="solicitud_senial_mal_estado_descripcion"> Describa el daño</label>
-                                    <input type="text" name="solicitud_senial_mal_estado_descripcion" id=""
-                                        class="form-control" placeholder="Describa el estado de la señal">
+                                    <input type="text" name="solicitud_senial_descripcion"
+                                        id="solicitud_senial_descripcion" class="form-control"
+                                        placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group mb-3 d-none" id="senal">
                                     <label for="senial_id">Nombre de la señal</label>
-                                    <select name="senial_id" id="senial" class="form-control">
+                                    <select name="senial_id" id="senial_id" class="form-control">
                                         <option value="">Seleccione categoria...</option>
                                         <?php
                                         foreach ($seniales as $senial) {
@@ -172,11 +144,14 @@
                                         }
                                         ?>
                                     </select>
-                                    <span class="senial_id" id="error_senial_id"></span>
+                                    <span class="text-danger" id="error_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen de la señal dañada</label>
-                                    <input type="file" name="solicitud_senial_mal_estado_imagen">
+                                    <input type="file" name="solicitud_senial_imagen"accept="image/png, image/jpeg, image/jpg">
+                                    <br>
+                                    <span class="text-danger" id="error_solicitud_senial_imagen"></span>
+
                                 </div>
                             </div>
                         </div>
@@ -189,7 +164,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" id="btnSenialM"  value="Enviar" class="btn btn-success" disabled>
+            <input type="submit" id="btnSenialM" value="Enviar" class="btn btn-success" disabled>
         </div>
     </form>
 </div>
