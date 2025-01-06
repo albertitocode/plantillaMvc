@@ -69,7 +69,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senial_id" id="" class="form-control"
+                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
                                                 "Solicitud",

@@ -88,7 +88,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="olicitud_reductores_mal_estado_direccion" class="fw-bold">Direccion
+                                    <label class="fw-bold">Direccion
                                         via</label>
                                     <div class="d-flex">
 
@@ -112,14 +112,14 @@
                             <div class="col-md-6 col-lg-4">
 
                                 <div class="form-group">
-                                    <label for="solicitud_reductores_mal_estado_descripcion"> Describa el daño</label>
+                                    <label> Describa el daño</label>
                                     <input type="text" name="solicitud_reductores_mal_estado_descripcion" id=""
                                         class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group mb-3 d-none" id="reduct">
-                                    <label for="reductor_id">Nombre del Reductor</label>
+                                    <label >Nombre del Reductor</label>
                                     <select name="reductor_id" id="reductor_id" class="form-control">
                                         <option value="">Seleccione reductor...</option>
                                         <?php

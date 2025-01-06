@@ -58,8 +58,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="categoria_reductor_id">Categoria de la señal</label>
-                                    <select name="categoria_reductor_id" id="" class="form-control" data-url='<?php echo
+                                    <label for="categoria_reductor_id">Categoria del reductor</label>
+                                    <select name="categoria_reductor_id" id="categoria_reductor_id" class="form-control" data-url='<?php echo
                                         getUrl(
                                             "Solicitud",
                                             "Solicitud",
@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="solicitud_reductor_nuevo_direccion" class="fw-bold">Direccion
+                                    <label class="fw-bold">Direccion
                                         via</label>
                                     <div class="d-flex">
 
@@ -102,15 +102,15 @@
                             <div class="col-md-6 col-lg-4">
 
                                 <div class="form-group">
-                                    <label for="solicitud_reductor_nuevo_descripcion"> Describa el caso</label>
+                                    <label > Describa el caso</label>
                                     <input type="text" name="solicitud_reductor_nuevo_descripcion" id=""
                                         class="form-control" placeholder="Describa el estado de la señal">
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
-                                <div class="form-group mb-3 d-none" id="reductor">
-                                    <label for="reductor_id">Nombre del Reductor</label>
-                                    <select name="reductor_id" id="" class="form-control">
+                                <div class="form-group mb-3 d-none" id="reduct">
+                                    <label ">Nombre del Reductor</label>
+                                    <select name="reductor_id" id="reductor_id" class="form-control">
                                         <option value="">Seleccione reductor...</option>
                                         <?php
                                         foreach ($reductores as $reductor) {
@@ -121,7 +121,7 @@
                                     <span class="text-danger" id="error_reductor_id"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="image" class="d-block">Imagen del reductor dañado</label>
+                                    <label class="d-block">Imagen del reductor dañado</label>
                                     <input type="file" name="solicitud_reductor_nuevo_imagen">
                                 </div>
                             </div>

@@ -34,7 +34,6 @@ $(document).ready(function () {
     'numero3': 'Número complemento 3',
     'barrio': 'Barrio',
     'usuario_contrasenia': 'Contraseña',
-    'rol':'Rol'
   };
   const camposSenialM = {
     'categoria_senial_id': 'Categoria',
@@ -312,8 +311,7 @@ $(document).ready(function () {
 
 
   //new perfil
-  document.getElementById('formUsu').addEventListener('submit', function (e) {
-    e.preventDefault();
+  $('#formUsu').submit(function (event) {
     console.log("submit");
 
 
@@ -355,10 +353,10 @@ $(document).ready(function () {
             case 'usuario_apellido_1':
             case 'usuario_apellido_2':
               if (value.length > 30) {
-                document.getElementById(error).textContent = `*El campo ${campoNombre} no puede tener más de 50 caracteres.*`;
+                document.getElementById(error).textContent = `*El campo ${valor} no puede tener más de 50 caracteres.*`;
                 esValido = false;
               } else if (!validarCampoLetras(value)) {
-                document.getElementById(error).textContent = `*El campo ${campoNombre} solo debe contener letras.*`;
+                document.getElementById(error).textContent = `*El campo ${valor} solo debe contener letras.*`;
                 esValido = false;
               }
               break;
@@ -378,7 +376,7 @@ $(document).ready(function () {
             case 'numero3':
             case 'usuario_num_identificacion':
               if (!validarNumeros(value)) {
-                document.getElementById(error).textContent = `*El campo ${campoNombre} debe contener solo números.*`;
+                document.getElementById(error).textContent = `*El campo ${valor} debe contener solo números.*`;
                 esValido = false;
               } else if (name == 'usuario_telefono') {
     
@@ -839,6 +837,7 @@ $(document).ready(function () {
       }
     });
   });
+
   //ajax cargar formulario de solicitudes
   $(document).on('change', "#id_solicitud", function () {
     let id_solicitud = $(this).val();
@@ -937,9 +936,6 @@ $(document).ready(function () {
 
   $('#tipo_choque').on('change', function () {
 
-
-
-
     var url = $(this).attr('data-url');
     var tipo_choque = $(this).val();
 
@@ -972,18 +968,22 @@ $(document).ready(function () {
 
 
 
-  $(document).on('change', '#formSenialM select, #formSenialN select', function () {
-
+  $('#tipo_senial_id').on('change', function () {
+  
     var url = $(this).attr('data-url');
     var categoria_senial = $('#categoria_senial_id').val();
     var tipo_senial = $('#tipo_senial_id').val();
+    console.log(categoria_senial)
+    console.log(tipo_senial)
 
     $.ajax({
+      
       url: url,
       type: 'POST',
       data: {
-        'tipo_senial': tipo_senial,
-        'categoria_senial': categoria_senial
+        
+        'tipo_senial_id': tipo_senial,
+        'categoria_senial_id': categoria_senial
       },
       success: function (data) {
         if (!data.includes("error")) {
@@ -1007,7 +1007,7 @@ $(document).ready(function () {
   });
 
 
-  $(document).on('change', '#formReductorM select, #formReductorN select', function () {
+  $('#categoria_reductor_id').on('change', function () {
 
     var url = $(this).attr('data-url');
     var categoria_reductor = $('#categoria_reductor_id').val();
