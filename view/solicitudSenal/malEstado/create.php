@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formMalaSenial">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formSenialM">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -76,7 +76,7 @@
                                     <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i> </span>
 
 
-                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
+                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
                                                 "Solicitud",
@@ -93,7 +93,6 @@
                                         ?>
 
                                     </select>
-
                                     <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
                                 <div class="form-group">
@@ -114,23 +113,9 @@
                                     <span class="text-danger" id="error_danio_id"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
+                                    <label for="solicitud_senial_mal_estado_direccion" class="fw-bold">Direccion
                                         via</label>
-                                    <div class="d-flex">
-
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
+                                    <input type="text" name="solicitud_senial_mal_estado_direccion" id="" class="form-control">
 
                                 </div>
 

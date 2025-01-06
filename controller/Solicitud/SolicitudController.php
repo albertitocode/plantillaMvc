@@ -62,7 +62,7 @@ class SolicitudController
             // include_once '../view/solicitudVial/create.php';
             redirect(getUrl("Solicitud", "Solicitud", "getVias"));
         } else if ($id_solicitud == 4) {
-            redirect(getUrl("Solicitud", "Solicitud", "getAccidente"));
+            redirect(getUrl("Solicitud", "Solicitud", "getAccidentes"));
         } else if ($id_solicitud == 5) {
             redirect(getUrl("Solicitud", "Solicitud", "getSenialNueva"));
         } else if ($id_solicitud == 3) {
@@ -123,8 +123,8 @@ class SolicitudController
         //añadir campo fecha
         //agregar los cambios de estados
 
-        $categoria_senal_id = $_POST['categoria_senial_id'];
-        $tipo_senal_id = $_POST['tipo_senial_id'];
+        $categoria_senial_id = $_POST['categoria_senial_id'];
+        $tipo_senial_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_nueva_descripcion = $_POST['solicitud_senial_nueva_descripcion'];
         $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
@@ -136,9 +136,7 @@ class SolicitudController
         $campos = [
             'categoria_senial_id' => 'Es requerido llenar el campo categoria',
             'tipo_senial_id' => 'Es requerido llenar el campo tipo de señal', //todos llegan menos este, revisar
-            'senial_id' => 'Es requerido llenar el campo señal',
-            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion'
-            
+            'senial_id' => 'Es requerido llenar el campo señal',            
 
         ];
 
@@ -196,7 +194,7 @@ class SolicitudController
 
     public function getNombreSenial()
     {
-        echo "si";
+     //   echo "si";
         $obj = new SolicitudModel();
         if (isset($_POST['categoria_senial_id'])) {
 
@@ -292,8 +290,8 @@ class SolicitudController
         //añadir campo fecha
         //agregar los cambios de estados
         // $categoria = $_POST['categoria_senal_id'];
-        $categoria_senal_id = $_POST['categoria_senial_id'];
-        $tipo_senal_id = $_POST['tipo_senial_id'];
+        $categoria_senial_id = $_POST['categoria_senial_id'];
+        $tipo_senial_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_mal_estado_descripcion = $_POST['solicitud_senial_mal_estado_descripcion'];
         $solicitud_senial_mal_estado_direccion = $_POST['solicitud_senial_mal_estado_direccion'];
@@ -308,8 +306,6 @@ class SolicitudController
             'categoria_senial_id' => 'Es requerido llenar el campo categoria',
             'tipo_senial_id' => 'Es requerido llenar el campo tipo de señal',
             'senial_id' => 'Es requerido llenar el campo señal',
-            'solicitud_senial_nueva_descripcion' => 'Es requerido llenar el campo observacion',
-            'solicitud_senial_nueva_direccion' => 'Es requerido llenar el campo Direccion',
             'danio_id' => 'Es requerido llenar el campo daño'
         ];
 
@@ -374,9 +370,9 @@ class SolicitudController
     {
         echo "si";
         $obj = new SolicitudModel();
-        if (isset($_POST['categoria_reductor'])) {
+        if (isset($_POST['categoria_reductor_id'])) {
 
-            $categoria_reductor = $_POST['categoria_reductor'];
+            $categoria_reductor = $_POST['categoria_reductor_id'];
             echo $categoria_reductor;
 
             $sql = "SELECT * from reductores WHERE categoria_reductor_id=$categoria_reductor";
@@ -444,10 +440,6 @@ class SolicitudController
     {
         $obj = new SolicitudModel();
 
-        //añadir campo fecha
-        //agregar los cambios de estados
-        // $categoria = $_POST['categoria_reductor_id'];
-        // $senial_id = $_POST['senial_id'];
         $solicitud_reductores_mal_estado_descripcion = $_POST['solicitud_reductores_mal_estado_descripcion'];
         $carrera = $_POST['carrera'];
         $calle = $_POST['calle'];
@@ -457,15 +449,11 @@ class SolicitudController
         $danio_id = $_POST['danio_id'];
         $usuario_id = $_SESSION['id'];
         $reductor_id = $_POST['reductor_id'];
-        $categoria = $_POST['categoria_reductor_id'];
+        $categoria_reductor_id = $_POST['categoria_reductor_id'];
 
         $validacion = true;
         $campos = [
-            'solicitud_reductores_mal_estado_descripcion' => 'El campo Descripcion es requerido',
             'danio_id' => 'El campo daño es requerido',
-            'barrio' => 'El campo barrio es requerido',
-            'calle' => 'El campo calle es requerido',
-            'carrera' => 'El campo carrera es requerido',
             'reductor_id' => 'El campo reductor es requerido',
             'categoria_reductor_id' => 'El campo categoria es requerido'
 
@@ -480,10 +468,6 @@ class SolicitudController
             }
 
         }
-        // if(validarCampoLetras($usu_nombre)==false){
-        //     $_SESSION['errores'][]="El campo nombre debe contener solo letras";
-        //         $validaciones= false;
-        //     }
 
         $sql = "INSERT INTO solicitud_reductores_mal_estado (solicitud_reductores_mal_estado_descripcion,solicitud_reductores_mal_estado_direccion,solicitud_reductores_mal_estado_imagen,reductor_id,danio_id,usuario_id,tipo_solicitud_id,estado_id) VALUES('$solicitud_reductores_mal_estado_descripcion','$direccion','$solicitud_reductores_mal_estado_imagen',$reductor_id,$danio_id,$usuario_id,3,4)";
         // var_dump($sql);
@@ -551,7 +535,7 @@ class SolicitudController
 
         //añadir campo fecha
         //agregar los cambios de estados
-        // $categoria = $_POST['categoria_reductor_id'];
+        
         // $senial_id = $_POST['senial_id'];
         $solicitud_reductor_nuevo_descripcion = $_POST['solicitud_reductor_nuevo_descripcion'];
         $carrera = $_POST['carrera'];
@@ -562,13 +546,10 @@ class SolicitudController
         // var_dump($solicitud_reductor_nuevo_imagen);
         $usuario_id = $_SESSION['id'];
         $reductor_id = $_POST['reductor_id'];
+        $categoria_reductor_id = $_POST['categoria_reductor_id'];
 
         $validacion = true;
         $campos = [
-            'solicitud_reductores_mal_estado_descripcion' => 'El campo Descripcion es requerido',
-            'barrio' => 'El campo barrio es requerido',
-            'calle' => 'El campo calle es requerido',
-            'carrera' => 'El campo carrera es requerido',
             'reductor_id' => 'El campo reductor es requerido',
             'categoria_reductor_id' => 'El campo categoria es requerido'
 
@@ -645,21 +626,24 @@ class SolicitudController
     {
 
         $obj = new SolicitudModel();
-        $carrera = $_POST['carrera'];
-        $calle = $_POST['calle'];
-        $barrio = $_POST['barrio'];
-        $direccion = "carrera $carrera, calle $calle, barrio $barrio";
-        $descripcion = $_POST['solicitud_via_mal_estado_descripcion'];
+        // $carrera = $_POST['carrera'];
+        // $calle = $_POST['calle'];
+        // $barrio = $_POST['barrio'];
+         $direccion = "";
         $imagen = $_POST['solicitud_via_mal_estado_imagen'];
         $danio = $_POST['danio_id'];
         $usuario = $_SESSION['id'];
+    
+        if($_POST['solicitud_via_mal_estado_descripcion'] ==""){
+            $descripcion= "Sin descripción";
+        }else{
+            $descripcion= $_POST['solicitud_via_mal_estado_descripcion'];
+        }
+
 
         //VALIDACIONES
         $validacion = true;
         $campos = [
-            'carrera' => 'El campo carrera es requerido',
-            'calle' => 'El campo calle es requerido',
-            'barrio' => 'El campo barrio es requerido',
             'danio' => 'El campo daño es requerido'
         ];
 
@@ -695,7 +679,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateVia") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetSolicitud") . "';
                     }
                 });
             </script>";
@@ -880,7 +864,7 @@ class SolicitudController
 
     public function getDetalleChoque()
     {
-        //echo "si";
+        echo "si";
         $obj = new SolicitudModel();
         if (isset($_POST['tipo_choque'])) {
             $tipo_choque = $_POST['tipo_choque'];
@@ -919,20 +903,11 @@ class SolicitudController
     {
         $obj = new SolicitudModel();
 
-        $tipo_via = $_POST['tipo_via'];
-        $num_via = $_POST['num_via'];
-        $letra1 = $_POST['letra1'];
-
-        $orientacion = $_POST['orientacion'];
-        $numero2 = $_POST['numero2'];
-        $letra2 = $_POST['letra2'];
-        $numero3 = $_POST['numero3'];
-        $barrio = $_POST['barrio'];
-
-        $descripcion = $_POST['observacion'];
+        // $barrio = $_POST['barrio'];
+        
         $imagen = $_POST['imagen'];
         $tipo_choque = $_POST['tipo_choque'];
-
+        $direccion = $_POST['solicitud_accidente_direccion'];
         $id_usuario = $_SESSION['id'];
 
         if (isset($_POST['lesionados'])) {
@@ -940,47 +915,48 @@ class SolicitudController
         } else {
             $lesionados = "Sin lesionados";
         }
-        if (isset($_POST['bis'])) {
-            $bis = $_POST['bis'];
-        } else {
-            $bis = "";
+
+        if (isset($_POST['observacion'])){
+            $descripcion = $_POST['observacion'];
+        }else{
+            $descripcion = "Sin descripción";
         }
 
-        $direccion = "$tipo_via $num_via$letra1 $bis $orientacion $numero2$letra2 $numero3, barrio $barrio";
+        if ($_POST['detalle_choque'] == ""){
+            $choque_detalle_nombre="Sin detalles";
+        }else{
+            $detalle = $_POST['detalle_choque'];
+            $sql = "SELECT * FROM choque_detalles WHERE choque_detalle_id = $detalle";
+            $choque_detalle = pg_fetch_all($obj->consult($sql));
+
+            foreach ($choque_detalle as $choque){
+                $choque_detalle_nombre= $choque['choque_detalle_descripcion'];
+            }
+        }
+        
+    
+        // if (isset($_POST['bis'])) {
+        //     $bis = $_POST['bis'];
+        // } else {
+        //     $bis = "";
+        // }
+
+        // $direccion = "$tipo_via $num_via$letra1 $bis $orientacion $numero2$letra2 $numero3, barrio $barrio";
 
         //VALIDACIONES
         $validacion = true;
         $campos = [
-            'tipo_via' => 'El campo tipo de vía es requerido',
-            'num_via' => 'El campo número de vía es requerido',
-            'barrio' => 'El campo barrio es requerido',
             'tipo_choque' => 'El campo tipo de choque es requerido'
         ];
-        if (validarNumeros($num_via)) {
-            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
-            $validacion = false;
+      
+        foreach ($campos as $campo => $mensaje) {
+            if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+
+                $_SESSION['errores'][] = $mensaje;
+                $validacion = false;
+            }
 
         }
-
-        if (validarNumeros($numero2)) {
-            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
-            $validacion = false;
-
-        }
-        if (validarNumeros($numero3)) {
-            $_SESSION['errores'][] = "Solo debes ingresar números en el campo número de via";
-            $validacion = false;
-
-        }
-        // Bucle para validar los campos
-        // foreach ($campos as $campo => $mensaje) {
-        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
-
-        //         $_SESSION['errores'][] = $mensaje;
-        //         $validacion = false;
-        //     }
-
-        // }
 
         // function validarNumeros($input){
         //     $patron = "/^[0-9]+$/";
@@ -989,8 +965,8 @@ class SolicitudController
         // }
 
         $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
-        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id) VALUES (
-    '$direccion', $tipo_choque, '$imagen','$descripcion','$lesionados', 4, $id_usuario, 4 );";
+        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id,detalle_choque_nombre) VALUES (
+    '$direccion', $tipo_choque, '$imagen','$descripcion','$lesionados', 4, $id_usuario, 4, '$choque_detalle_nombre');";
 
         if ($validacion == true) {
             $ejecutar = $obj->insert($sql);
@@ -1005,7 +981,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateAccidente") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetSolicitud") . "';
                     }
                 });
             </script>";
@@ -1030,11 +1006,11 @@ class SolicitudController
 
         $obj = new SolicitudModel();
 
-        $sql = "SELECT sa.*, tc.tipo_choque_nombre, e.estado_nombre, tip.tipo_solicitud_nombre , e.estado_nombre,usu.usuario_num_identificacion FROM
+        $sql = "SELECT sa.*, tc.tipo_choque_nombre, e.estado_nombre, tip.tipo_solicitud_nombre, e.estado_nombre, usu.usuario_nombre_1, usu.usuario_apellido_1, usu.usuario_telefono FROM
           solicitud_accidentes sa JOIN
            tipo_choques tc ON sa.tipo_choque_id=tc.tipo_choque_id JOIN usuarios usu  ON sa.usuario_id=usu.usuario_id JOIN 
           tipo_solicitudes tip ON sa.tipo_solicitud_id = tip.tipo_solicitud_id JOIN 
-          estados e ON sa.estado_id = e.estado_id";
+          estados e ON sa.estado_id = e.estado_id order by sa.solicitud_accidente_id ASC";
         $accidentes = pg_fetch_all($obj->consult($sql));
 
 
@@ -1059,7 +1035,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateAccidente") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
                     }
                 });
             </script>";
@@ -1203,6 +1179,57 @@ class SolicitudController
         else if ($name == "solicitud_reductores_nuevos"){
             include_once '../view/solicitudes/detalleRN.php';
         }
+       
+        
+    }
+    public function solicitudDetalleAccidente(){
+        $obj = new SolicitudModel();
+
+        $id_soli = $_POST['id_soli'];
+        $sql = "SELECT * FROM solicitud_accidentes WHERE solicitud_accidente_id= $id_soli";
+        $accidentes = pg_fetch_all($obj->consult($sql));
+        
+        
+        foreach($accidentes as $acci){
+            $tipo_choque = $acci['tipo_choque_id'];
+            $tipo_solicitudes = $acci['tipo_solicitud_id'];
+            $usuarios = $acci['usuario_id'];
+            $estados = $acci['estado_id'];
+            
+        }
+
+        $sql = "SELECT * FROM tipo_choques WHERE tipo_choque_id = $tipo_choque";
+        $tipo_choq = pg_fetch_all($obj->consult($sql));
+
+        foreach($tipo_choq as $tipo_ch){
+            $nombre_tipo_choque=$tipo_ch['tipo_choque_nombre'];
+        }
+
+        $sql = "SELECT * FROM tipo_solicitudes WHERE tipo_solicitud_id=$tipo_solicitudes";
+        $tipo_solicitudes = pg_fetch_all($obj->consult($sql));
+
+        foreach($tipo_solicitudes as $tipo_solicitud){
+            $nombre_tipo_soli = $tipo_solicitud['tipo_solicitud_nombre'];
+        }
+
+        $sql = "SELECT * FROM usuarios WHERE usuario_id=$usuarios";
+        $usuario = pg_fetch_all($obj->consult($sql));
+
+        foreach($usuario as $usu){
+            $id_usuario = $usu['usuario_num_identificacion'];
+        }
+
+        
+        $sql = "SELECT * from estados WHERE estado_id=$estados";
+        $estado = pg_fetch_all($obj->consult($sql));
+
+        foreach($estado as $estadito){
+            $nombre_estado = $estadito['estado_nombre'];
+        }
+        // $sql = "SELECT tipo_solicitud_id From $name";
+        
+        include_once '../view/solicitudes/detalleAcc.php';
+       
        
         
     }

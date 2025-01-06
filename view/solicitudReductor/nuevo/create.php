@@ -6,8 +6,7 @@
 <div class="mt-5">
 
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorNuevo"); ?>" method="post"
-        id="formNuevoReductor">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateReductorNuevo"); ?>" method="post" id="formReductorN">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -135,7 +134,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" id="btnReductorN" value="Enviar" class="btn btn-success">
+            <input type="submit" id="btnReductorN" value="Enviar" class="btn btn-success" disabled>
         </div>
     </form>
 </div>

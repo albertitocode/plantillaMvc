@@ -5,8 +5,7 @@
 
 <div class="mt-5">
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateAccidente"); ?>" method="post"
-        id="formAccidente">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateAccidente"); ?>" method="post" id="formAccidente">
 
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
@@ -69,89 +68,11 @@
                                 <div class="row">
 
                                     <div class="col-md-6 col-lg-6">
-
-                                        <div class="form-group mb-3">
-
+                                        <div class="form-group">
                                             <label for="direccion" class="fw-bold">Dirección Accidente</label>
-                                            <div class="row gx-2">
-                                                <div class="col-6 col-md-4">
-                                                    <select name="tipo_via" id="tipo_via" class="form-select mt-1">
-                                                        <option value="">Tipo de vía...</option>
-                                                        <?php
+                                            <input type="text" name="solicitud_accidente_direccion" id="" class="form-control">
+                                            <span class="text-danger" id="error_solicitud_accidente_direccion"></span>
 
-                                                        foreach ($vias as $via) {
-                                                            echo "<option  value='" . $via['tipo_via_nombre']  . "'>" . $via['tipo_via_nombre'] . "</option>";
-                                                        }
-
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <input type="text" name="num_via" id="num_via" class="form-control"
-                                                        placeholder="Número vía">
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <select name="letra1" id="letra1" class="form-select mt-1">
-                                                        <option value="">Letra...</option>
-                                                        <?php
-                                                        foreach ($letras as $letra) {
-                                                            echo "<option  value='" .$letra['letra_via']  . "'>" . $letra['letra_via'] . "</option>";
-                                                        }
-
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 col-md-4 mt-3 text-center">
-                                                    <label for="bis" class="fw-bold">¿Es Bis?</label>
-                                                    <input type="checkbox" id="bis" name="bis" value="Bis">
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <select name="orientacion" id="orientacion"
-                                                        class="form-select mt-1">
-                                                        <option value="">Orientación...</option>
-                                                        <?php
-                                                        foreach ($orientaciones as $orientacion) {
-                                                            echo "<option  value='" .$orientacion['orientacion_nombre'] . "'>" . $orientacion['orientacion_nombre'] . "</option>";
-                                                        }
-
-                                                        ?>
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-6 col-md-4">
-                                                    <input type="text" name="numero2" id="numero2" class="form-control"
-                                                        placeholder="#">
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <select name="letra2" id="letra2" class="form-select mt-1">
-                                                        <option value="">Letra...</option>
-                                                        <?php
-                                                        foreach ($letras as $letra) {
-                                                            echo "<option  value='" .$letra['letra_via'] . "'>" . $letra['letra_via'] . "</option>";
-                                                        }
-
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 col-md-4 ">
-                                                    <input type="text" name="numero3" id="numero3" class="form-control"
-                                                        placeholder="#">
-                                                </div>
-                                                <div class="col-6 col-md-4 ">
-                                                    <select name="barrio" id="barrio" class="form-select mt-1">
-                                                        <option value="">Barrio...</option>
-                                                        <?php
-                                                        foreach ($barrios as $barrio) {
-                                                            echo "<option  value='" .  $barrio['barrio_nombre'] . "'>" . $barrio['barrio_nombre'] . "</option>";
-                                                        }
-
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <span class=" text-danger" id="error_direccion"></span>
-
-                                            </div>
                                         </div>
 
 
@@ -163,9 +84,9 @@
                                     </div>
 
 
-                                    <div class="col-md-6 col-lg-6">
+                                    <d  iv class="col-md-6 col-lg-6">
                                         <div class="form-group mb-3">
-                                            <label for="danio_id" class="fw-bold">Tipo de choque</label>
+                                            <label for="" class="fw-bold">Tipo de choque</label>
                                             <select name="tipo_choque" id="tipo_choque" class="form-select" data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
 
                                                 <option value="">Seleccione...</option>
@@ -179,20 +100,12 @@
                                             <span class=" text-danger" id="error_tipo_choque"></span>
                                         </div>
 
-                                        <?php 
-                                         $class="form-group mb-3 d-none";
-                                       
-                                        
-                                        ?>
-                                        <?php 
-                                       
-                                         if(!empty($class))echo "<div class='$class' id='dc'>";
-                                        ?>
+                                        <div class="form-group mb-3 d-none" id="detalle">
                                             
-                                            <label for="detalle_choque" class="fw-bold">Detalle de choque</label>
-                                            <select name="detalle_choque" id="detalle_choque" class="form-select">
+                                            <label for="detalle_choque">Detalle de choque</label>
+                                            <select name="detalle_choque" id="detalle_choque" class="form-control">
+                                            <option value="">Detalle del choque...</option>
                                                 <?php
-
                                                 foreach ($detallesChoques as $detalle) {
                                                     echo "<option value='" . $detalle['choque_detalle_id'] . "'>" . $detalle['choque_detalle_descripcion'] . "</option>";
                                                 }
@@ -200,10 +113,9 @@
 
                                             </select>
                                             <span class=" text-danger" id="error_detalle_choque"></span>
-                                       <?php
-                                       
-                                        echo "</div>";
-                                        ?>
+                                
+                                        </div>
+                                        
                                    
                                         <div class="form-group mb-3">
                                             <label for="bis" class="fw-bold">¿Hay lesionados?</label>
@@ -222,7 +134,7 @@
 
                                 <!-- Botón de envío -->
                                 <div class="mt-3 text-center">
-                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                    <input type="submit" class="btn btn-success" id="btnAccidente" disabled value="Enviar">
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,7 @@
 
     </div>
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateVia"); ?>" method="post" id="form">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateVia"); ?>" method="post" id="formVia">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -65,22 +65,8 @@
                                 <div class="form-group">
                                     <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
                                         via</label>
-                                    <div class="d-flex">
-
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
-
+                                    <input type="text" class="form-control" name="solicitud_via_mal_estado_direccion">
+                                    <span class="text-danger" id="error_direccion"></span>
                                 </div>
 
                                 <div class="form-group ">
@@ -107,15 +93,16 @@
 
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_danio_id"></span>
                                 </div>
                                 <div class="form-group ">
                                     <label for="solicitud_via_mal_estado_imagen" class="d-block fw-bold">Imagen</label>
-                                    <input type="file" name="solicitud_via_mal_estado_imagen">
+                                    <input type="file" name="solicitud_via_mal_estado_imagen" class="form-control">
                                 </div>
                             </div>
 
                             <div class="mt-3">
-                                <input type="submit" value="Enviar" class="btn btn-success">
+                                <input type="submit" value="Enviar" class="btn btn-success" id="btnVia" disabled>
                             </div>
                         </div>
                     </div>

@@ -56,10 +56,14 @@ $(document).ready(function () {
     'categoria_reductor_id': 'Categoria',
     'reductor_id': 'Reductor'
   };
-  //   function validarNumeros($input){
-  //     $patron="/^[0-9]+$/";
-  //     return preg_match($patron,$input)===1;
-  // }
+
+  const camposAccidente = {
+    'tipo_choque': 'Tipo de choque'
+    // 'detalle_choque': 'Detalle choque'
+  }
+  const camposVia = {
+    'danio_id' :'Daño'
+  }
 
   function validarCampoLetras(input) {
     const patron = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/u;
@@ -450,17 +454,17 @@ $(document).ready(function () {
 
 
 
-  $(document).on('input', '#formMalaSenial input, #formMalaSenial select', function (event) {
+  $(document).on('input', '#formSenialM input, #formSenialM select', function (event) {
     event.preventDefault();
     console.log("funca esto");
-    var formData = $('#formMalaSenial').serializeArray();
+    var formData = $('#formSenialM').serializeArray();
     let esValido = true;
 
     // Limpiar los mensajes de error antes de comenzar la validación
     Object.keys(camposSenialM).forEach(campoSenialM => {
       const error = `error_${campoSenialM}`;
       document.getElementById(error).textContent = ""; // Limpia los errores
-    });x
+    });
 
     // Validación de los campos
     formData.forEach(function (campoData) {
@@ -530,8 +534,8 @@ $(document).ready(function () {
   //nuevo reductor
   $(document).on('input', '#formReductorN input, #formReductorN select', function (event) {
     event.preventDefault();
-    //console.log("funca esto yes");
-    var formData = $('#formNuevoReductor').serializeArray();
+    console.log("funca esto yes");
+    var formData = $('#formReductorN').serializeArray();
     let esValido = true;
 
     // Limpiar los mensajes de error antes de comenzar la validación
@@ -565,6 +569,7 @@ $(document).ready(function () {
       submitButton.disabled = true;
     }
   });
+  
   //reductor en mal estado
   $(document).on('input', '#formReductorM input, #formReductorM select', function (event) {
     event.preventDefault();
@@ -605,35 +610,35 @@ $(document).ready(function () {
   });
 
 
-  $(document).on('input', '#formNuevaSenial input, #formNuevaSenial select', function (event) {
+  $(document).on('input', '#formAccidente input, #formAccidente select', function (event) {
     event.preventDefault();
-    //console.log("funca esto yes");
-    var formData = $('#formNuevaSenial').serializeArray();
+    //console.log("si net");
+    var formData = $('#formAccidente').serializeArray();
     let esValido = true;
 
-    // Limpiar los mensajes de error antes de comenzar la validación
-    Object.keys(camposSenialN).forEach(campoSenialN => {
-      const error = `error_${campoSenialN}`;
+  
+    Object.keys(camposAccidente).forEach(campoAccidente => {
+      const error = `error_${campoAccidente}`;
       document.getElementById(error).textContent = ""; // Limpia los errores
     });
 
-    // Validación de los campos
     formData.forEach(function (campoData) {
       const { name, value } = campoData;
       const error = `error_${name}`;
-      const valor = camposSenialN[name];
+      const valor = camposAccidente[name];
 
       // Validar campos vacíos
       if (value.trim() === '') {
-        if (camposSenialN[name]) {
+        if (camposAccidente[name]) {
 
           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
           esValido = false;
         }
       }
     });
+  
 
-    const submitButton = document.getElementById('btnSenialN');
+    const submitButton = document.getElementById('btnAccidente');
     if (esValido) {
       console.log('Formulario válido');
       submitButton.disabled = false;
@@ -641,201 +646,48 @@ $(document).ready(function () {
       console.log('Formulario no válido');
       submitButton.disabled = true;
     }
+
   });
 
-  // $('#formUsu').submit(function (event) {
-  //   event.preventDefault();
-
-
-  //   var formData = $(this).serializeArray();
-
-
-
-
-  //   let mensajes = [];
-
-
-  //   let esValido = true;
-
-  //   Object.keys(campos).forEach(campo => {
-  //     const error = `error_${campo}`;
-  //     document.getElementById(error).textContent = "";
-  //   });
-
-
-  //   formData.forEach(function (formData) {
-
-  //     if (formData.value.trim() === '') {
-
-  //       Object.keys(campos).forEach(campo => {
-
-
-  //         if (campo === formData.name) {
-
-  //           const error = `error_${formData.name}`;
-
-  //           const valor = campos[campo];
-
-  //           document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-  //           esValido = false;
-
-  //         }
-  //       });
-
-
-
-  //     } else if (formData.name === 'usuario_contrasenia') {
-  //       if (validarNumeros(formData.name) == false) {
-  //         esValido = false;
-  //         document.getElementById(formData.name).textContent = `*En el campo contraseña debes ingresar minimo 8
-  //          caracteres y contener al menos una mayuscula, una minuscula, 
-  //          un numero y un caracter especial*`;
-
-  //       }
-
-
-  //     }
-  //   });
-
-
-  //   if (esValido) {
-  //     alert('Formulario valido. Enviando datos..')
-  //     this.submit();
-  //   }
-  // });
-
-
-  $('#formAccidente').submit(function (event) {
+  $(document).on('input', '#formVia input, #formVia select', function (event) {
     event.preventDefault();
-    const campos = {
-      tipo_via: "Tipo de vía",
-      num_via: "Número de vía",
-      orientacion: "Orientación",
-      numero2: "Número complemento 2",
-      numero3: "Número complemento 3",
-      barrio: "Barrio",
-      tipo_choque: "Tipo de choque",
-      detalle_choque: "Detalle de choque"
-    };
-
-
-    var formData = $(this).serializeArray();
-
-
-
-
-    let mensajes = [];
-
-
+    console.log("si funca");
+    var formData = $('#formVia').serializeArray();
     let esValido = true;
 
-    Object.keys(campos).forEach(campo => {
-      const error = `error_${campo}`;
-      document.getElementById(error).textContent = "";
+  
+    Object.keys(camposVia).forEach(campoVia => {
+      const error = `error_${campoVia}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
     });
 
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposVia[name];
 
-    formData.forEach(function (formData) {
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposVia[name]) {
 
-      if (formData.value.trim() === '') {
-
-        Object.keys(campos).forEach(campo => {
-
-
-          if (campo === formData.name) {
-
-            const error = `error_${formData.name}`;
-            const valor = campos[campo];
-            if (campo === "tipo_choque" || campo === "detalle_choque") {
-              document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-
-
-
-            } else {
-              mensajes.push(`*El campo ${valor} es obligatorio*`);
-
-            }
-            esValido = false;
-
-          }
-        });
-
-
-
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
       }
     });
+  
 
-
+    const submitButton = document.getElementById('btnVia');
     if (esValido) {
-      alert('Formulario valido. Enviando datos..')
-      this.submit();
+      console.log('Formulario válido');
+      submitButton.disabled = false;
     } else {
-      console.log("invalido")
-    }
-  });
-
-  $(document).on('change', '#formAccidente input, #formAccidente select', function () {
-
-    console.log("si net")
-
-    var formData = $('#formAccidente').serializeArray();
-
-    let esValido = true;
-    let mensajes = [];
-    const campos = {
-      tipo_via: "Tipo de vía",
-      num_via: "Número de vía",
-      orientacion: "Orientación",
-      numero2: "Número complemento 2",
-      numero3: "Número complemento 3",
-      barrio: "Barrio",
-      tipo_choque: "Tipo de choque",
-      detalle_choque: "Detalle de choque"
-    };
-
-
-    document.getElementById('error_direccion').textContent = "";
-    document.getElementById('error_tipo_choque').textContent = "";
-
-    document.getElementById('error_detalle_choque').textContent = "";
-
-
-
-    // Validación de los campos
-
-    formData.forEach(function (formData) {
-      if (formData.value.trim() === '') {
-        Object.keys(campos).forEach(campo => {
-          if (campo === formData.name) {
-            const error = `error_${formData.name}`;
-            const valor = campos[campo];
-            if (campo === "tipo_choque" || campo === "detalle_choque") {
-              document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-
-
-
-            } else {
-              mensajes.push(`*El campo ${valor} es obligatorio*`);
-
-            }
-            esValido = false;
-
-          }
-        });
-      }
-    });
-
-    if (!esValido) {
-      document.getElementById("error_direccion").innerHTML = mensajes.join('<br>');
-
-    } else {
-      console.log("datos completos")
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
     }
 
-    // Aquí puedes añadir acciones adicionales si es necesario
+    
   });
-
-
 
 
 
@@ -998,7 +850,8 @@ $(document).ready(function () {
 
 
 
-  $(document).on('change', '#formMalaSenial select, #formNuevaSenial select', function () {
+  // $(document).on('change', '#formMalaSenial select, #formNuevaSenial select', function () {
+    $('#tipo_senial_id').on('change', function () {
 
     var url = $(this).attr('data-url');
     var categoria_senial = $('#categoria_senial_id').val();
@@ -1064,6 +917,37 @@ $(document).ready(function () {
       }
     });
 
+  });
+
+});
+$('#tipo_choque').on('change', function () {
+
+  var url = $(this).attr('data-url');
+  var tipo_choque = $('#tipo_choque').val();
+
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+      'tipo_choque': tipo_choque,
+    },
+    success: function (data) {
+      if (!data.includes("error")) {
+
+        $("#detalle_choque").html(data);
+        $('#detalle').removeClass('d-none');
+        console.log(data);
+
+      } else {
+        $('#detalle').addClass('d-none');
+      }
+
+
+
+    },
+    error: function () {
+      alert('Error al cargar los detalles del choque.');
+    }
   });
 
 });

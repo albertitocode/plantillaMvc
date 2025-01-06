@@ -91,21 +91,7 @@
                                 <div class="form-group">
                                     <label for="solicitud_senial_nueva_direccion" class="fw-bold">Direccion
                                         via</label>
-                                    <div class="d-flex">
-
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
+                                        <input type="text" name="solicitud_senial_nueva__direccion" id="" class="form-control">
 
                                 </div>
 
@@ -121,7 +107,7 @@
                                             false,
                                             "ajax"
                                         ); ?>'>
-                                        <option value="">Seleccione señal...</option>
+                                        <option value="">Seleccione tipo de señal...</option>
                                         <?php
                                         foreach ($tipo_senal as $tipo) {
                                             echo "<option  value='" . $tipo['tipo_senial_id'] . "'>" . $tipo['tipo_senial_nombre'] . "</option>";
