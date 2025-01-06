@@ -45,17 +45,20 @@ class="mt-5">
                         <table class="table table-striped table hover ">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Descripcion</th>
                                     <th>Direccion</th>
                                     <th>Imagen</th>
                                     <th>Tipo de choque</th>
-                                    <!-- <th>Choque detalle</th> -->
+                                    <th>Choque detalle</th>
                                     <th>Tipo de solicitud</th>
                                     <th>Estado</th>
-                                    <th>Usuario</th>
                                     <th>Lesionados</th>
+                                    <th>Usuario</th>
+                                    <th>Telefono usuario</th>
+                                    
                     
                                    
 
@@ -67,16 +70,25 @@ class="mt-5">
                                 // $clase="";
                                 // $texto="";
                                 echo "<tr>";
+                                echo "<td>";
+                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalleAccidente")."' method='post'>";
+                                echo "<input type='hidden'  name='id_soli' value=" .$accidente['solicitud_accidente_id'] . "> ";
+                                echo "<button type ='submit 'class='btnV'>Acción 3</button>";
+                                echo "</form>";
+                                echo "</td> ";
                                 echo "<td>" . $accidente['solicitud_accidente_id'] . "</td>";
                                 echo "<td>" . $accidente['solicitud_accidente_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
                                 echo "<td>" . $accidente['solicitud_accidente_descripcion'] . "</td>";
                                 echo "<td>" . $accidente['solicitud_accidente_direccion'] . "</td>";
                                 echo "<td>" . $accidente['solicitud_accidente_imagen'] . "</td>";
                                 echo "<td>" . $accidente['tipo_choque_nombre'] . "</td>";
+                                echo "<td>" . $accidente['detalle_choque_nombre'] . "</td>";
                                 echo "<td>" . $accidente['tipo_solicitud_nombre'] . "</td>";
                                 echo "<td>" . $accidente['estado_nombre'] . "</td>";
-                                echo "<td>" . $accidente['usuario_num_identificacion'] ."</td>";
                                 echo "<td>" . $accidente['solicitud_accidente_lesionados'] . "</td>";
+                                echo "<td>" . $accidente['usuario_nombre_1'] ."  ". $accidente['usuario_apellido_1'] ."</td>";
+                                echo "<td>" . $accidente['usuario_telefono'] . "</td>";
+                                
                             
                                 
 

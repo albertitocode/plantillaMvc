@@ -5,8 +5,7 @@
 
 <div class="mt-5">
 
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateAccidente"); ?>" method="post"
-        id="formAccidente">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateAccidente"); ?>" method="post" id="formAccidente">
 
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
@@ -81,9 +80,9 @@
                                     </div>
 
 
-                                    <div class="col-md-6 col-lg-6">
+                                    <d  iv class="col-md-6 col-lg-6">
                                         <div class="form-group mb-3">
-                                            <label for="danio_id" class="fw-bold">Tipo de choque</label>
+                                            <label for="" class="fw-bold">Tipo de choque</label>
                                             <select name="tipo_choque" id="tipo_choque" class="form-select" data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
 
                                                 <option value="">Seleccione...</option>
@@ -97,20 +96,12 @@
                                             <span class=" text-danger" id="error_tipo_choque"></span>
                                         </div>
 
-                                        <?php 
-                                         $class="form-group mb-3 d-none";
-                                       
-                                        
-                                        ?>
-                                        <?php 
-                                       
-                                         if(!empty($class))echo "<div class='$class' id='dc'>";
-                                        ?>
+                                        <div class="form-group mb-3 d-none" id="detalle">
                                             
-                                            <label for="detalle_choque" class="fw-bold">Detalle de choque</label>
-                                            <select name="detalle_choque" id="detalle_choque" class="form-select">
+                                            <label for="detalle_choque">Detalle de choque</label>
+                                            <select name="detalle_choque" id="detalle_choque" class="form-control">
+                                            <option value="">Detalle del choque...</option>
                                                 <?php
-
                                                 foreach ($detallesChoques as $detalle) {
                                                     echo "<option value='" . $detalle['choque_detalle_id'] . "'>" . $detalle['choque_detalle_descripcion'] . "</option>";
                                                 }
@@ -118,10 +109,9 @@
 
                                             </select>
                                             <span class=" text-danger" id="error_detalle_choque"></span>
-                                       <?php
-                                       
-                                        echo "</div>";
-                                        ?>
+                                
+                                        </div>
+                                        
                                    
                                         <div class="form-group mb-3">
                                             <label for="bis" class="fw-bold">¿Hay lesionados?</label>
@@ -140,7 +130,7 @@
 
                                 <!-- Botón de envío -->
                                 <div class="mt-3 text-center">
-                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                    <input type="submit" class="btn btn-success" id="btnAccidente" disabled value="Enviar">
                                 </div>
                             </div>
                         </div>

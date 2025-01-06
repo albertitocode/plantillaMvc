@@ -66,7 +66,7 @@
                                     </span>
 
 
-                                    <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
+                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
                                                 "Solicitud",
@@ -83,7 +83,6 @@
                                         ?>
 
                                     </select>
-
                                     <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
                                 <div class="form-group">

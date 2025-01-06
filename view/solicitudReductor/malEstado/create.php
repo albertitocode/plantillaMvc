@@ -147,7 +147,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" value="Enviar" id="btnReductorM" disabled class="btn btn-success">
+            <input type="submit" value="Enviar" id="btnReductorM" disabled class="btn btn-success" disabled>
         </div>
     </form>
 </div>
