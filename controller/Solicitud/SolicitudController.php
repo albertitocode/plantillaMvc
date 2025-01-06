@@ -863,8 +863,8 @@ class SolicitudController
         $sql = "SELECT * FROM letras_via";
         $letras = pg_fetch_all($obj->consult($sql));
 
-        $sql = "SELECT * FROM tipos_via";
-        $vias = pg_fetch_all($obj->consult($sql));
+        // $sql = "SELECT * FROM tipos_via";
+        // $vias = pg_fetch_all($obj->consult($sql));
 
         $sql = "SELECT * FROM orientaciones";
         $orientaciones = pg_fetch_all($obj->consult($sql));

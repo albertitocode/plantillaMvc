@@ -1891,7 +1891,6 @@ function msToolbar(p_msMap, _control, _default)
   var _iconPanButton        = 'misc/img/alpha_button_pan.png';
   var _iconZoominButton     = 'misc/img/alpha_button_zoomIn.png';
   var _iconZoomoutButton    = 'misc/img/alpha_button_zoomOut.png';
-  var _iconCoordenadas    = 'misc/img/';
 
 
   this.getTag = function(){return _tagToolbar;}
