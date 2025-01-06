@@ -64,7 +64,6 @@
                                     ?>
                                 </select>
                                 </div>
-                                <a href="<?php getUrl("","","") ?>">Mirar grafica</a>
                         <div id="formularios">
                                 
                            

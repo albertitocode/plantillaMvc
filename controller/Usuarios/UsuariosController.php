@@ -6,11 +6,23 @@ class UsuariosController
     // public function test(){
     //     echo"Funciona maifren";
     // }
-    
+
 
     public function getCreate()
     {
         $obj = new UsuariosModel();
+
+        $sql = "SELECT * FROM barrios";
+        $barrios = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM letras_via";
+        $letras = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM tipo_via";
+        $vias = pg_fetch_all($obj->consult($sql));
+
+        $sql = "SELECT * FROM orientaciones";
+        $orientaciones = pg_fetch_all($obj->consult($sql));
 
 
         $sql = "SELECT * FROM roles";
@@ -44,58 +56,88 @@ class UsuariosController
         $usu_telefono = $_POST['usuario_telefono'];
         $tipo_documento = $_POST['tipo_documento_id'];
         $numero_documento = $_POST['usuario_num_identificacion'];
-
-        $usu_direccion = $_POST['usuario_direccion'];
         $usu_fecha_nac = $_POST['usuario_fecha_nacimiento'];
+        $tipo_via = $_POST['tipo_via'];
+        $num_via = $_POST['num_via'];
+        $letra1 = $_POST['letra1'];
 
-        
-        $validaciones = true;
+        $orientacion = $_POST['orientacion'];
+        $numero2 = $_POST['numero2'];
+        $letra2 = $_POST['letra2'];
+        $numero3 = $_POST['numero3'];
+        $barrio = $_POST['barrio'];
 
-         $campos = [
 
-             ' usu_nombre_1' => 'El campo primer nombre es requerido',
-             'usu_nombre_2' => 'El campo nombre es requerido',
-             'usu_apellido_1' => 'El campo nombre es requerido',
-             'usu_apellido_2' => 'El campo nombre es requerido',
-             'usu_correo' => 'El campo nombre es requerido',
-             'usu_contrasenia' => 'El campo nombre es requerido',
-             'usu_telefono' => 'El campo telefono es requerido',
-             'tipo_documento' => 'El campo nombre es requerido',
-             'numero_documento' => 'El campo nombre es requerido',
-             'usu_direccion' => 'El campo nombre es requerido',
-              'usu_fecha_nac' => 'El campo fecha de nacimiento es requerido'
-         ];
+        if (isset($_POST['rol'])) {
 
-        // // Bucle para validar los campos
-        // foreach ($campos as $campo => $mensaje) {
-        //     if (empty($$campo)) {  // Se usa $$campo para acceder dinámicamente a la variable
+            $rol = $_POST['rol'];
+        } else {
+            $rol = 3;
+        }
 
-        //         $_SESSION['errores'][] = $mensaje;
-        //         $validacion = false;
-        //     }
+        if (isset($_POST['bis'])) {
+            $bis = $_POST['bis'];
+        } else {
+            $bis = "";
+        }
+        $direccion = "$tipo_via $num_via$letra1 $bis $orientacion #$numero2$letra2-$numero3, barrio $barrio";
 
-        // }
 
-        
+        $validacion = true;
+
+        $campos = [
+
+            'usuario_nombre_1' => 'Primer nombre requerido',
+            'usuario_apellido_1' => 'Primer apellido requerido',
+            'usuario_correo' => 'Correo electrónico requerido',
+            'usuario_apellido_2' => 'Segundo apellido requerido',
+            'usuario_fecha_nacimiento' => 'Fecha de nacimiento requerido',
+            'usuario_telefono' => 'Teléfono requerido',
+            'tipo_documento_id' => 'Tipo de documento requerido',
+            'usuario_num_identificacion' => 'Número de documento requerido',
+            'tipo_via' => "Tipo de vía requerido",
+            'num_via' => "Número de vía requerido",
+            'orientacion' => "Orientación requerido",
+            'numero2' => "Número complemento 2 requerido",
+            'numero3' => "Número complemento 3 requerido",
+            'barrio' => "Barrio requerido",
+            'usuario_contrasenia' => 'Contraseña requerido',
+            'rol' => 'Rol requerido'
+        ];
+
+        foreach ($campos as $campo => $mensaje) {
+            if (empty($_POST[$campo])) {
+                $_SESSION['errores'][] = $mensaje; // Guardamos el error en sesión
+                $validacion = false; // Marcamos que la validación falló
+            }
+        }
+
+
 
         // // $id= $obj->autoIncrement("usu_id","usuarios");
-        //  $usu_clave=password_hash($usu_contrasenia,PASSWORD_DEFAULT);
+        $usu_clave = password_hash($usu_contrasenia, PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (tipo_documento_id, usuario_num_identificacion, usuario_nombre_1,
          usuario_nombre_2, usuario_apellido_1, usuario_apellido_2,usuario_fecha_nacimiento, usuario_contrasenia, usuario_correo,
           usuario_telefono, usuario_direccion, rol_id, estado_id) VALUES ($tipo_documento, $numero_documento, 
-          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2','$usu_fecha_nac', '$usu_contrasenia', '$usu_correo',
-           $usu_telefono, '$usu_direccion', 2, 1)";
-
-
-        if ($validaciones == true) {
+          '$usu_nombre_1', '$usu_nombre_2', '$usu_apellido_1', '$usu_apellido_2','$usu_fecha_nac', '$usu_clave', '$usu_correo',
+           $usu_telefono, '$direccion', $rol, 1)";
+        var_dump($sql);
+        if ($validacion) {
             $ejecutar = $obj->insert($sql);
             if ($ejecutar) {
-                if (isset($_POST['registro'])) {
-                    $_SESSION['auth'] = 'ok';
-                    redirect('../web/index.php');
-                } else {
-                    redirect(getUrl("Usuarios", "Usuarios", "getUsuarios"));
-                }
+                echo "<script>
+                Swal.fire({
+                    title: '¡Felicidades!',
+                    text: 'El usuario ha sido registrado exitosamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    // Redirigimos al usuario después de que cierre la alerta
+                    if (result.isConfirmed) {
+                        window.location.href = '" . getUrl("Usuarios", "Usuarios", "getUsuarios") . "';
+                    }
+                });
+            </script>";
             } else {
                 echo "Se ha presentado un error al insertar";
             }
@@ -169,7 +211,8 @@ class UsuariosController
             echo "No se pudo actualizar";
         }
     }
-    public function getPerfilAdmin(){
+    public function getPerfilAdmin()
+    {
         $obj = new UsuariosModel();
 
 
