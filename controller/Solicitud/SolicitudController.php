@@ -198,7 +198,7 @@ class SolicitudController
     {
         echo "si";
         $obj = new SolicitudModel();
-        if (isset($_POST['categoria_senial'])) {
+        if (isset($_POST['categoria_senial_id'])) {
 
             $tipo_senial = $_POST['tipo_senial_id'];
             $categoria_senial = $_POST['categoria_senial_id'];

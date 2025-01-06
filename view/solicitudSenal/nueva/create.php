@@ -69,7 +69,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
-                                    <select name="categoria_senial_id" id="" class="form-control"
+                                    <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"
                                         data-url='<?php echo
                                             getUrl(
                                                 "Solicitud",
@@ -161,7 +161,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" id="btnSenialN" value="Enviar" class="btn btn-success">
+            <input type="submit" id="btnSenialN" value="Enviar" class="btn btn-success" disabled>
         </div>
     </form>
 </div>

@@ -18,7 +18,7 @@
     //     }
 
     //  -->
-    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formSenialM">
+    <form action="<?php echo getUrl("Solicitud", "Solicitud", "postCreateSenialMalEstado"); ?>" method="post" id="formMalaSenial">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Registro</h3>
             <ul class="breadcrumbs mb-3">
@@ -73,8 +73,7 @@
                                     que se encuentra en mal estado.<br> Si no sabes cuáles son las categorías, 
                                     consúltalas en el siguiente enlace <br> <a href='<?php echo getUrl("Solicitud", "Solicitud", "getImgCategoriaSenial"); ?>' 
                                     target='_blank'>Ver más</a>">
-                                    <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i>
-</span>
+                                    <i class="bi bi-info-circle" style="font-size: 1rem; cursor: pointer;"></i> </span>
 
 
                                     <select name="categoria_senal_id" id="categoria_senial_id" class="form-control"
@@ -95,7 +94,7 @@
 
                                     </select>
 
-
+                                    <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="danio_id"> Daño</label>
@@ -190,7 +189,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" id="btnSenialM" value="Enviar" class="btn btn-success">
+            <input type="submit" id="btnSenialM"  value="Enviar" class="btn btn-success" disabled>
         </div>
     </form>
 </div>

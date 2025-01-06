@@ -48,10 +48,9 @@ $(document).ready(function () {
     'senial_id': 'Señal'
   };
   const camposReductorM = {
-    'categoria_senial_id': 'Categoria',
+    'categoria_reductor_id': 'Categoria',
     'danio_id': 'Daño',
-    'tipo_senial_id': 'Tipo de señal',
-    'senial_id': 'Señal'
+    'reductor_id': 'Reductor'
   };
   const camposReductorN = {
     'categoria_reductor_id': 'Categoria',
@@ -311,9 +310,9 @@ $(document).ready(function () {
 
 
 
-  //new perfil
-  document.getElementById('formUsu').addEventListener('submit', function (e) {
-    e.preventDefault();
+ // new perfil
+ $('#formUsu').submit(function (event) {
+    event.preventDefault();
     console.log("submit");
 
 
@@ -451,17 +450,17 @@ $(document).ready(function () {
 
 
 
-  $(document).on('input', '#formMalSenial input, #formMalSenial select', function (event) {
+  $(document).on('input', '#formMalaSenial input, #formMalaSenial select', function (event) {
     event.preventDefault();
     console.log("funca esto");
-    var formData = $('#formMalSenial').serializeArray();
+    var formData = $('#formMalaSenial').serializeArray();
     let esValido = true;
 
     // Limpiar los mensajes de error antes de comenzar la validación
     Object.keys(camposSenialM).forEach(campoSenialM => {
       const error = `error_${campoSenialM}`;
       document.getElementById(error).textContent = ""; // Limpia los errores
-    });
+    });x
 
     // Validación de los campos
     formData.forEach(function (campoData) {
@@ -529,7 +528,7 @@ $(document).ready(function () {
   });
 
   //nuevo reductor
-  $(document).on('input', '#formNuevoReductor input, #formNuevoReductor select', function (event) {
+  $(document).on('input', '#formReductorN input, #formReductorN select', function (event) {
     event.preventDefault();
     //console.log("funca esto yes");
     var formData = $('#formNuevoReductor').serializeArray();
@@ -566,6 +565,84 @@ $(document).ready(function () {
       submitButton.disabled = true;
     }
   });
+  //reductor en mal estado
+  $(document).on('input', '#formReductorM input, #formReductorM select', function (event) {
+    event.preventDefault();
+    console.log("funca esto");
+    var formData = $('#formReductorM').serializeArray();
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposReductorM).forEach(campoReductorM => {
+      const error = `error_${campoReductorM}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposReductorM[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposReductorM[name]) {
+
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnReductorM');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
+
+
+  $(document).on('input', '#formNuevaSenial input, #formNuevaSenial select', function (event) {
+    event.preventDefault();
+    //console.log("funca esto yes");
+    var formData = $('#formNuevaSenial').serializeArray();
+    let esValido = true;
+
+    // Limpiar los mensajes de error antes de comenzar la validación
+    Object.keys(camposSenialN).forEach(campoSenialN => {
+      const error = `error_${campoSenialN}`;
+      document.getElementById(error).textContent = ""; // Limpia los errores
+    });
+
+    // Validación de los campos
+    formData.forEach(function (campoData) {
+      const { name, value } = campoData;
+      const error = `error_${name}`;
+      const valor = camposSenialN[name];
+
+      // Validar campos vacíos
+      if (value.trim() === '') {
+        if (camposSenialN[name]) {
+
+          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+          esValido = false;
+        }
+      }
+    });
+
+    const submitButton = document.getElementById('btnSenialN');
+    if (esValido) {
+      console.log('Formulario válido');
+      submitButton.disabled = false;
+    } else {
+      console.log('Formulario no válido');
+      submitButton.disabled = true;
+    }
+  });
+
   // $('#formUsu').submit(function (event) {
   //   event.preventDefault();
 
@@ -627,54 +704,6 @@ $(document).ready(function () {
   //   }
   // });
 
-
-
-  $('#form').submit(function (event) {
-    event.preventDefault();
-
-    let mensajes = [];
-
-    $('#error').html('');
-
-    let esValido = true;
-
-    const nombre = $('#nombre').val().trim();
-    if (nombre === '') {
-      mensajes.push('El Nombre es obligatorio');
-      esValido = false;
-    }
-    const apellido = $('#apellido').val().trim();
-    if (apellido === '') {
-      mensajes.push('El campo Apellido es obligatorio');
-      esValido = false;
-    }
-    const email = $('#email').val().trim();
-    if (email === '') {
-      mensajes.push('El campo email es obligatorio');
-      esValido = false;
-    }
-    const clave = $('#clave').val().trim();
-    if (clave === '') {
-      mensajes.push('El campo clave es obligatorio');
-      esValido = false;
-    }
-
-
-    // const user = $('#user').val().trim();
-    // if(user ===''){
-    //   mensajes.push('El campo usuario es obligatorio');
-    // }
-    if (esValido) {
-      // alert('Formulario valido. Enviando datos..')
-      // $("#error").fadeout(500);
-      this.submit();
-    } else {
-
-      $('#error').html(mensajes.map(ms => `${ms}<br>`).join(''));
-      $('#error').removeClass('d-none');
-
-    }
-  });
 
   $('#formAccidente').submit(function (event) {
     event.preventDefault();
@@ -915,30 +944,27 @@ $(document).ready(function () {
       }
     })
   });
-  $(document).on('click', '#copyList', function () {
-    let listUser = $("#listUser").html();
+  // $(document).on('click', '#copyList', function () {
+  //   let listUser = $("#listUser").html();
 
-    $("#responsables").append(
-      "<div class='col md-4 form-group'>" +
-      "<label>Responsable</label>" +
-      "<div class='row'>" +
-      "<div class='col-md-10'>" + listUser + "</div>" +
-      "<div class='col-md-2'>" +
-      "<button class='btn btn-danger' type='button' id='removeList'>x</button" +
-      "</div>" +
-      "</div>" +
-      "</div>"
-    )
-  });
-  $(document).on('click', '#removeList', function () {
-    $(this).parent().parent().parent().remove();
-  });
+  //   $("#responsables").append(
+  //     "<div class='col md-4 form-group'>" +
+  //     "<label>Responsable</label>" +
+  //     "<div class='row'>" +
+  //     "<div class='col-md-10'>" + listUser + "</div>" +
+  //     "<div class='col-md-2'>" +
+  //     "<button class='btn btn-danger' type='button' id='removeList'>x</button" +
+  //     "</div>" +
+  //     "</div>" +
+  //     "</div>"
+  //   )
+  // });
+  // $(document).on('click', '#removeList', function () {
+  //   $(this).parent().parent().parent().remove();
+  // });
 
 
   $('#tipo_choque').on('change', function () {
-
-
-
 
     var url = $(this).attr('data-url');
     var tipo_choque = $(this).val();
@@ -972,7 +998,7 @@ $(document).ready(function () {
 
 
 
-  $(document).on('change', '#formSenialM select, #formSenialN select', function () {
+  $(document).on('change', '#formMalaSenial select, #formNuevaSenial select', function () {
 
     var url = $(this).attr('data-url');
     var categoria_senial = $('#categoria_senial_id').val();
@@ -982,8 +1008,8 @@ $(document).ready(function () {
       url: url,
       type: 'POST',
       data: {
-        'tipo_senial': tipo_senial,
-        'categoria_senial': categoria_senial
+        'tipo_senial_id': tipo_senial,
+        'categoria_senial_id': categoria_senial
       },
       success: function (data) {
         if (!data.includes("error")) {
@@ -1007,7 +1033,8 @@ $(document).ready(function () {
   });
 
 
-  $(document).on('change', '#formReductorM select, #formReductorN select', function () {
+  $('#categoria_reductor_id').on('change', function () {
+    // $(document).on('change', '#formReductorM select, #formReductorN select', function () {
 
     var url = $(this).attr('data-url');
     var categoria_reductor = $('#categoria_reductor_id').val();
@@ -1016,7 +1043,7 @@ $(document).ready(function () {
       url: url,
       type: 'POST',
       data: {
-        'categoria_reductor': categoria_reductor
+        'categoria_reductor_id': categoria_reductor
       },
       success: function (data) {
         if (!data.includes("error")) {
