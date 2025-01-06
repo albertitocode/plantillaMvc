@@ -45,11 +45,11 @@ class="mt-5">
                         <table class="table table-striped table hover ">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>ID</th>
                                     <!-- <th>Fecha</th> -->
                                     <th>Descripcion</th>
                                     <th>Direccion</th>
-                                    
                                     <th>Señal</th>
                                     <th>Tipo de solicitud</th>
                                     <th>Estado</th>
@@ -66,6 +66,15 @@ class="mt-5">
                                 // $clase="";
                                 // $texto="";
                                 echo "<tr>";
+                                echo "<td>";
+                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalleNueva")."' method='post'>";
+                                echo "<input type='hidden'  name='id_soli' value=" .$senial_nueva['solicitud_senial_nueva_id'] . "> ";
+                                echo "<input type='hidden'  name='name_soli' value='solicitud_seniales_nuevas'> ";
+                                echo "<input type='hidden'  name='name_camp_id' value='solicitud_senial_nueva_id'> ";
+                                echo "<input type='hidden'  name='elemento_vial' value='senial'>";
+                                echo "<button type ='submit 'class='btnV'>Acción 3</button>";
+                                echo "</form>";
+                                echo"</td>";
                                 echo "<td>" . $senial_nueva['solicitud_senial_nueva_id'] . "</td>";
                                 // echo "<td>" . $senial_malo['solicitud_senial_mal_estado_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
                                 echo "<td>" . $senial_nueva['solicitud_senial_nueva_descripcion'] . "</td>";
@@ -99,7 +108,7 @@ class="mt-5">
                                 // //         ."<button class='btn btn-danger'>Elimminar</button>"
                                 // //     ."</a>";
                                 // // "</td>";
-                                // echo "</tr>";
+                                echo "</tr>";
                             }
                         } else {
                             echo "está vacio";

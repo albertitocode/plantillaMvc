@@ -45,6 +45,7 @@ class="mt-5">
                         <table class="table table-striped table hover ">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Descripcion</th>
@@ -66,6 +67,15 @@ class="mt-5">
                                 // $clase="";
                                 // $texto="";
                                 echo "<tr>";
+                                echo "<td>";
+                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalleNueva")."' method='post'>";
+                                echo "<input type='hidden'  name='id_soli' value=" .$reductor_nuevo['solicitud_reductor_nuevo_id'] . "> ";
+                                echo "<input type='hidden'  name='name_soli' value='solicitud_reductores_nuevos'> ";
+                                echo "<input type='hidden'  name='name_camp_id' value='solicitud_reductor_nuevo_id'> ";
+                                echo "<input type='hidden'  name='elemento_vial' value='reductor'>";
+                                echo "<button type ='submit 'class='btnV'>Acción 3</button>";
+                                echo "</form>";
+                                echo"</td>";
                                 echo "<td>" . $reductor_nuevo['solicitud_reductor_nuevo_id'] . "</td>";
                                 echo "<td>" . $reductor_nuevo['solicitud_reductor_nuevo_fecha_creacion'] . "</td>"; //cambiar el nombre en la db
                                 echo "<td>" . $reductor_nuevo['solicitud_reductor_nuevo_descripcion'] . "</td>";

@@ -75,6 +75,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_categoria_reductor_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="danio_id"> Daño</label>
@@ -86,6 +87,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_danio_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label class="fw-bold">Direccion
@@ -128,6 +130,7 @@
                                         }
                                         ?>
                                     </select>
+                                    <span class="text-danger" id="error_reductor_id"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen del reductor dañado</label>
@@ -144,7 +147,7 @@
         <!--Usuarios id se va coger desde sesion_start -->
 
         <div class="mt-5">
-            <input type="submit" value="Enviar" class="btn btn-success">
+            <input type="submit" value="Enviar" id="btnReductorM" disabled class="btn btn-success">
         </div>
     </form>
 </div>

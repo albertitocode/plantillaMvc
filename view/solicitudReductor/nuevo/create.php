@@ -59,7 +59,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_reductor_id">Categoria del reductor</label>
-                                    <select name="categoria_reductor_id" id="categoria_reductor_id" class="form-control" data-url='<?php echo
+                                    <select name="categoria_reductor_id" id="categoria_reductor_idcategoria_reductor_id" class="form-control" data-url='<?php echo
                                         getUrl(
                                             "Solicitud",
                                             "Solicitud",
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group mb-3 d-none" id="reduct">
-                                    <label ">Nombre del Reductor</label>
+                                    <label for="reductor_id">Nombre del Reductor</label>
                                     <select name="reductor_id" id="reductor_id" class="form-control">
                                         <option value="">Seleccione reductor...</option>
                                         <?php

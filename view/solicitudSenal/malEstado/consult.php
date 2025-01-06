@@ -51,7 +51,7 @@ class="mt-5">
                                     <th>Descripcion</th>
                                     <th>Direccion</th>
                                     <th>Imagen</th>
-                                    <th>Reductor</th>
+                                    <th>Señal</th>
                                     <th>Daño</th>
                                     <th>Tipo de solicitud</th>
                                     <th>Estado</th>
@@ -69,9 +69,11 @@ class="mt-5">
                                 // $texto="";
                                 echo "<tr>";
                                 echo "<td>";
-                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalle")."' method='post'>";
+                                echo "<form action='".getUrl("Solicitud", "Solicitud", "solicitudDetalleMalEstado")."' method='post'>";
                                 echo "<input type='hidden'  name='id_soli' value=" .$senial_malo['solicitud_senial_mal_estado_id'] . "> ";
                                 echo "<input type='hidden'  name='name_soli' value='solicitud_seniales_mal_estado'> ";
+                                echo "<input type='hidden'  name='name_camp_id' value='solicitud_senial_mal_estado_id'> ";
+                                echo "<input type='hidden'  name='elemento_vial' value='senial'>";
                                 echo "<button type ='submit 'class='btnV'>Acción 3</button>";
                                 echo "</form>";
                                 echo "</td> ";
