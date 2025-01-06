@@ -61,13 +61,20 @@
 
 
                             <div class="col-md-6 col-lg-6">
-                                
-                                <div class="form-group">
-                                    <label for="solicitud_via_mal_estado_direccion" class="fw-bold">Direccion
-                                        via</label>
-                                    <input type="text" class="form-control" name="solicitud_via_mal_estado_direccion">
-                                    <span class="text-danger" id="error_direccion"></span>
+                            <div class="form-group">
+                                    <label for="danio_id" class="fw-bold">Daño</label>
+                                    <select name="danio_id" id="danio_id" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <?php
+                                        foreach ($danios as $danio) {
+                                            echo "<option  value='" . $danio['danio_id'] . "'>" . $danio['danio_nombre'] . "</option>";
+                                        }
+
+                                        ?>
+                                    </select>
+                                    <span class="text-danger" id="error_danio_id"></span>
                                 </div>
+                               
 
                                 <div class="form-group ">
                                     <label for="solicitud_via_mal_estado_descripcion"
@@ -82,19 +89,7 @@
 
 
                             <div class="col-md-6 col-lg-6">
-                                <div class="form-group">
-                                    <label for="danio_id" class="fw-bold">Daño</label>
-                                    <select name="danio_id" id="danio_id" class="form-control">
-                                        <option value="">Seleccione...</option>
-                                        <?php
-                                        foreach ($danios as $danio) {
-                                            echo "<option  value='" . $danio['danio_id'] . "'>" . $danio['danio_nombre'] . "</option>";
-                                        }
-
-                                        ?>
-                                    </select>
-                                    <span class="text-danger" id="error_danio_id"></span>
-                                </div>
+                               
                                 <div class="form-group ">
                                     <label for="solicitud_via_mal_estado_imagen" class="d-block fw-bold">Imagen</label>
                                     <input type="file" name="solicitud_via_mal_estado_imagen" class="form-control">

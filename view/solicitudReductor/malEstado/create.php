@@ -57,7 +57,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="categoria_reductor_id">Categoria del reductor</label>
                                     <select name="categoria_reductor_id" id="categoria_reductor_id" class="form-control" data-url='<?php echo
@@ -89,38 +89,10 @@
                                     </select>
                                     <span class="text-danger" id="error_danio_id"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label class="fw-bold">Direccion
-                                        via</label>
-                                    <div class="d-flex">
-
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
-
-                                </div>
-
+                               
                             </div>
-                            <div class="col-md-6 col-lg-4">
-
-                                <div class="form-group">
-                                    <label> Describa el daño</label>
-                                    <input type="text" name="solicitud_reductores_mal_estado_descripcion" id=""
-                                        class="form-control" placeholder="Describa el estado de la señal">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="form-group mb-3 d-none" id="reduct">
+                            <div class="col-md-6 col-lg-6">
+                            <div class="form-group mb-3 d-none" id="reduct">
                                     <label >Nombre del Reductor</label>
                                     <select name="reductor_id" id="reductor_id" class="form-control">
                                         <option value="">Seleccione reductor...</option>
@@ -132,10 +104,19 @@
                                     </select>
                                     <span class="text-danger" id="error_reductor_id"></span>
                                 </div>
+
+                                <div class="form-group">
+                                    <label> Describa el daño</label>
+                                    <input type="text" name="solicitud_reductores_mal_estado_descripcion" id=""
+                                        class="form-control" placeholder="Describa el estado de la señal">
+                                </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen del reductor dañado</label>
-                                    <input type="file" name="solicitud_reductores_mal_estado_imagen">
+                                    <input type="file" name="solicitud_reductores_mal_estado_imagen" class="form-control">
                                 </div>
+                            
+                               
+                               
                             </div>
                         </div>
                     </div>

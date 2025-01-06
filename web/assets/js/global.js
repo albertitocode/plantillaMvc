@@ -452,7 +452,7 @@ $(document).ready(function () {
 
 
 
-  $(document).on('input', '#formSenialM input, #formSenialM select', function (event) {
+  $(document).on('input', '#formMalaSenial input, #formMalaSenial select', function (event) {
     event.preventDefault();
     var formData = $('#formMalaSenial').serializeArray();
 
@@ -550,7 +550,7 @@ $(document).ready(function () {
   //nuevo reductor
   $(document).on('input', '#formReductorN input, #formReductorN select', function (event) {
     event.preventDefault();
-    console.log("funca esto yes");
+    //console.log("funca esto yes");
     var formData = $('#formReductorN').serializeArray();
     let esValido = true;
 
@@ -585,46 +585,51 @@ $(document).ready(function () {
       submitButton.disabled = true;
     }
   });
-  
-  //reductor en mal estado
-  $(document).on('input', '#formReductorM input, #formReductorM select', function (event) {
-    event.preventDefault();
-    console.log("funca esto");
-    var formData = $('#formReductorM').serializeArray();
-    let esValido = true;
 
-    // Limpiar los mensajes de error antes de comenzar la validación
-    Object.keys(camposReductorM).forEach(campoReductorM => {
-      const error = `error_${campoReductorM}`;
-      document.getElementById(error).textContent = ""; // Limpia los errores
-    });
+ //reductor en mal estado
+ $(document).on('input', '#formReductorM input, #formReductorM select', function (event) {
+  event.preventDefault();
+  console.log("funca esto");
+  var formData = $('#formReductorM').serializeArray();
+  let esValido = true;
 
-    // Validación de los campos
-    formData.forEach(function (campoData) {
-      const { name, value } = campoData;
-      const error = `error_${name}`;
-      const valor = camposReductorM[name];
+  // Limpiar los mensajes de error antes de comenzar la validación
+  Object.keys(camposReductorM).forEach(campoReductorM => {
+    const error = `error_${campoReductorM}`;
+    document.getElementById(error).textContent = ""; // Limpia los errores
+  });
 
-      // Validar campos vacíos
-      if (value.trim() === '') {
-        if (camposReductorM[name]) {
+  // Validación de los campos
+  formData.forEach(function (campoData) {
+    const { name, value } = campoData;
+    const error = `error_${name}`;
+    const valor = camposReductorM[name];
 
-          document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
-          esValido = false;
-        }
+    // Validar campos vacíos
+    if (value.trim() === '') {
+      if (camposReductorM[name]) {
+
+        document.getElementById(error).textContent = `*El campo ${valor} es obligatorio*`;
+        esValido = false;
       }
-    });
-
-    const submitButton = document.getElementById('btnReductorM');
-    if (esValido) {
-      console.log('Formulario válido');
-      submitButton.disabled = false;
-    } else {
-      console.log('Formulario no válido');
-      submitButton.disabled = true;
     }
   });
 
+  const submitButton = document.getElementById('btnReductorM');
+  if (esValido) {
+    console.log('Formulario válido');
+    submitButton.disabled = false;
+  } else {
+    console.log('Formulario no válido');
+    submitButton.disabled = true;
+  }
+});
+
+
+ 
+
+
+ 
 
   $(document).on('input', '#formAccidente input, #formAccidente select', function (event) {
     event.preventDefault();
@@ -903,8 +908,7 @@ $(document).ready(function () {
 
   });
 
-
-  $(document).on('change', '#formReductorM select, #formReductorN select', function () {
+  $('#categoria_reductor_id').on('change', function () {
 
     var url = $(this).attr('data-url');
     var categoria_reductor = $('#categoria_reductor_id').val();
@@ -936,36 +940,38 @@ $(document).ready(function () {
 
   });
 
-});
-$('#tipo_choque').on('change', function () {
+  $('#tipo_choque').on('change', function () {
 
-  var url = $(this).attr('data-url');
-  var tipo_choque = $('#tipo_choque').val();
-
-  $.ajax({
-    url: url,
-    type: 'POST',
-    data: {
-      'tipo_choque': tipo_choque,
-    },
-    success: function (data) {
-      if (!data.includes("error")) {
-
-        $("#detalle_choque").html(data);
-        $('#detalle').removeClass('d-none');
-        console.log(data);
-
-      } else {
-        $('#detalle').addClass('d-none');
+    var url = $(this).attr('data-url');
+    var tipo_choque = $('#tipo_choque').val();
+  
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: {
+        'tipo_choque': tipo_choque,
+      },
+      success: function (data) {
+        if (!data.includes("error")) {
+  
+          $("#detalle_choque").html(data);
+          $('#detalle').removeClass('d-none');
+          console.log(data);
+  
+        } else {
+          $('#detalle').addClass('d-none');
+        }
+  
+  
+  
+      },
+      error: function () {
+        alert('Error al cargar los detalles del choque.');
       }
-
-
-
-    },
-    error: function () {
-      alert('Error al cargar los detalles del choque.');
-    }
+    });
+  
   });
 
 });
+
 

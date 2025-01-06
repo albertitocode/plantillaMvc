@@ -103,7 +103,6 @@
                                     <span class="text-danger" id="error_danio_id"></span>
                                 </div>
 
-
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
@@ -147,7 +146,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image" class="d-block">Imagen de la señal dañada</label>
-                                    <input type="file" name="solicitud_senial_imagen"accept="image/png, image/jpeg, image/jpg">
+                                    <input type="file" name="solicitud_senial_imagen"accept="image/png, image/jpeg, image/jpg" class="form-control">
                                     <br>
                                     <span class="text-danger" id="error_solicitud_senial_imagen"></span>
 

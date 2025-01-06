@@ -58,7 +58,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <label for="categoria_reductor_id">Categoria del reductor</label>
-                                    <select name="categoria_reductor_id" id="categoria_reductor_idcategoria_reductor_id" class="form-control" data-url='<?php echo
+                                    <select name="categoria_reductor_id" id="categoria_reductor_id" class="form-control" data-url='<?php echo
                                         getUrl(
                                             "Solicitud",
                                             "Solicitud",
@@ -76,26 +76,7 @@
                                     <span class="text-danger" id="error_categoria_reductor_id"></span>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="fw-bold">Direccion
-                                        via</label>
-                                    <div class="d-flex">
-
-                                        <label for="carrera" class="mt-2 mx-2">carrera</label>
-                                        <input type="text" name="carrera" id="carrera" class="form-control px-4"
-                                            placeholder="carrera">
-
-                                        <label for="calle" class="mt-2 mx-2">calle</label>
-                                        <input type="text" name="calle" id="calle" class="form-control px-4"
-                                            placeholder="calle">
-
-                                        <label for="barrio" class="mt-2 mx-2">barrio</label>
-                                        <input type="text" name="barrio" id="barrio" class="form-control px-4"
-                                            placeholder="brario">
-
-                                    </div>
-
-                                </div>
+                              
 
                             </div>
                             <div class="col-md-6 col-lg-4">
@@ -121,7 +102,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block">Imagen del reductor dañado</label>
-                                    <input type="file" name="solicitud_reductor_nuevo_imagen">
+                                    <input type="file" name="solicitud_reductor_nuevo_imagen" class="form-control">
                                 </div>
                             </div>
                         </div>

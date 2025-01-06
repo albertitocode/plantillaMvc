@@ -69,19 +69,7 @@
 
                                     <div class="col-md-6 col-lg-6">
 
-                                        
-
-
-                                        <div class="form-group mb-3">
-                                            <label for="observacion" class="fw-bold">Observación</label>
-                                            <textarea name="observacion" id="solicitud_via_mal_estado_descripcion"
-                                                class="form-control" placeholder="Describa el accidente"></textarea>
-                                        </div>
-                                    </div>
-
-
-                                    <d  iv class="col-md-6 col-lg-6">
-                                        <div class="form-group mb-3">
+                                    <div class="form-group mb-3">
                                             <label for="" class="fw-bold">Tipo de choque</label>
                                             <select name="tipo_choque" id="tipo_choque" class="form-select" data-url='<?php echo getUrl("Solicitud", "Solicitud", "getDetalleChoque", false, "ajax"); ?>'>
 
@@ -96,10 +84,22 @@
                                             <span class=" text-danger" id="error_tipo_choque"></span>
                                         </div>
 
+
+                                        <div class="form-group mb-3">
+                                            <label for="observacion" class="fw-bold">Observación</label>
+                                            <textarea name="observacion" id="solicitud_via_mal_estado_descripcion"
+                                                class="form-control" placeholder="Describa el accidente"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-lg-6">
+                                       
+
                                         <div class="form-group mb-3 d-none" id="detalle">
                                             
                                             <label for="detalle_choque">Detalle de choque</label>
-                                            <select name="detalle_choque" id="detalle_choque" class="form-control">
+                                            <select name="detalle_choque" id="detalle_choque" class="form-control" >
                                             <option value="">Detalle del choque...</option>
                                                 <?php
                                                 foreach ($detallesChoques as $detalle) {
@@ -113,7 +113,7 @@
                                         </div>
                                         
                                    
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mt-4">
                                             <label for="bis" class="fw-bold">¿Hay lesionados?</label>
                                             <input type="checkbox" id="lesionados" name="lesionados"
                                                 value="Con lesionados">

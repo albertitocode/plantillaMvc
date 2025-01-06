@@ -146,7 +146,7 @@ class SolicitudController
         $tipo_senial_id = $_POST['tipo_senial_id'];
         $senial_id = $_POST['senial_id'];
         $solicitud_senial_nueva_descripcion = $_POST['solicitud_senial_nueva_descripcion'];
-        $solicitud_senial_nueva_direccion = $_POST['solicitud_senial_nueva_direccion'];
+        $solicitud_senial_nueva_direccion ="carrera calle barrio";
 
         $usuario_id = $_SESSION['id'];
 
@@ -342,7 +342,6 @@ class SolicitudController
                
         } else {
             $img = "Sin imagen";
-            echo "No se ha subido ninguna imagen.";
         }
         
 
@@ -519,10 +518,8 @@ class SolicitudController
         $obj = new SolicitudModel();
 
         $solicitud_reductores_mal_estado_descripcion = $_POST['solicitud_reductores_mal_estado_descripcion'];
-        $carrera = $_POST['carrera'];
-        $calle = $_POST['calle'];
-        $barrio = $_POST['barrio'];
-        $direccion = "carrera $carrera - calle $calle - barrio $barrio";
+       
+        $direccion = "carrera  - calle - barrio ";
         $solicitud_reductores_mal_estado_imagen = $_POST['solicitud_reductores_mal_estado_imagen'];
         $danio_id = $_POST['danio_id'];
         $usuario_id = $_SESSION['id'];
@@ -562,7 +559,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getCreateReductorMalEstado") . "';
                     }
                 });
             </script>";
@@ -775,7 +772,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetSolicitud") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "GetCreateVia") . "';
                     }
                 });
             </script>";
@@ -1003,7 +1000,7 @@ class SolicitudController
         
         $imagen = $_POST['imagen'];
         $tipo_choque = $_POST['tipo_choque'];
-        $direccion = $_POST['solicitud_accidente_direccion'];
+        $direccion = "cra calle barrio";
         $id_usuario = $_SESSION['id'];
 
         if (isset($_POST['lesionados'])) {
@@ -1061,7 +1058,7 @@ class SolicitudController
         // }
 
         $sql = "INSERT INTO solicitud_accidentes (solicitud_accidente_direccion,tipo_choque_id,
-        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id,detalle_choque_nombre) VALUES (
+        solicitud_accidente_imagen,solicitud_accidente_descripcion,solicitud_accidente_lesionados,estado_id,usuario_id,tipo_solicitud_id,detalle_choque_descripcion) VALUES (
     '$direccion', $tipo_choque, '$imagen','$descripcion','$lesionados', 4, $id_usuario, 4, '$choque_detalle_nombre');";
 
         if ($validacion == true) {
@@ -1131,7 +1128,7 @@ class SolicitudController
                 }).then((result) => {
                     // Redirigimos al usuario después de que cierre la alerta
                     if (result.isConfirmed) {
-                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getSolicitud") . "';
+                        window.location.href = '" . getUrl("Solicitud", "Solicitud", "getCreateAccidente") . "';
                     }
                 });
             </script>";

@@ -66,7 +66,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="categoria_senal_id">Categoria de la señal</label>
                                     <select name="categoria_senial_id" id="categoria_senial_id" class="form-control"
@@ -87,16 +87,16 @@
                                     </select>
                                     <span class="text-danger" id="error_categoria_senial_id"></span>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="solicitud_senial_nueva_direccion" class="fw-bold">Direccion
-                                        via</label>
-                                        <input type="text" name="solicitud_senial_nueva__direccion" id="" class="form-control">
-
+                                    <label for="solicitud_senial_nueva_descripcion"> Describa el motivo</label>
+                                    <input type="text" name="solicitud_senial_nueva_descripcion" id=""
+                                        class="form-control" placeholder="Motivo de la señal">
                                 </div>
 
+                                
+
                             </div>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="tipo_senal_id">Tipo de señal</label>
                                     <select name="tipo_senial_id" id="tipo_senial_id" class="form-control" data-url='<?php echo
@@ -116,13 +116,8 @@
                                     </select>
                                     <span class="text-danger" id="error_tipo_senial_id"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="solicitud_senial_nueva_descripcion"> Describa el motivo</label>
-                                    <input type="text" name="solicitud_senial_nueva_descripcion" id=""
-                                        class="form-control" placeholder="Motivo de la señal">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
+                              
+                        
                                 <div class="form-group mb-3 d-none" id="senal">
                                     <label for="senial_id">Nombre de la señal</label>
                                     <select name="senial_id" id="senial" class="form-control">
